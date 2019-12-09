@@ -9,7 +9,7 @@ void World::Init() {
 	LoadTextures();
 	//LoadScenes();
 
-	m_pPlayer = std::make_shared<Player>(Vec2(0,0), umapTextures.at("player"));
+	m_pPlayer = new Player(Vec2(0,0), umapTextures.at("player"));
 
 }
 
@@ -29,14 +29,23 @@ World::World() {
 
 }
 
+World::~World() {
+
+	for (auto& x : umapTextures) delete x.second;
+	delete m_pPlayer;
+
+	vecpScenes.clear();
+	umapTextures.clear();
+
+}
+
 void World::LoadTextures() {
 
-	std::string filepath = FILEMANAGER->GetTextureFilepath();
-	if (!FILEMANAGER->FileExists(filepath)) return;
+	if (!FILEMANAGER->FileExists(FILEMANAGER->GetTextureFilepath())) return;
 
-	CHapiXML xml = filepath;
+	CHapiXML xml = FILEMANAGER->GetTextureFilepath();
 
-	std::vector<CHapiXMLNode*> nodes = xml.GetAllNodesWithName("Texture");
+	std::vector<CHapiXMLNode*> nodes = xml.GetAllNodesWithName("Textures");
 
 	for (auto& node : nodes) {
 
@@ -45,15 +54,10 @@ void World::LoadTextures() {
 		if (!node->GetAttributeWithName("filepath", attr)) return;
 		if (!node->GetAttributeWithName("alias", attr)) return;
 
-		std::shared_ptr<Texture> t = std::make_shared<Texture>(node->GetAttributes()[0].AsString());
+		Texture* t = new Texture(node->GetAttributes()[0].AsString());
 
 		umapTextures.insert({ node->GetAttributes()[1].AsString(), t });
 
 	}
 
-}
-
-
-World::~World()
-{
 }

@@ -35,11 +35,11 @@ private:
 
 	static std::shared_ptr<World> s_pWorld;
 
-	std::shared_ptr<Player> m_pPlayer;
+	Player* m_pPlayer = nullptr;
 
-	std::unordered_map<std::string, std::shared_ptr<Texture>> umapTextures;
+	std::unordered_map<std::string, Texture*> umapTextures;
 
-	std::vector<std::shared_ptr<Scene>> vecpScenes;
+	std::vector<Scene*> vecpScenes;
 
 	const unsigned short m_cshNumLevels{ 10 };
 

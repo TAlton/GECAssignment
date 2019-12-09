@@ -7,14 +7,14 @@ class Player :
 
 public:
 
-	Player(Vec2 v, std::shared_ptr<Texture> pTex) {
+	Player(Vec2 v, Texture* pTex) {
 
 		try {
 
 			m_v2Pos = v;
 			m_pTexture = pTex;
 			this->m_strAlias = "player";
-			m_pRectangle = std::make_shared<Rectangle>(pTex->GetWidth(), pTex->GetHeight());
+			//m_pRectangle =  std::make_shared<Rectangle>(pTex->GetWidth(), pTex->GetHeight());
 
 		}
 		catch (std::overflow_error& e) {

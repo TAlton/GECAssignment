@@ -13,8 +13,11 @@ public:
 
 	static std::shared_ptr<BinaryTree>& GetInstance() {
 
-		if (!s_pBinaryTree)
+		if (!s_pBinaryTree) {
+
 			s_pBinaryTree.reset(new BinaryTree());
+
+		}
 		return s_pBinaryTree;
 
 	}
