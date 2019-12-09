@@ -10,6 +10,8 @@ public:
 	Entity();
 	~Entity();
 
+protected:
+
 	Vec2 m_v2Pos{ 0,0 },
 		m_v2LastPos{ 0,0 };
 
