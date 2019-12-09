@@ -32,6 +32,7 @@ World::World() {
 World::~World() {
 
 	for (auto& x : umapTextures) delete x.second;
+
 	delete m_pPlayer;
 
 	vecpScenes.clear();

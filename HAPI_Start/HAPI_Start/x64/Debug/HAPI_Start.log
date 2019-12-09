@@ -1,4 +1,8 @@
-﻿  Player.cpp
+﻿  Entity.cpp
+  Player.cpp
+  Scene.cpp
   World.cpp
+  WorldEntity.cpp
+  main.cpp
   Generating Code...
   HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_Start.exe
