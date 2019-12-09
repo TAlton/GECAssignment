@@ -22,6 +22,8 @@ public:
 
 	}
 
+	void CreateWindow();
+
 private:
 
 	Graphics();
@@ -34,9 +36,8 @@ private:
 		m_cnHeight{ 720 },
 		m_cnScreenSize{ (m_cnWidth * m_cnHeight) << 2 };
 
-	const std::string m_strTitle{ "" };
-
-	void CreateWindow();
+	const std::string m_cstrTitle{ "" };
 
 };
 
+#define GRAPHICS Graphics::GetInstance()
