@@ -6,6 +6,8 @@ class Rectangle {
 
 public:
 
+	Rectangle(short width, short height) : m_shRight(width), m_shBottom(height) {}
+
 	short m_shLeft{ 0 },
 		m_shRight{ 0 },
 		m_shTop{ 0 },

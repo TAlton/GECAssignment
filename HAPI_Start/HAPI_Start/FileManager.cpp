@@ -2,6 +2,9 @@
 
 std::shared_ptr<FileManager> FileManager::s_pFileManager = nullptr;
 
+FileManager::FileManager() {
+}
+
 FileManager::~FileManager()
 {
 }
@@ -10,7 +13,7 @@ const std::string FileManager::GetSceneFilepath(const int index) {
 
 	try {
 
-		return this->m_cveccstrFilepaths[index];
+		m_cveccstrFilepaths[index];
 
 	}
 	catch (std::out_of_range& e) {

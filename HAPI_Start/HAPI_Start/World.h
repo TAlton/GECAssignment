@@ -4,6 +4,7 @@
 
 #include "Graphics.h"
 #include "Texture.h"
+#include "Player.h"
 #include "Scene.h"
 #include "BinaryTree.h"
 
@@ -33,6 +34,8 @@ private:
 	World();
 
 	static std::shared_ptr<World> s_pWorld;
+
+	std::shared_ptr<Player> m_pPlayer;
 
 	std::unordered_map<std::string, std::shared_ptr<Texture>> umapTextures;
 

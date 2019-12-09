@@ -9,6 +9,8 @@ void World::Init() {
 	LoadTextures();
 	//LoadScenes();
 
+	m_pPlayer = std::make_shared<Player>(Vec2(0,0), umapTextures.at("player"));
+
 }
 
 void World::Loop() {
@@ -29,9 +31,10 @@ World::World() {
 
 void World::LoadTextures() {
 
-	if (!FILEMANAGER->FileExists(FILEMANAGER->GetTextureFilepath())) return;
-	
-	CHapiXML xml = FILEMANAGER->GetTextureFilepath();
+	std::string filepath = FILEMANAGER->GetTextureFilepath();
+	if (!FILEMANAGER->FileExists(filepath)) return;
+
+	CHapiXML xml = filepath;
 
 	std::vector<CHapiXMLNode*> nodes = xml.GetAllNodesWithName("Texture");
 

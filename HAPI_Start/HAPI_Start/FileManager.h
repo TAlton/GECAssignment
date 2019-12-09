@@ -11,7 +11,7 @@ public:
 
 	~FileManager();
 
-	const std::string GetTextureFilepath() const { return this->m_cstrTextureFilepath; }
+	std::string GetTextureFilepath() { return this->m_cstrTextureFilepath; }
 	const std::string GetSceneFilepath(const int index);
 	bool FileExists(const std::string filepath);
 
@@ -29,12 +29,12 @@ public:
 
 private:
 
-	FileManager() = default;
+	FileManager();
 
 	static std::shared_ptr<FileManager> s_pFileManager;
 
 	const std::string m_cstrTextureFilepath{ "Data\\XML\\Texture\\Texture.xml" };
-	const std::vector<std::string> m_cveccstrFilepaths{ "Data\\XML\\Scene\\Scene1.xml",
+	std::vector<std::string> m_cveccstrFilepaths{ "Data\\XML\\Scene\\Scene1.xml",
 															"Data\\XML\\Scene\\Scene2.xml",
 															"Data\\XML\\Scene\\Scene3.xml" };
 };

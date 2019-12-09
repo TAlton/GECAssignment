@@ -11,7 +11,7 @@ public:
 	WorldEntity(const std::string alias, Vec2 pos, int side, short health);
 	~WorldEntity();
 
-	void Update() override;
+	void Update(float dt) override;
 
 private:
 

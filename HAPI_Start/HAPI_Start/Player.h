@@ -7,14 +7,14 @@ class Player :
 
 public:
 
-	Player(Vec2 v, std::string alias, std::shared_ptr<Texture> pTex, std::shared_ptr<Rectangle> pRect) {
+	Player(Vec2 v, std::shared_ptr<Texture> pTex) {
 
 		try {
 
 			m_v2Pos = v;
-			m_strAlias = alias;
 			m_pTexture = pTex;
-			m_pRectangle = pRect;
+			this->m_strAlias = "player";
+			m_pRectangle = std::make_shared<Rectangle>(pTex->GetWidth(), pTex->GetHeight());
 
 		}
 		catch (std::overflow_error& e) {
@@ -33,7 +33,7 @@ public:
 
 	~Player();
 
-	void Update(float dt);
+	void Update(float dt) override;
 
 private:
 
