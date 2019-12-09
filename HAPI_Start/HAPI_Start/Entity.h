@@ -4,6 +4,8 @@
 #include "Texture.h"
 #include "Vec2.h"
 
+#include <string>
+
 class Entity {
 
 public:

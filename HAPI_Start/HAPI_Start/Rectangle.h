@@ -1,6 +1,6 @@
 #pragma once
-class Rectangle
-{
+class Rectangle {
+
 public:
 
 	short m_shLeft{ 0 },
