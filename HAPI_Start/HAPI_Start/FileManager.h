@@ -14,6 +14,7 @@ public:
 
 	const std::string GetTextureFilepath() const { return this->m_cstrTextureFilepath; }
 	const std::string GetSceneFilepath(const int index);
+	bool FileExists(const std::string filepath);
 
 	static std::shared_ptr<FileManager>& GetInstance () {
 

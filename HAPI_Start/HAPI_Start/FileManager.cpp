@@ -46,3 +46,13 @@ const std::string FileManager::GetSceneFilepath(const int index) {
 
 
 }
+
+bool FileManager::FileExists(const std::string filepath) {
+
+	struct stat buf;
+
+	if (stat(filepath.c_str(), &buf) != -1) return true; //checks the state of the file if it exists
+
+	return false;
+
+}

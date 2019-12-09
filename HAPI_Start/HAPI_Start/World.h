@@ -1,6 +1,11 @@
 #pragma once
 
+#include <unordered_map>
+
 #include "Graphics.h"
+#include "Texture.h"
+#include "Scene.h"
+#include "BinaryTree.h"
 
 class World
 {
@@ -28,6 +33,14 @@ private:
 	World();
 
 	static std::shared_ptr<World> s_pWorld;
+
+	std::unordered_map<std::string, std::shared_ptr<Texture>> umapTextures;
+
+	std::vector<std::shared_ptr<Scene>> vecpScenes;
+
+	const unsigned short m_cshNumLevels{ 10 };
+
+	void LoadTextures();
 
 };
 

@@ -1,7 +1,11 @@
 #pragma once
 
+#include <HAPI_lib.h>
+
 #include "Entity.h"
 #include "FileManager.h"
+
+using namespace HAPISPACE;
 
 class Scene {
 
