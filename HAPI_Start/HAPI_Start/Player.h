@@ -7,12 +7,11 @@ class Player :
 
 public:
 
-	Player(Vec2 v, Texture* pTex) {
+	Player(Vec2 v) {
 
 		try {
 
 			m_v2Pos = v;
-			m_pTexture = pTex;
 			this->m_strAlias = "player";
 			//m_pRectangle =  std::make_shared<Rectangle>(pTex->GetWidth(), pTex->GetHeight());
 

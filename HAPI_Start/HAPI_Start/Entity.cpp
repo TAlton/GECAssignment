@@ -5,6 +5,4 @@
 Entity::~Entity()
 {
 
-	delete m_pTexture;
-
 }

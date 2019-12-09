@@ -9,7 +9,8 @@ void World::Init() {
 	LoadTextures();
 	//LoadScenes();
 
-	m_pPlayer = new Player(Vec2(0,0), umapTextures.at("player"));
+	m_pPlayer = new Player(Vec2(0,0));
+	m_pPlayer->SetTexture(*(umapTextures.at(m_pPlayer->GetAlias())));
 
 }
 
@@ -56,6 +57,7 @@ void World::LoadTextures() {
 		if (!node->GetAttributeWithName("alias", attr)) return;
 
 		Texture* t = new Texture(node->GetAttributes()[0].AsString());
+		
 
 		umapTextures.insert({ node->GetAttributes()[1].AsString(), t });
 

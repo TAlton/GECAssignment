@@ -4,6 +4,9 @@
 
 Texture::~Texture()
 {
+
+	delete m_pTexture;
+
 }
 
 void Texture::LoadTexture(const std::string& filepath) {
