@@ -2,10 +2,12 @@
 
 std::shared_ptr<World> World::s_pWorld = nullptr;
 
-void World::Init() const {
+void World::Init() {
 
 	GRAPHICS->CreateWindow();
 	BINARYTREE->CreateTree(m_cshNumLevels);
+	LoadTextures();
+	//LoadScenes();
 
 }
 

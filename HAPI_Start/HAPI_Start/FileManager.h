@@ -9,7 +9,6 @@ class FileManager {
 
 public:
 
-	FileManager() = default;
 	~FileManager();
 
 	const std::string GetTextureFilepath() const { return this->m_cstrTextureFilepath; }
@@ -30,10 +29,12 @@ public:
 
 private:
 
+	FileManager() = default;
+
 	static std::shared_ptr<FileManager> s_pFileManager;
 
 	const std::string m_cstrTextureFilepath{ "Data\\XML\\Texture\\Texture.xml" };
-	const std::vector<const std::string> m_cveccstrFilepaths{ "Data\\XML\\Scene\\Scene1.xml",
+	const std::vector<std::string> m_cveccstrFilepaths{ "Data\\XML\\Scene\\Scene1.xml",
 															"Data\\XML\\Scene\\Scene2.xml",
 															"Data\\XML\\Scene\\Scene3.xml" };
 };

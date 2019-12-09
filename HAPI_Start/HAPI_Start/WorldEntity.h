@@ -7,8 +7,11 @@ class WorldEntity :
 
 public:
 
+	WorldEntity() = default;
 	WorldEntity(const std::string alias, Vec2 pos, int side, short health);
 	~WorldEntity();
+
+	void Update() override;
 
 private:
 

@@ -25,7 +25,7 @@ public:
 
 	}
 
-	void Init() const;
+	void Init();
 	void Loop();
 
 private:

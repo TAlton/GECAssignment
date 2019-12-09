@@ -2,11 +2,6 @@
 
 std::shared_ptr<FileManager> FileManager::s_pFileManager = nullptr;
 
-FileManager::FileManager()
-{
-}
-
-
 FileManager::~FileManager()
 {
 }

@@ -22,7 +22,7 @@ void Scene::LoadScene(const int index) {
 
 		auto vecAttr = node->GetAttributes();
 
-		std::shared_ptr<WorldEntity> we = std::make_shared<Worldentity>() //add ctor params
+		std::shared_ptr<WorldEntity> we = std::make_shared<WorldEntity>(); //add ctor params
 
 	}
 

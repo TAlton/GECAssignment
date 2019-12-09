@@ -1,10 +1,4 @@
-﻿  Entity.cpp
-  Player.cpp
-  Rectangle.cpp
-  Texture.cpp
-  Vec2.cpp
-  World.cpp
-  Generating Code...
+﻿  WorldEntity.cpp
 HAPI_Debug64.lib(Error.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(Error.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(HapiCore.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(HapiCore.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(HapiMain.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(HapiMain.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
@@ -12,7 +6,9 @@ HAPI_Debug64.lib(HapiOsSFML.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not f
 HAPI_Debug64.lib(HapiRendererSFML.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(HapiRendererSFML.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(HapiSoundSFML.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(HapiSoundSFML.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(HapiXInput.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(HapiXInput.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
+HAPI_Debug64.lib(HapiXML.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(HapiXML.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(PerfCounters.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(PerfCounters.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
+HAPI_Debug64.lib(pugixml.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(pugixml.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(SFMLFontManager.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(SFMLFontManager.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(bitreader.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(bitreader.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info
 HAPI_Debug64.lib(bitwriter.obj) : warning LNK4099: PDB 'HAPI_LIB.pdb' was not found with 'HAPI_Debug64.lib(bitwriter.obj)' or at 'C:\Users\alton\Source\Repos\GECAssignment\HAPI_Start\x64\Debug\HAPI_LIB.pdb'; linking object as if no debug info

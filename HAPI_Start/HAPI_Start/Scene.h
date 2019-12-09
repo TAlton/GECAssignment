@@ -4,6 +4,7 @@
 
 #include "Entity.h"
 #include "FileManager.h"
+#include "WorldEntity.h"
 
 using namespace HAPISPACE;
 

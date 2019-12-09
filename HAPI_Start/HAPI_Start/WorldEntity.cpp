@@ -30,3 +30,7 @@ WorldEntity::WorldEntity(const std::string alias, Vec2 pos, int side, short heal
 WorldEntity::~WorldEntity()
 {
 }
+
+void WorldEntity::Update()
+{
+}
