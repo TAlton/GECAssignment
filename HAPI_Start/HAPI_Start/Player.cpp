@@ -6,7 +6,7 @@ Player::~Player()
 
 void Player::Update(float dt) {
 
-	switch (m_CurrentState) {
+	switch (m_CurrentState) { //state machine for player states
 
 	case IDLE:
 		break;

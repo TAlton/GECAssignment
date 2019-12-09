@@ -2,11 +2,6 @@
 
 
 
-Texture::Texture()
-{
-}
-
-
 Texture::~Texture()
 {
 }

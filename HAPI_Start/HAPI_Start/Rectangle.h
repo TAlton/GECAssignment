@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Vec2.h"
+
 class Rectangle {
 
 public:
@@ -8,7 +11,7 @@ public:
 		m_shTop{ 0 },
 		m_shBottom{ 0 };
 
-	Rectangle();
+	Rectangle() = default;
 	~Rectangle();
 
 	void ClipTo(const Rectangle& other);

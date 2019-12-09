@@ -31,6 +31,7 @@
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vec2.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

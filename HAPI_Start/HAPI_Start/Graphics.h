@@ -36,7 +36,7 @@ private:
 		m_cnHeight{ 720 },
 		m_cnScreenSize{ (m_cnWidth * m_cnHeight) << 2 };
 
-	const std::string m_cstrTitle{ "" };
+	const std::string m_cstrTitle{ "Game Engine Construction - S6079142" };
 
 };
 

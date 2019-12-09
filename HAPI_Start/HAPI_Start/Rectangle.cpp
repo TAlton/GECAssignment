@@ -2,11 +2,6 @@
 
 
 
-Rectangle::Rectangle()
-{
-}
-
-
 Rectangle::~Rectangle()
 {
 }

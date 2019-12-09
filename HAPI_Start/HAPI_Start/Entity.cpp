@@ -2,11 +2,6 @@
 
 
 
-Entity::Entity()
-{
-}
-
-
 Entity::~Entity()
 {
 }
