@@ -4,13 +4,19 @@
 #include "Texture.h"
 #include "Vec2.h"
 
-#include <string>
+#include <HAPI_lib.h>
+
+using namespace HAPISPACE;
 
 class Entity {
 
 public:
-	Entity();
+
+	Entity() = default;
+	Entity(Vec2 v, std::string alias, std::shared_ptr<Texture> pTex, std::shared_ptr<Rectangle> pRect) : m_v2Pos(v), m_strAlias(alias), m_pTexture(pTex), m_pRectangle(pRect) {}
 	~Entity();
+
+	virtual void Update() = 0;
 
 protected:
 
@@ -19,8 +25,7 @@ protected:
 
 	std::string m_strAlias{ "default" };
 
-	Texture m_Texture;
-
-	Rectangle m_Rectangle;
+	std::shared_ptr<Texture> m_pTexture = nullptr;
+	std::shared_ptr<Rectangle> m_pRectangle = nullptr;
 };
 
