@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "FileManager.h"
 
 class Scene {
 
@@ -8,7 +9,7 @@ class Scene {
 
 public:
 
-	Scene();
+	Scene(const short index) : m_shID(index) {}
 	~Scene();
 
 private:
@@ -18,7 +19,7 @@ private:
 
 	std::vector<Entity*> m_vecpenEntities;
 
-	void LoadScene();
+	void LoadScene(const int index);
 
 };
 
