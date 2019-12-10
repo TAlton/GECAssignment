@@ -53,6 +53,7 @@ World::World() {
 World::~World() {
 
 	for (auto& x : umapTextures) delete x.second;
+	for (auto& x : vecpScenes) delete x;
 
 	delete m_pPlayer;
 

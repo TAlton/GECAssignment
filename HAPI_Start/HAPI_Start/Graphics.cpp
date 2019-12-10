@@ -56,7 +56,7 @@ void Graphics::Draw(Entity& e) {
 	e.GetTexture()->GetWidth();
 
 	int i{ 0 };
-	const int eol = (m_cnWidth - e.GetTexture()->GetWidth()) * BytesPerPixel;
+	const int eol = (m_cnWidth - e.GetTexture()->GetWidth()) * BYTESPERPIXEL;
 	int nPosX = e.GetPosition().x;
 	int nPosY = e.GetPosition().y;
 
@@ -76,7 +76,7 @@ void Graphics::Draw(Entity& e) {
 	if (nPosX < 0) nPosX = 0;
 	if (nPosY < 0) nPosY = 0;
 
-	BYTE* tempBufferPtr = m_pScreen + (nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) * BytesPerPixel;
+	BYTE* tempBufferPtr = m_pScreen + (nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) * BYTESPERPIXEL;
 	BYTE* tPtr = e.GetTexturePointer();
 
 	if (rect->GetTop() != 0) tPtr += nTexOffsetY;
@@ -87,20 +87,20 @@ void Graphics::Draw(Entity& e) {
 		for (int x{ 0 }; x < nWidthToDraw; x++) { //draw width of object in window bounds
 
 
-			if (245 <= tPtr[i + Alpha]) { //memcpy if alpha isnt required
+			if (245 <= tPtr[i + ALPHA]) { //memcpy if alpha isnt required
 
-				memcpy(&tempBufferPtr[i], &tPtr[i], BytesPerPixel);
-				i += BytesPerPixel;
+				memcpy(&tempBufferPtr[i], &tPtr[i], BYTESPERPIXEL);
+				i += BYTESPERPIXEL;
 
 			}
 
 			else { //access the bytes directly for the rgb channels
 
-				tempBufferPtr[i] = tempBufferPtr[i] + ((tPtr[i + Alpha] * (tPtr[i] - tempBufferPtr[i])) >> 8); //red
-				tempBufferPtr[i + Green] = tempBufferPtr[i + Green] + ((tPtr[i + Alpha] * (tPtr[i + Green] - tempBufferPtr[i + Green])) >> 8); //green
-				tempBufferPtr[i + Blue] = tempBufferPtr[i + Blue] + ((tPtr[i + Alpha] * (tPtr[i + Blue] - tempBufferPtr[i + Blue])) >> 8); //blue
+				tempBufferPtr[i] = tempBufferPtr[i] + ((tPtr[i + ALPHA] * (tPtr[i] - tempBufferPtr[i])) >> 8); //red
+				tempBufferPtr[i + Green] = tempBufferPtr[i + Green] + ((tPtr[i + ALPHA] * (tPtr[i + Green] - tempBufferPtr[i + Green])) >> 8); //green
+				tempBufferPtr[i + BLUE] = tempBufferPtr[i + BLUE] + ((tPtr[i + ALPHA] * (tPtr[i + BLUE] - tempBufferPtr[i + BLUE])) >> 8); //blue
 
-				i += BytesPerPixel;
+				i += BYTESPERPIXEL;
 
 			}
 

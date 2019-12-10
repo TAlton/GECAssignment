@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Scene.h"
 #include "BinaryTree.h"
+#include "Physics.h"
 
 class World
 {

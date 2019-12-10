@@ -42,8 +42,8 @@ private:
 };
 
 #define GRAPHICS Graphics::GetInstance()
-#define BytesPerPixel 4
-#define Red 0
-#define Green 1
-#define Blue 2
-#define Alpha 3
+#define BYTESPERPIXEL 4
+#define RED 0
+#define GREEN 1
+#define BLUE 2
+#define ALPHA 3

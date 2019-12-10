@@ -40,6 +40,7 @@ private:
 
 	short m_shHealth{ 0 },
 		m_shAmmo{ 10 };
+
 	int m_CurrentState{ IDLE };
 
 };
