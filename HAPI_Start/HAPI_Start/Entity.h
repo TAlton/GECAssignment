@@ -20,11 +20,14 @@ public:
 
 	virtual void Update(float dt) = 0;
 
-	const Vec2 GetPosition() const { return this->m_v2Pos; }
-	const Vec2 GetLastPosition() const { return this->m_v2LastPos; }
-	const std::string GetAlias() const { return this->m_strAlias; }
-	const Rectangle* GetRectangle() const { return this->m_pRectangle; }
-	const Texture* GetTexture() const { return this->m_pTex; }
+	Vec2 GetPosition() const { return this->m_v2Pos; }
+	Vec2 GetLastPosition() const { return this->m_v2LastPos; }
+	std::string GetAlias() const { return this->m_strAlias; }
+	Rectangle* GetRectangle() const { return this->m_pRectangle; }
+	Texture* GetTexture() const { return this->m_pTex; }
+	int GetWidth() const { return this->m_nWidth; }
+	int GetHeight() const { return this->m_nHeight; }
+	unsigned char* GetTexturePointer() const { return this->m_pTex->GetPointer(); }
 
 	void SetPosition(short x, short y) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = x; this->m_v2Pos.y = y; }
 	void SetPosition(Vec2 v) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = v.x; this->m_v2Pos.y = v.y; }

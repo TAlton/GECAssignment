@@ -1,6 +1,7 @@
 #pragma once
 
 #include <HAPI_lib.h>
+#include "Entity.h"
 
 using namespace HAPISPACE;
 
@@ -23,12 +24,16 @@ public:
 	}
 
 	void CreateWindow();
+	void Draw(Entity& e);
+	void ClearScreen() const;
 
 private:
 
 	Graphics();
 
 	static std::shared_ptr<Graphics> s_pGraphics;
+
+	std::shared_ptr<Rectangle> m_rectScreen = nullptr;
 
 	unsigned char* m_pScreen{ nullptr };
 
@@ -41,3 +46,8 @@ private:
 };
 
 #define GRAPHICS Graphics::GetInstance()
+#define BytesPerPixel 4
+#define Red 0
+#define Green 1
+#define Blue 2
+#define Alpha 3
