@@ -9,31 +9,25 @@ Player::~Player()
 
 void Player::Update(float dt) {
 
-	switch (m_CurrentState) { //state machine for player states
+	//calc new pos
+	//if new pos colliding dont update pos
 
-	case IDLE:
-		break;
-	case MOVELEFT:
-		//move left
-		break;
-	case MOVERIGHT:
-		//move right
-		break;
-	case JUMPING:
-		//jump
-		break;
-	case COLLIDING:
-		//collide
-		break;
-	case SHOOTING:
-		//shoot
-		break;
-	case RELOADING:
-		//reload
-		break;
-	default:
-		break;
-		
-	}
+}
+
+void Player::Move(int x, int y) {
+
+	m_v2LastPos = m_v2Pos;
+
+	this->m_v2Pos.x += x;
+	this->m_v2Pos.y += y;
+
+}
+
+void Player::Move(Vec2 v) {
+
+	m_v2LastPos = m_v2Pos;
+
+	this->m_v2Pos.x += v.x;
+	this->m_v2Pos.y += v.y;
 
 }

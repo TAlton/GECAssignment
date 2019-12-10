@@ -33,6 +33,8 @@ public:
 	~Player();
 
 	void Update(float dt) override;
+	void Move(int x, int y);
+	void Move(Vec2 v);
 
 private:
 

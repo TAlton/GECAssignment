@@ -66,10 +66,10 @@ void Graphics::Draw(Entity& e) {
 
 	rect->ClipTo(*m_rectScreen);
 
-	int nWidthToDraw = std::abs(rect->GetLeft() - rect->GetRight());
-	int nHeightToDraw = std::abs(rect->GetBottom() - rect->GetTop());
-	int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) * 4;
-	int nTexOffsetY = std::abs(((e.GetTexture()->GetHeight() - nHeightToDraw) * e.GetTexture()->GetWidth()) * 4);
+	const int nWidthToDraw = std::abs(rect->GetLeft() - rect->GetRight());
+	const int nHeightToDraw = std::abs(rect->GetBottom() - rect->GetTop());
+	const int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) * 4;
+	const int nTexOffsetY = std::abs(((e.GetTexture()->GetHeight() - nHeightToDraw) * e.GetTexture()->GetWidth()) * 4);
 
 	rect->Translate(-nPosX, -nPosY);
 
@@ -87,7 +87,7 @@ void Graphics::Draw(Entity& e) {
 		for (int x{ 0 }; x < nWidthToDraw; x++) { //draw width of object in window bounds
 
 
-			if (250 <= tPtr[i + Alpha]) { //memcpy if alpha isnt required
+			if (245 <= tPtr[i + Alpha]) { //memcpy if alpha isnt required
 
 				memcpy(&tempBufferPtr[i], &tPtr[i], BytesPerPixel);
 				i += BytesPerPixel;

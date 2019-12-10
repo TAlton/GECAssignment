@@ -10,6 +10,24 @@ void World::Init() {
 	LoadScenes();
 
 	m_pPlayer = new Player(Vec2(0,0));
+
+	try {
+
+		if (umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end());
+
+	}
+	catch (std::out_of_range& e) {
+
+		throw e;
+		return;
+
+	}
+	catch (...) {
+
+		return;
+
+	}
+
 	m_pPlayer->SetTexture(*(umapTextures.at(m_pPlayer->GetAlias())));
 
 }
