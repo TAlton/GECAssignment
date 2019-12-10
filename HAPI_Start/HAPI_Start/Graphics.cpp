@@ -14,28 +14,31 @@ void Graphics::CreateWindow() {
 
 		HAPI.Initialise(const_cast<int&>(m_cnWidth), const_cast<int&>(m_cnHeight), m_cstrTitle); 
 		//casting constness to allow for const vars that are initialised here
+		m_pScreen = HAPI.GetScreenPointer();
 
 	}
 
-	catch (std::overflow_error & e) {
+	catch (std::overflow_error& e) {
 
 		throw e;
 
 	}
 
-	catch (std::underflow_error & e) {
+	catch (std::underflow_error& e) {
 
 		throw e;
 
 	}
 
-	catch (std::invalid_argument & e) {
+	catch (std::invalid_argument& e) {
 
 		throw e;
 
 	}
 
-	catch (std::runtime_error & e) {
+	catch (std::runtime_error& e) {
+
+		throw e;
 
 	}
 
@@ -59,7 +62,7 @@ void Graphics::Draw(Entity& e) {
 
 	rect->Translate(nPosX, nPosY);
 
-	if (rect->CompletelyOutside(*m_rectScreen)) return; //if the rectangle is offscreen dont render it
+	if (rect->Outside(*m_rectScreen)) return; //if the rectangle is offscreen dont render it
 
 	rect->ClipTo(*m_rectScreen);
 

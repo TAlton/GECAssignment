@@ -44,6 +44,7 @@ private:
 	const unsigned short m_cshNumLevels{ 10 };
 
 	void LoadTextures();
+	void DrawRenderables() const;
 
 };
 

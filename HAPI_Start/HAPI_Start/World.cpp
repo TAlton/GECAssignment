@@ -18,7 +18,9 @@ void World::Loop() {
 
 	while (HAPI.Update()) {
 
+		GRAPHICS->ClearScreen();
 
+		DrawRenderables();
 
 	}
 
@@ -62,5 +64,11 @@ void World::LoadTextures() {
 		umapTextures.insert({ node->GetAttributes()[1].AsString(), t });
 
 	}
+
+}
+
+void World::DrawRenderables() const {
+
+	GRAPHICS->Draw(*m_pPlayer);
 
 }

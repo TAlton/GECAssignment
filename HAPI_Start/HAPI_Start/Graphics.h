@@ -13,12 +13,8 @@ public:
 
 	static std::shared_ptr<Graphics>& GetInstance() {
 
-		if (!s_pGraphics) {
-
+		if (!s_pGraphics)
 			s_pGraphics.reset(new Graphics());
-
-		}
-
 		return s_pGraphics;
 
 	}
