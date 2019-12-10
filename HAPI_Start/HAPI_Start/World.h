@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "BinaryTree.h"
 #include "Physics.h"
+#include "Input.h"
 
 class World
 {
@@ -37,6 +38,7 @@ private:
 	static std::shared_ptr<World> s_pWorld;
 
 	Player* m_pPlayer = nullptr;
+	Input* m_pInput = nullptr;
 
 	std::unordered_map<std::string, Texture*> umapTextures;
 

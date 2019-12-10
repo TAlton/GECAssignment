@@ -10,6 +10,7 @@ void World::Init() {
 	LoadScenes();
 
 	m_pPlayer = new Player(Vec2(0,0));
+	m_pInput = new Input();
 
 	try {
 
@@ -56,6 +57,7 @@ World::~World() {
 	for (auto& x : vecpScenes) delete x;
 
 	delete m_pPlayer;
+	delete m_pInput;
 
 	vecpScenes.clear();
 	umapTextures.clear();
