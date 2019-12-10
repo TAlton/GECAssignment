@@ -12,7 +12,7 @@ public:
 	~FileManager();
 
 	std::string GetTextureFilepath() { return this->m_cstrTextureFilepath; }
-	const std::string GetSceneFilepath(const int index);
+	std::string GetSceneFilepath(const int index);
 	bool FileExists(const std::string filepath);
 
 	static std::shared_ptr<FileManager>& GetInstance () {
@@ -33,7 +33,7 @@ private:
 
 	static std::shared_ptr<FileManager> s_pFileManager;
 
-	const std::string m_cstrTextureFilepath{ "Data\\XML\\Texture\\Texture.xml" };
+	std::string m_cstrTextureFilepath{ "Data\\XML\\Texture\\Textures.xml" };
 	std::vector<std::string> m_cveccstrFilepaths{ "Data\\XML\\Scene\\Scene1.xml",
 															"Data\\XML\\Scene\\Scene2.xml",
 															"Data\\XML\\Scene\\Scene3.xml" };

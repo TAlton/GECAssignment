@@ -7,8 +7,9 @@ class WorldEntity :
 
 public:
 
-	WorldEntity() = default;
-	WorldEntity(const std::string alias, Vec2 pos, int side, short health);
+	WorldEntity(short h, Vec2 P, const char* id, int side) : Entity(h, P, id, side) {}
+	WorldEntity(int h, int x, int y, std::string id, int side) : Entity(h, x, y, id, side) { SetPosition(x, y); }
+	WorldEntity(const Entity& e) : Entity(e) {}
 	~WorldEntity();
 
 	void Update(float dt) override;

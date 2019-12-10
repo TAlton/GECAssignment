@@ -15,7 +15,9 @@ class Entity {
 public:
 
 	Entity() = default;
-	Entity(Vec2 v, std::string alias, Texture* pTex, Rectangle* pRect) : m_v2Pos(v), m_strAlias(alias), m_pTex(pTex), m_pRectangle(pRect) {}
+	Entity(short h, Vec2 P, const char* id, int side) : m_nHealth(h), m_v2Pos(P), m_strAlias(id), m_ESide(side) {}
+	Entity(short h, short x, short y, std::string id, int side) : m_nHealth(h), m_strAlias(id), m_ESide(side) { SetPosition(x, y); }
+	Entity(const Entity& e) : m_nHealth(e.GetHealth()), m_v2Pos(e.GetPosition()), m_strAlias(e.GetAlias()) {}
 	~Entity();
 
 	virtual void Update(float dt) = 0;
@@ -27,6 +29,7 @@ public:
 	Texture* GetTexture() const { return this->m_pTex; }
 	int GetWidth() const { return this->m_nWidth; }
 	int GetHeight() const { return this->m_nHeight; }
+	int GetHealth() const { return this->m_nHealth; }
 	unsigned char* GetTexturePointer() const { return this->m_pTex->GetPointer(); }
 
 	void SetPosition(short x, short y) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = x; this->m_v2Pos.y = y; }
@@ -49,7 +52,8 @@ protected:
 
 	int m_ESide = NEUTRAL,
 		m_nWidth{ 0 },
-		m_nHeight{ 0 };
+		m_nHeight{ 0 },
+		m_nHealth{ 0 };
 
 	std::string m_strAlias{ "default" };
 

@@ -9,7 +9,7 @@ FileManager::~FileManager()
 {
 }
 
-const std::string FileManager::GetSceneFilepath(const int index) {
+std::string FileManager::GetSceneFilepath(const int index) {
 
 	try {
 
@@ -42,6 +42,7 @@ const std::string FileManager::GetSceneFilepath(const int index) {
 
 	}
 
+	return m_cveccstrFilepaths[index];
 
 }
 

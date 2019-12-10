@@ -42,8 +42,10 @@ private:
 	std::vector<Scene*> vecpScenes;
 
 	const unsigned short m_cshNumLevels{ 10 };
+	short m_shCurrentScene{ 0 };
 
 	void LoadTextures();
+	void LoadScenes();
 	void DrawRenderables() const;
 
 };

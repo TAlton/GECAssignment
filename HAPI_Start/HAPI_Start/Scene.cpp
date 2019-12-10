@@ -2,29 +2,14 @@
 
 
 
-Scene::~Scene()
-{
+Scene::~Scene(){
+
+	for (auto& x : m_vecpenEntities) delete x;
+
 }
 
-void Scene::LoadScene(const int index) {
+void Scene::AddEntity(Entity* e) {
 
-	if (!FILEMANAGER->FileExists(FILEMANAGER->GetSceneFilepath(index))) return;
-
-	CHapiXML xml = FILEMANAGER->GetSceneFilepath(index);
-
-	std::vector<CHapiXMLNode*> nodes = xml.GetAllNodesWithName("Scene");
-
-	for (auto& node : nodes) {
-
-		CHapiXMLAttribute attr;
-
-		if (!node->GetAttributeWithName("Alias", attr)) return;
-
-		auto vecAttr = node->GetAttributes();
-
-		std::shared_ptr<WorldEntity> we = std::make_shared<WorldEntity>(); //add ctor params
-
-	}
-
+	m_vecpenEntities.push_back(e);
 
 }

@@ -9,13 +9,13 @@ Texture::~Texture()
 
 }
 
-void Texture::LoadTexture(const std::string& filepath) {
+void Texture::LoadTexture() {
 
 	try {
 
 		int width = static_cast<int>(m_shHeight),
 			height = static_cast<int>(m_shWidth);
-		HAPI.LoadTexture(filepath, &m_pTexture, width, height);
+		HAPI.LoadTexture(m_strAlias, &m_pTexture, width, height);
 
 		this->m_shHeight = height;
 		this->m_shWidth = width;

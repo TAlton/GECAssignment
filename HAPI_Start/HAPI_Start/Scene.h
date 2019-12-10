@@ -14,17 +14,34 @@ class Scene {
 
 public:
 
-	Scene(const short index) : m_shID(index) {}
+	Scene(const short index) { m_shSceneID = index % 3; }
 	~Scene();
+
+	const int GetPrevScene() const { return this->m_shPrevScene; }
+	const int GetNextSceneLeft() const { return this->m_shNextSceneLeft; }
+	const int GetNextSceneRight() const { return this->m_shNextSceneRight; }
+	const int GetID() const { return this->m_shSceneID; }
+	void SetPathways(int id, int parent, int lChild, int rChild) {
+
+		m_shID = id;
+		m_shPrevScene = parent;
+		m_shNextSceneLeft = lChild;
+		m_shNextSceneRight = rChild;
+
+	}
+
+	std::vector<Entity*> GetEntities() const { return this->m_vecpenEntities; }
+	void AddEntity(Entity* e);
 
 private:
 
-	short m_shID{ 0 };
-
+	short m_shID{ -1 },
+		m_shPrevScene{ -1 },
+		m_shNextSceneLeft{ -1 },
+		m_shNextSceneRight{ -1 },
+		m_shSceneID{ -1 };
 
 	std::vector<Entity*> m_vecpenEntities;
-
-	void LoadScene(const int index);
 
 };
 

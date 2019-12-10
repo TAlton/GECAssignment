@@ -1,0 +1,4 @@
+<Textures>
+	<Texture filepath="Data\XML\Texture\alphaThing.tga" alias="player" />
+	<Texture filepath="Data\XML\Texture\playerSprite.tga" alias="test" />
+</Textures>
