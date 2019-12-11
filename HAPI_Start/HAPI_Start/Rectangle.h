@@ -22,6 +22,7 @@ public:
 
 	bool Contains(const Rectangle& other);
 	bool Outside(const Rectangle& other);
+	bool OverLap(const Rectangle& other);
 
 	short GetWidth() { return this->m_shRight; }
 	short GetHeight() { return this->m_shBottom; }

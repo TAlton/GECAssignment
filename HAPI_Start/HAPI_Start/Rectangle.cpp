@@ -58,3 +58,9 @@ bool Rectangle::Outside(const Rectangle& other) {
 
 	return false;
 }
+
+bool Rectangle::Overlap(const Rectangle& other) {
+
+
+
+}
