@@ -9,8 +9,13 @@ Player::~Player()
 
 void Player::Update(float dt) {
 
+	this->Move(0, dt);
+
 	switch (m_nState) {
 	
+	case COLLIDING:
+		this->m_v2Pos = m_v2LastPos;
+		break;
 	case FALLING:
 		this->Move(0, 1);
 		break;

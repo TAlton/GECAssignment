@@ -14,7 +14,7 @@ void World::Init() {
 
 	try {
 
-		if (umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end());
+		umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end();
 
 	}
 	catch (std::out_of_range& e) {
@@ -40,6 +40,7 @@ void World::Loop() {
 		GRAPHICS->ClearScreen();
 
 		GetInput();
+
 		UpdateEntities();
 
 		DrawRenderables();
@@ -166,7 +167,6 @@ void World::GetInput() {
 	case HK_SPACE:
 		m_pPlayer->SetState(JUMPING);
 		break;
-
 	case 'A':
 		m_pPlayer->SetState(MOVELEFT);
 		break;
@@ -183,8 +183,35 @@ void World::GetInput() {
 
 }
 
-void World::UpdateEntities() const {
+void World::UpdateEntities() {
 
+	CheckCollision();
 	m_pPlayer->Update(1.0f);
+
+}
+
+bool World::CheckCollision() {
+
+	const short x1 = m_pPlayer->GetPosition().x;
+	const short y1 = m_pPlayer->GetPosition().y;
+	const short x2 = m_pPlayer->GetPosition().x + m_pPlayer->GetWidth();
+	const short y2 = m_pPlayer->GetPosition().y + m_pPlayer->GetHeight();
+
+	for (auto& x : vecpScenes[m_shCurrentScene]->GetEntities()) {
+
+		const short e_x1 = x->GetPosition().x;
+		const short e_y1 = x->GetPosition().y;
+		const short e_x2 = x->GetPosition().x + x->GetWidth();
+		const short e_y2 = x->GetPosition().y + x->GetHeight();
+
+		if (x1 < e_x2 && x2 > e_x1 &&
+			y1 < e_y2 && y2 > e_y1) {
+
+			return true;
+		}
+
+	}
+
+	return false;
 
 }

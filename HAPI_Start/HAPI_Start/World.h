@@ -51,7 +51,8 @@ private:
 	void LoadScenes();
 	void DrawRenderables() const;
 	void GetInput();
-	void UpdateEntities() const;
+	void UpdateEntities();
+	bool CheckCollision();
 
 };
 

@@ -8,8 +8,6 @@ class Player :
 
 public:
 
-
-
 	Player(Vec2 v) {
 
 		try {
@@ -42,15 +40,16 @@ public:
 	int GetState() const { return this->m_nState; }
 
 	void SetState(int state) { this->m_nState = state; }
-
+	
 private:
 
 	short m_shHealth{ 0 },
 		m_shAmmo{ 10 };
 
-	int m_nState{ 0 };
+	int m_nState{ 0 },
+		m_CurrentState{ IDLE };
 
-	int m_CurrentState{ IDLE };
+	bool m_bCollided{ false };
 
 };
 

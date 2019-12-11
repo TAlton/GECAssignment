@@ -68,15 +68,15 @@ void Graphics::Draw(Entity& e) {
 
 	const int nWidthToDraw = std::abs(rect->GetLeft() - rect->GetRight());
 	const int nHeightToDraw = std::abs(rect->GetBottom() - rect->GetTop());
-	const int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) * 4;
-	const int nTexOffsetY = std::abs(((e.GetTexture()->GetHeight() - nHeightToDraw) * e.GetTexture()->GetWidth()) * 4);
+	const int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) << 2;
+	const int nTexOffsetY = std::abs(((e.GetTexture()->GetHeight() - nHeightToDraw) * e.GetTexture()->GetWidth()) << 2);
 
 	rect->Translate(-nPosX, -nPosY);
 
 	if (nPosX < 0) nPosX = 0;
 	if (nPosY < 0) nPosY = 0;
 
-	BYTE* tempBufferPtr = m_pScreen + (nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) * BYTESPERPIXEL;
+	BYTE* tempBufferPtr = m_pScreen + ((nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) << 2);//* BYTESPERPIXEL;
 	BYTE* tPtr = e.GetTexturePointer();
 
 	if (rect->GetTop() != 0) tPtr += nTexOffsetY;
