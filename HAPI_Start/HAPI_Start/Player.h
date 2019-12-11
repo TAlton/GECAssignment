@@ -36,6 +36,7 @@ public:
 	void Update(float dt) override;
 	void Move(int x, int y);
 	void Move(Vec2 v);
+	void Collided(bool b);
 
 	int GetState() const { return this->m_nState; }
 

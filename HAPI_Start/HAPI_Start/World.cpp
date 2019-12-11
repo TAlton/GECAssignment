@@ -207,11 +207,13 @@ bool World::CheckCollision() {
 		if (x1 < e_x2 && x2 > e_x1 &&
 			y1 < e_y2 && y2 > e_y1) {
 
+			m_pPlayer->Collided(true);
 			return true;
 		}
 
 	}
 
+	m_pPlayer->Collided(false);
 	return false;
 
 }

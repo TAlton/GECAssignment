@@ -9,18 +9,15 @@ Player::~Player()
 
 void Player::Update(float dt) {
 
-	this->Move(0, dt);
+	if (!m_bCollided) this->Move(0, 1);
 
 	switch (m_nState) {
-	
-	case COLLIDING:
-		this->m_v2Pos = m_v2LastPos;
-		break;
+
 	case FALLING:
 		this->Move(0, 1);
 		break;
 	case JUMPING:
-		this->Move(0, -dt);
+		this->Move(0, -5);
 		break;
 	case MOVELEFT:
 		this->Move(-dt, 0);
@@ -52,5 +49,11 @@ void Player::Move(Vec2 v) {
 
 	this->m_v2Pos.x += v.x;
 	this->m_v2Pos.y += v.y;
+
+}
+
+void Player::Collided(bool b) {
+
+	this->m_bCollided = b;
 
 }
