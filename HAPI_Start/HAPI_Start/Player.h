@@ -1,11 +1,14 @@
 #pragma once
 #include "Entity.h"
+
+enum eState : int { IDLE = 0, MOVELEFT, MOVERIGHT, JUMPING, COLLIDING, SHOOTING, RELOADING, FALLING };
+
 class Player :
 	public Entity {
 
-	enum eState : int { IDLE = 0, MOVELEFT, MOVERIGHT, JUMPING, COLLIDING, SHOOTING, RELOADING };
-
 public:
+
+
 
 	Player(Vec2 v) {
 
@@ -36,10 +39,16 @@ public:
 	void Move(int x, int y);
 	void Move(Vec2 v);
 
+	int GetState() const { return this->m_nState; }
+
+	void SetState(int state) { this->m_nState = state; }
+
 private:
 
 	short m_shHealth{ 0 },
 		m_shAmmo{ 10 };
+
+	int m_nState{ 0 };
 
 	int m_CurrentState{ IDLE };
 

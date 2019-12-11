@@ -7,3 +7,12 @@ void HAPI_Main() {
 
 }
 
+/*
+
+move player
+implement collisions
+shooting
+enemy
+collision with bullets 
+
+*/

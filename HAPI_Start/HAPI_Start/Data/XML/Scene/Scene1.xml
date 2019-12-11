@@ -1,3 +1,4 @@
 <Scene>
-	<Object Health="0" Position_X="1" Position_Y="100" TextureAlias="test" Side="0" />
+	<Object Health="0" Position_X="0" Position_Y="680" TextureAlias="floor" Side="0" />
+	<Object Health="0" Position_X="0" Position_Y="128" TextureAlias="Platform100_50" Side="0" />
 </Scene>

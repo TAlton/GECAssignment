@@ -9,8 +9,8 @@ void World::Init() {
 	LoadTextures();
 	LoadScenes();
 
-	m_pPlayer = new Player(Vec2(0,0));
-	m_pInput = new Input();
+	m_pPlayer = std::make_shared<Player>(Vec2(0,0));
+	m_pInput = std::make_shared<Input>();
 
 	try {
 
@@ -39,6 +39,9 @@ void World::Loop() {
 
 		GRAPHICS->ClearScreen();
 
+		GetInput();
+		UpdateEntities();
+
 		DrawRenderables();
 
 	}
@@ -55,9 +58,6 @@ World::~World() {
 
 	for (auto& x : umapTextures) delete x.second;
 	for (auto& x : vecpScenes) delete x;
-
-	delete m_pPlayer;
-	delete m_pInput;
 
 	vecpScenes.clear();
 	umapTextures.clear();
@@ -129,6 +129,13 @@ void World::LoadScenes() {
 
 			auto vecAttr = node->GetAttributes();
 
+			if (!node->GetAttributeWithName("Health", attr)) return;
+			if (!node->GetAttributeWithName("Position_X", attr)) return;
+			if (!node->GetAttributeWithName("Position_Y", attr)) return;
+			if (!node->GetAttributeWithName("TextureAlias", attr)) return;
+			if (!node->GetAttributeWithName("Side", attr)) return;
+
+
 			WorldEntity* wo = new WorldEntity(vecAttr[0].AsInt(), vecAttr[1].AsInt(), vecAttr[2].AsInt(), vecAttr[3].AsString(), vecAttr[4].AsInt());
 
 			wo->SetTexture(*(umapTextures.at(
@@ -148,5 +155,36 @@ void World::DrawRenderables() const {
 	for (auto& x : vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x);
 
 	GRAPHICS->Draw(*m_pPlayer);
+
+}
+
+void World::GetInput() {
+
+	switch (m_pInput->GetKBInput()) {
+
+	case 'W':
+	case HK_SPACE:
+		m_pPlayer->SetState(JUMPING);
+		break;
+
+	case 'A':
+		m_pPlayer->SetState(MOVELEFT);
+		break;
+
+	case 'D':
+		m_pPlayer->SetState(MOVERIGHT);
+		break;
+
+	default:
+		m_pPlayer->SetState(IDLE);
+		break;
+
+	}
+
+}
+
+void World::UpdateEntities() const {
+
+	m_pPlayer->Update(1.0f);
 
 }

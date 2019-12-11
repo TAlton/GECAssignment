@@ -97,7 +97,7 @@ void Graphics::Draw(Entity& e) {
 			else { //access the bytes directly for the rgb channels
 
 				tempBufferPtr[i] = tempBufferPtr[i] + ((tPtr[i + ALPHA] * (tPtr[i] - tempBufferPtr[i])) >> 8); //red
-				tempBufferPtr[i + Green] = tempBufferPtr[i + Green] + ((tPtr[i + ALPHA] * (tPtr[i + Green] - tempBufferPtr[i + Green])) >> 8); //green
+				tempBufferPtr[i + GREEN] = tempBufferPtr[i + GREEN] + ((tPtr[i + ALPHA] * (tPtr[i + GREEN] - tempBufferPtr[i + GREEN])) >> 8); //green
 				tempBufferPtr[i + BLUE] = tempBufferPtr[i + BLUE] + ((tPtr[i + ALPHA] * (tPtr[i + BLUE] - tempBufferPtr[i + BLUE])) >> 8); //blue
 
 				i += BYTESPERPIXEL;

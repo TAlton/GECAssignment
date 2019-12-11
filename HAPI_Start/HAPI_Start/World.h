@@ -37,8 +37,8 @@ private:
 
 	static std::shared_ptr<World> s_pWorld;
 
-	Player* m_pPlayer = nullptr;
-	Input* m_pInput = nullptr;
+	std::shared_ptr<Player> m_pPlayer = nullptr;
+	std::shared_ptr<Input> m_pInput = nullptr;
 
 	std::unordered_map<std::string, Texture*> umapTextures;
 
@@ -50,6 +50,8 @@ private:
 	void LoadTextures();
 	void LoadScenes();
 	void DrawRenderables() const;
+	void GetInput();
+	void UpdateEntities() const;
 
 };
 

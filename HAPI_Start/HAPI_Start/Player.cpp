@@ -9,8 +9,26 @@ Player::~Player()
 
 void Player::Update(float dt) {
 
-	//calc new pos
-	//if new pos colliding dont update pos
+	switch (m_nState) {
+	
+	case FALLING:
+		this->Move(0, 1);
+		break;
+	case JUMPING:
+		this->Move(0, -dt);
+		break;
+	case MOVELEFT:
+		this->Move(-dt, 0);
+		break;
+	case MOVERIGHT:
+		this->Move(dt, 0);
+		break;
+	case IDLE:
+		break;
+	default:
+		break;
+
+	}
 
 }
 
