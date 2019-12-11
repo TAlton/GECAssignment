@@ -9,8 +9,6 @@ Player::~Player()
 
 void Player::Update(float dt) {
 
-	if (!m_bCollided) this->Move(0, 1);
-
 	switch (m_nState) {
 
 	case FALLING:
@@ -54,6 +52,7 @@ void Player::Move(Vec2 v) {
 
 void Player::Collided(bool b) {
 
+	if (true==b) this->m_v2Pos = this->m_v2LastPos;
 	this->m_bCollided = b;
 
 }

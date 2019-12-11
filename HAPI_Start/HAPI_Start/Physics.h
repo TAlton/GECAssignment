@@ -6,9 +6,7 @@ class Physics {
 
 public:
 
-	float GetGravity() const { return this->m_fGravity; }
-
-	std::shared_ptr<Physics>& GetInstance() {
+	static std::shared_ptr<Physics>& GetInstance() {
 
 		if (!s_pPhysics) {
 
@@ -20,6 +18,8 @@ public:
 
 	}
 
+	float GetGravity() const { return this->m_fGravity; }
+
 private:
 
 	const float m_fGravity{ 0.981f };
@@ -30,4 +30,4 @@ private:
 
 };
 
-#define PHYSICS Physics::GetInstance
+#define PHYSICS Physics::GetInstance()

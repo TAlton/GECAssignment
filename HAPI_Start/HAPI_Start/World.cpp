@@ -185,8 +185,11 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
+	m_pPlayer->Move(Vec2(0,1)); //apply gravity
 	CheckCollision();
 	m_pPlayer->Update(1.0f);
+	CheckCollision();
+	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
 
 }
 

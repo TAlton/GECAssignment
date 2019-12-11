@@ -9,8 +9,8 @@ void HAPI_Main() {
 
 /*
 
-move player
-implement collisions
+setup delta time
+change level flags
 shooting
 enemy
 collision with bullets 
