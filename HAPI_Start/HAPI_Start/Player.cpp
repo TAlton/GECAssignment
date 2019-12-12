@@ -24,7 +24,7 @@ void Player::Update(float dt) {
 
 	}
 
-	if (true == m_bJumping && true == m_bCollided) {
+	if (true == m_bJumping) {
 
 		Jump(dt);
 

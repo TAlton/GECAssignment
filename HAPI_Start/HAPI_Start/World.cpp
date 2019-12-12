@@ -168,6 +168,7 @@ void World::GetInput() {
 	case HK_SPACE:
 
 		switch (m_pPlayer->GetJump()) {
+
 		case true:
 			break;
 		case false:
@@ -175,6 +176,7 @@ void World::GetInput() {
 			break;
 		default:
 			break;
+
 		}
 
 		break;

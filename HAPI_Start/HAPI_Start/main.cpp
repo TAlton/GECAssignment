@@ -10,6 +10,7 @@ void HAPI_Main() {
 /*
 
 fix double jumping by adding is colliding and w = true to set jumping to true
+fix sticking into wall unsure of issue
 change level flags
 shooting
 enemy

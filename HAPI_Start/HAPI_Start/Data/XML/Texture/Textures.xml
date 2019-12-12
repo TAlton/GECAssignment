@@ -3,4 +3,5 @@
 	<Texture filepath="Data\XML\Texture\playerSprite.tga" alias="test" />
 	<Texture filepath="Data\XML\Texture\Floor.png" alias="floor" />
 	<Texture filepath="Data\XML\Texture\Platform100_50.png" alias="Platform100_50" />
+	<Texture filepath="Data\XML\Texture\Wall.png" alias="Wall" />
 </Textures>
