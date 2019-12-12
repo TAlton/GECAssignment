@@ -36,6 +36,8 @@ std::string FileManager::GetSceneFilepath(const int index) {
 
 	catch (std::runtime_error& e) {
 
+		throw e;
+
 	}
 
 	catch (...) {

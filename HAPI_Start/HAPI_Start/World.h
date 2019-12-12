@@ -47,12 +47,16 @@ private:
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
 
+	unsigned long m_ulCurrentTime{ 0 };
+	unsigned long m_ulFrameTime;
+
 	void LoadTextures();
 	void LoadScenes();
 	void DrawRenderables() const;
 	void GetInput();
 	void UpdateEntities();
 	bool CheckCollision();
+	void CalcFrameTime();
 
 };
 

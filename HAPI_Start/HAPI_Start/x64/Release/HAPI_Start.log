@@ -1,3 +1,5 @@
 ﻿  World.cpp
-C:\Users\s6079142\Source\repos\GECAssignment\HAPI_Start\HAPI_Start\World.cpp(17,70): warning C4390:  ';': empty controlled statement found; is this the intent?
-  HAPI_Start.vcxproj -> C:\Users\s6079142\Source\Repos\GECAssignment\HAPI_Start\x64\Release\HAPI_Start.exe
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(193): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+  main.cpp
+  Generating Code...
+  HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GEC\HAPI_Start\x64\Release\HAPI_Start.exe

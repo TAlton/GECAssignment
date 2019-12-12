@@ -12,6 +12,8 @@ void World::Init() {
 	m_pPlayer = std::make_shared<Player>(Vec2(0,0));
 	m_pInput = std::make_shared<Input>();
 
+	m_ulCurrentTime = HAPI.GetTime();
+
 	try {
 
 		umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end();
@@ -37,6 +39,7 @@ void World::Loop() {
 
 	while (HAPI.Update()) {
 
+		CalcFrameTime();
 		GRAPHICS->ClearScreen();
 
 		GetInput();
@@ -187,7 +190,7 @@ void World::UpdateEntities() {
 
 	m_pPlayer->Move(Vec2(0,1)); //apply gravity
 	CheckCollision();
-	m_pPlayer->Update(1.0f);
+	m_pPlayer->Update(m_ulFrameTime);
 	CheckCollision();
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
 
@@ -218,5 +221,13 @@ bool World::CheckCollision() {
 
 	m_pPlayer->Collided(false);
 	return false;
+
+}
+
+void World::CalcFrameTime() {
+
+	const unsigned long ulNewTime = HAPI.GetTime();
+	m_ulFrameTime = ulNewTime - m_ulCurrentTime;
+	m_ulCurrentTime = ulNewTime;
 
 }

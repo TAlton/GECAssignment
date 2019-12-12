@@ -13,6 +13,7 @@ void Graphics::CreateWindow() {
 	try {
 
 		HAPI.Initialise(const_cast<int&>(m_cnWidth), const_cast<int&>(m_cnHeight), m_cstrTitle); 
+		HAPI.SetShowFPS(true);
 		//casting constness to allow for const vars that are initialised here
 		m_pScreen = HAPI.GetScreenPointer();
 
