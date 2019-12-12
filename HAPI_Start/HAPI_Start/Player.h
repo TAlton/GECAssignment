@@ -37,10 +37,13 @@ public:
 	void Move(int x, int y);
 	void Move(Vec2 v);
 	void Collided(bool b);
+	void Fall(float dt);
 
 	int GetState() const { return this->m_nState; }
+	int GetJump() const { return this->m_bJumping; }
 
 	void SetState(int state) { this->m_nState = state; }
+	void SetJump(bool b) { this->m_bJumping = b;  }
 	
 private:
 
@@ -50,7 +53,14 @@ private:
 	int m_nState{ 0 },
 		m_CurrentState{ IDLE };
 
-	bool m_bCollided{ false };
+	float m_fMaxVelocity{ 3.0f };
+	float m_fVelocity{ -m_fMaxVelocity };
+
+	bool m_bCollided{ false },
+		m_bJumping{ false },
+		m_bFalling{ false };
+
+	void Jump(float dt);
 
 };
 

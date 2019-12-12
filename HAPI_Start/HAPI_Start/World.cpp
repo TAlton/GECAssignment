@@ -42,8 +42,6 @@ void World::Loop() {
 		CalcFrameTime();
 		GRAPHICS->ClearScreen();
 
-		GetInput();
-
 		UpdateEntities();
 
 		DrawRenderables();
@@ -168,7 +166,17 @@ void World::GetInput() {
 
 	case 'W':
 	case HK_SPACE:
-		m_pPlayer->SetState(JUMPING);
+
+		switch (m_pPlayer->GetJump()) {
+		case true:
+			break;
+		case false:
+			m_pPlayer->SetJump(true);
+			break;
+		default:
+			break;
+		}
+
 		break;
 	case 'A':
 		m_pPlayer->SetState(MOVELEFT);
@@ -188,8 +196,11 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
-	m_pPlayer->Move(Vec2(0,1)); //apply gravity
+	if (false == m_pPlayer->GetJump()) m_pPlayer->Fall(m_ulFrameTime); //apply gravity
 	CheckCollision();
+
+	GetInput();
+
 	m_pPlayer->Update(m_ulFrameTime);
 	CheckCollision();
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls

@@ -3,6 +3,7 @@
 #include "Rectangle.h"
 #include "Texture.h"
 #include "Vec2.h"
+#include "Physics.h"
 
 #include <HAPI_lib.h>
 

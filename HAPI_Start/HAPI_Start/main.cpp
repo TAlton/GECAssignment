@@ -9,7 +9,7 @@ void HAPI_Main() {
 
 /*
 
-setup delta time
+fix double jumping by adding is colliding and w = true to set jumping to true
 change level flags
 shooting
 enemy
