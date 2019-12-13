@@ -13,7 +13,7 @@ public:
 		try {
 
 			m_v2Pos = v;
-			this->m_strAlias = "player";
+			this->m_strAlias = "testPlayer";
 			//m_pRectangle =  std::make_shared<Rectangle>(pTex->GetWidth(), pTex->GetHeight());
 
 		}
