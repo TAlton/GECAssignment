@@ -86,7 +86,7 @@ void Player::Jump(float dt) {
 
 	m_bFalling = false;
 
-	if (m_fVelocity < 0) {
+	if (m_fVelocity < 0) { //slowly decelerate velocity
 		m_fVelocity += dt / 100;
 	}
 	else {
@@ -97,7 +97,7 @@ void Player::Jump(float dt) {
 
 	this->SetPosition(m_v2Pos.x,
 		static_cast<int>(PHYSICS->Lerp(this->m_v2Pos.y,
-			this->m_v2Pos.y + m_fVelocity, 1.0f)));
+			this->m_v2Pos.y + m_fVelocity, 1.0f)));  //issue passing in t
 
 
 }

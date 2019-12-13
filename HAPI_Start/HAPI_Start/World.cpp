@@ -14,6 +14,8 @@ void World::Init() {
 
 	m_ulCurrentTime = HAPI.GetTime();
 
+	vecpBullets.resize(100);
+
 	try {
 
 		umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end();
@@ -129,8 +131,6 @@ void World::LoadScenes() {
 
 			CHapiXMLAttribute attr;
 
-			//if (!node->GetAttributeWithName("alias", attr)) return;
-
 			auto vecAttr = node->GetAttributes();
 
 			if (!node->GetAttributeWithName("Health", attr)) return;
@@ -228,7 +228,7 @@ bool World::CheckCollision() {
 		const short e_y2 = x->GetPosition().y + x->GetHeight();
 
 		if (x1 < e_x2 && x2 > e_x1 &&
-			y1 < e_y2 && y2 > e_y1) {
+			y1 < e_y2 && y2 > e_y1) { //checks if rectangle one intersects rectangle 2
 
 			m_pPlayer->Collided(true);
 			return true;
@@ -243,7 +243,7 @@ bool World::CheckCollision() {
 
 void World::CalcFrameTime() {
 
-	const unsigned long ulNewTime = HAPI.GetTime();
+	const unsigned long ulNewTime = HAPI.GetTime(); //calculates current time and time to run frame
 	m_ulFrameTime = ulNewTime - m_ulCurrentTime;
 	m_ulCurrentTime = ulNewTime;
 
@@ -252,5 +252,7 @@ void World::CalcFrameTime() {
 void World::UpdateLevel() {
 
 	//if collide with left door go left etc etc
+
+	for (auto& x : vecpBullets) x->SetActive(false);
 
 }

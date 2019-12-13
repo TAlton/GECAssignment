@@ -9,6 +9,7 @@
 #include "BinaryTree.h"
 #include "Physics.h"
 #include "Input.h"
+#include "Bullet.h"
 
 class World
 {
@@ -43,6 +44,7 @@ private:
 	std::unordered_map<std::string, Texture*> umapTextures;
 
 	std::vector<Scene*> vecpScenes;
+	std::vector<Bullet*> vecpBullets;
 
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
