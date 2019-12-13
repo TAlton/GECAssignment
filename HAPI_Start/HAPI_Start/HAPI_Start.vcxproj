@@ -36,6 +36,7 @@
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldEntity.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldEntity.h" />
