@@ -9,7 +9,7 @@ void HAPI_Main() {
 
 /*
 
-need a fix for double jumping or an excuse?? ----- keep jumping true unless colliding
+
 adding in doors for changing level
 adding animation
 shooting

@@ -86,10 +86,13 @@ void Player::Jump(float dt) {
 
 	m_bFalling = false;
 
-	if (m_fVelocity < 0) { //slowly decelerate velocity
+	if (m_fVelocity < m_fMaxVelocity * 2) { //slowly decelerate velocity
+
 		m_fVelocity += dt / 100;
+
 	}
 	else {
+
 		m_bJumping = false;
 		m_bFalling = true;
 		return;
