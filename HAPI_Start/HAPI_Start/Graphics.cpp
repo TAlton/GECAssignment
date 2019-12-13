@@ -54,7 +54,7 @@ void Graphics::Draw(Entity& e) {
 	std::shared_ptr<Rectangle> rect;
 	rect = std::make_shared<Rectangle>(*e.GetRectangle());
 
-	e.GetTexture()->GetWidth();
+	//e.GetTexture()->GetWidth();
 
 	int i{ 0 };
 	const int eol = (m_cnWidth - e.GetTexture()->GetWidth()) * BYTESPERPIXEL;

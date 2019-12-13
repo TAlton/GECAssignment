@@ -57,6 +57,7 @@ private:
 	void UpdateEntities();
 	bool CheckCollision();
 	void CalcFrameTime();
+	void UpdateLevel();
 
 };
 

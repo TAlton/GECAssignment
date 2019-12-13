@@ -1,6 +1,5 @@
 <Scene>
-	<Object Health="0" Position_X="0" Position_Y="680" TextureAlias="floor" Side="0" />
+	<Object Health="0" Position_X="-680" Position_Y="680" TextureAlias="floor" Side="0" />
 	<Object Health="0" Position_X="0" Position_Y="-50" TextureAlias="floor" Side="0" />
-	<Object Health="0" Position_X="-50" Position_Y="0" TextureAlias="Wall" Side="0" />
 	<Object Health="0" Position_X="1280" Position_Y="0" TextureAlias="Wall" Side="0" />
 </Scene>

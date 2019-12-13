@@ -46,6 +46,8 @@ void World::Loop() {
 
 		DrawRenderables();
 
+		UpdateLevel();
+
 	}
 
 }
@@ -198,12 +200,14 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
-	if (false == m_pPlayer->GetJump()) m_pPlayer->Fall(m_ulFrameTime); //apply gravity
+	if (m_ulCurrentTime % 16 == 0) return;
+
+	m_pPlayer->UpdateY(m_ulFrameTime);
 	CheckCollision();
 
 	GetInput();
 
-	m_pPlayer->Update(m_ulFrameTime);
+	m_pPlayer->UpdateX(m_ulFrameTime);
 	CheckCollision();
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
 
@@ -242,5 +246,11 @@ void World::CalcFrameTime() {
 	const unsigned long ulNewTime = HAPI.GetTime();
 	m_ulFrameTime = ulNewTime - m_ulCurrentTime;
 	m_ulCurrentTime = ulNewTime;
+
+}
+
+void World::UpdateLevel() {
+
+	//if collide with left door go left etc etc
 
 }

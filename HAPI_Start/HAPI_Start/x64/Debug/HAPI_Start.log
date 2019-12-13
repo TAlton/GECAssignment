@@ -1,4 +1,4 @@
-﻿  World.cpp
-C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(201): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(206): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+﻿  Player.cpp
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(19): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GEC\HAPI_Start\x64\Debug\HAPI_Start.exe

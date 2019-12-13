@@ -34,10 +34,13 @@ public:
 	~Player();
 
 	void Update(float dt) override;
+	void UpdateX(float dt);
+	void UpdateY(float dt);
 	void Move(int x, int y);
 	void Move(Vec2 v);
 	void Collided(bool b);
 	void Fall(float dt);
+	void Jump(float dt);
 
 	int GetState() const { return this->m_nState; }
 	int GetJump() const { return this->m_bJumping; }
@@ -53,14 +56,13 @@ private:
 	int m_nState{ 0 },
 		m_CurrentState{ IDLE };
 
-	float m_fMaxVelocity{ 3.0f };
+	float m_fMaxVelocity{ 2.5f };
 	float m_fVelocity{ -m_fMaxVelocity };
 
-	bool m_bCollided{ false },
+	bool m_bCollided{ true },
 		m_bJumping{ false },
-		m_bFalling{ false };
-
-	void Jump(float dt);
+		m_bFalling{ true },
+		m_bDead{ false };
 
 };
 
