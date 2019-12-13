@@ -31,7 +31,10 @@ public:
 	}
 
 	std::vector<Entity*> GetEntities() const { return this->m_vecpenEntities; }
+	std::vector<Entity*> GetBackground() const { return this->m_vecpenBackground; }
+
 	void AddEntity(Entity* e);
+	void AddBackground(Entity* e);
 
 private:
 
@@ -42,6 +45,7 @@ private:
 		m_shSceneID{ -1 };
 
 	std::vector<Entity*> m_vecpenEntities;
+	std::vector<Entity*> m_vecpenBackground;
 
 };
 

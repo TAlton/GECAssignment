@@ -9,8 +9,9 @@ void HAPI_Main() {
 
 /*
 
-fix double jumping by adding is colliding and w = true to set jumping to true
-change level flags
+need a fix for double jumping or an excuse?? ----- keep jumping true unless colliding
+adding in doors for changing level
+adding animation
 shooting
 enemy
 collision with bullets 

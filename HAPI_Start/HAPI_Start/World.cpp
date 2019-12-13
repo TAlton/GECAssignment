@@ -18,7 +18,7 @@ void World::Init() {
 
 	try {
 
-		umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end();
+		umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end(); //checks if the texture exists
 
 	}
 	catch (std::out_of_range& e) {
@@ -48,7 +48,7 @@ void World::Loop() {
 
 		DrawRenderables();
 
-		UpdateLevel();
+		//UpdateLevel();
 
 	}
 
@@ -139,14 +139,22 @@ void World::LoadScenes() {
 			if (!node->GetAttributeWithName("TextureAlias", attr)) return;
 			if (!node->GetAttributeWithName("Side", attr)) return;
 
-
 			WorldEntity* wo = new WorldEntity(vecAttr[0].AsInt(), vecAttr[1].AsInt(), vecAttr[2].AsInt(), vecAttr[3].AsString(), vecAttr[4].AsInt());
 
 			wo->SetTexture(*(umapTextures.at(
 				wo->GetAlias()
 			)));
 
-			s->AddEntity(wo);
+			if (NOCOLLIDE == vecAttr[4].AsInt()) {
+
+				s->AddBackground(wo);
+
+			}
+			else {
+
+				s->AddEntity(wo);
+
+			}
 
 		}
 
@@ -156,7 +164,8 @@ void World::LoadScenes() {
 
 void World::DrawRenderables() const {
 
-	for (auto& x : vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x);
+	for (auto& x : vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x);
+	for (auto& x : vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x); //draw background then entities
 
 	GRAPHICS->Draw(*m_pPlayer);
 

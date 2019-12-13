@@ -4,4 +4,6 @@
 	<Texture filepath="Data\XML\Texture\Floor.png" alias="floor" />
 	<Texture filepath="Data\XML\Texture\Platform100_50.png" alias="Platform100_50" />
 	<Texture filepath="Data\XML\Texture\Wall.png" alias="Wall" />
+	<Texture filepath="Data\XML\Texture\door.png" alias="door" />
+	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" />
 </Textures>

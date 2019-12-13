@@ -9,9 +9,9 @@
 
 using namespace HAPISPACE;
 
-class Entity {
+enum eSide : int { NEUTRAL = 0, PLAYER, ENEMY, NOCOLLIDE };
 
-	enum eSide : int { NEUTRAL = 0, PLAYER, ENEMY };
+class Entity {
 
 public:
 
