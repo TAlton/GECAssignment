@@ -22,7 +22,6 @@ public:
 	void CreateWindow();
 	void Draw(Entity& e);
 	void ClearScreen() const;
-	int GetWidth() const { return this->m_cnWidth; }
 
 private:
 
