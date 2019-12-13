@@ -86,7 +86,7 @@ void Player::Jump(float dt) {
 
 	m_bFalling = false;
 
-	if (m_fVelocity < m_fMaxVelocity * 2) { //slowly decelerate velocity
+	if (m_fVelocity < m_fMaxVelocity * 2) { //slowly decelerate velocity -- has to be velocity *2 to make up for speed up on the way down
 
 		m_fVelocity += dt / 100;
 
