@@ -42,6 +42,7 @@ public:
 	void Fall(float dt);
 	void Jump(float dt);
 	void Damage(int dmg) { this->m_shHealth -= dmg; }
+	bool Shoot(float dt);
 
 	int GetState() const { return this->m_nState; }
 	int GetJump() const { return this->m_bJumping; }
@@ -51,12 +52,13 @@ public:
 	
 private:
 
-	short m_shHealth{ 100 },
-		m_shAmmo{ 10 };
+	short m_shHealth{ 100 };
 
 	int m_nState{ 0 },
 		m_nCurrentState{ IDLE },
-		m_nFrameIterator{ 0 };
+		m_nFrameIterator{ 0 },
+		m_nAttackSpeedIterator{ 0 },
+		m_nAttackSpeed{ 333 };
 
 	float m_fMaxVelocity{ 2.5f },
 		m_fVelocity{ -m_fMaxVelocity };

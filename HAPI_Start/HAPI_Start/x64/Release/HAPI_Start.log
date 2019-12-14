@@ -1,4 +1,23 @@
-﻿  World.cpp
-C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(205): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(210): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+﻿  Bullet.cpp
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Bullet.cpp(11): warning C4244: 'argument': conversion from 'float' to 'short', possible loss of data
+  Entity.cpp
+  Graphics.cpp
+  Input.cpp
+  Player.cpp
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(13): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(25): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\Player.cpp(33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  Scene.cpp
+  Texture.cpp
+  World.cpp
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(229): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(246): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(255): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(262): warning C4244: 'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\alton\source\repos\GEC\HAPI_Start\HAPI_Start\World.cpp(402): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  WorldEntity.cpp
+  main.cpp
+  Generating Code...
   HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GEC\HAPI_Start\x64\Release\HAPI_Start.exe

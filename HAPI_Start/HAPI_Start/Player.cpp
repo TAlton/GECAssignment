@@ -9,9 +9,14 @@ Player::~Player()
 
 void Player::Update(float dt)
 {
+
+	m_nAttackSpeedIterator += dt;
+
 }
 
 void Player::UpdateX(float dt) {
+
+	Update(dt);
 
 	switch (m_nState) {
 
@@ -131,5 +136,19 @@ void Player::Fall(float dt) {
 	this->SetPosition(m_v2Pos.x,
 		static_cast<int>(PHYSICS->Lerp(this->m_v2Pos.y,
 			this->m_v2Pos.y - m_fVelocity, 1.0f)));
+
+}
+
+bool Player::Shoot(float dt) {
+
+	if (m_nAttackSpeedIterator >= m_nAttackSpeed) {
+
+		m_nAttackSpeedIterator = 0;
+		
+		return true;
+
+	}
+
+	return false;
 
 }

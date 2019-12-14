@@ -226,7 +226,7 @@ void World::GetInput() {
 	switch (m_pInput->GetMouseInput()) {
 
 	case LMB:
-		SpawnBullet();
+		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet();
 		break;
 	case RMB:
 		break;
