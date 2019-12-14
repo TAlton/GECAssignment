@@ -245,6 +245,27 @@ bool World::CheckCollision() {
 
 	}
 
+	for (auto& x : vecpScenes[m_shCurrentScene]->GetBackground()) {
+
+		const short e_x1 = x->GetPosition().x;
+		const short e_y1 = x->GetPosition().y;
+		const short e_x2 = x->GetPosition().x + x->GetWidth();
+		const short e_y2 = x->GetPosition().y + x->GetHeight();
+
+		if (x1 < e_x2 && x2 > e_x1 &&
+			y1 < e_y2 && y2 > e_y1) {
+
+			if ('E' == m_pInput->GetKBInput() && "doorLeft" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneLeft() != -1) 
+				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetNextSceneLeft();
+			if ('E' == m_pInput->GetKBInput() && "doorRight" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneRight() != -1)
+				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetNextSceneRight();
+			if ('E' == m_pInput->GetKBInput() && "doorPrev" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetPrevScene() != -1)
+				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetPrevScene();
+
+		}
+
+	}
+
 	m_pPlayer->Collided(false);
 	return false;
 

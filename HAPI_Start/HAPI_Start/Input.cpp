@@ -8,6 +8,7 @@ const char Input::GetKBInput() const {
 	if (kbData.scanCode['W']) return 'W';
 	if (kbData.scanCode['D']) return 'D';
 	if (kbData.scanCode['A']) return 'A';
+	if (kbData.scanCode['E']) return 'E';
 
 	return '\0';
 	

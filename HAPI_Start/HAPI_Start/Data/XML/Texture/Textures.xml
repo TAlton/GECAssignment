@@ -4,6 +4,8 @@
 	<Texture filepath="Data\XML\Texture\Floor.png" alias="floor" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\Platform100_50.png" alias="Platform100_50" isAnim="0"  />
 	<Texture filepath="Data\XML\Texture\Wall.png" alias="Wall" isAnim="0" />
-	<Texture filepath="Data\XML\Texture\door.png" alias="door" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\door.png" alias="doorLeft" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\door.png" alias="doorRight" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\door.png" alias="doorPrev" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" isAnim="1" />
 </Textures>
