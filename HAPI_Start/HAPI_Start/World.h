@@ -60,6 +60,7 @@ private:
 	bool CheckCollision();
 	void CalcFrameTime();
 	void UpdateLevel();
+	void SpawnBullet();
 
 };
 

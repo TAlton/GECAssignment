@@ -13,3 +13,15 @@ const char Input::GetKBInput() const {
 	return '\0';
 	
 }
+
+const int Input::GetMouseInput() const {
+
+	const HAPI_TMouseData& mData = HAPI.GetMouseData();
+
+	if (mData.leftButtonDown) return LMB;
+	if (mData.rightButtonDown) return RMB;
+	if (mData.middleButtonDown) return MMB;
+
+	return -1;
+
+}

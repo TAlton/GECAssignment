@@ -41,6 +41,7 @@ public:
 	void Collided(bool b);
 	void Fall(float dt);
 	void Jump(float dt);
+	void Damage(int dmg) { this->m_shHealth -= dmg; }
 
 	int GetState() const { return this->m_nState; }
 	int GetJump() const { return this->m_bJumping; }
@@ -50,7 +51,7 @@ public:
 	
 private:
 
-	short m_shHealth{ 0 },
+	short m_shHealth{ 100 },
 		m_shAmmo{ 10 };
 
 	int m_nState{ 0 },

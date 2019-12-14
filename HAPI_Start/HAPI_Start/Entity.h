@@ -33,11 +33,13 @@ public:
 	int GetHealth() const { return this->m_nHealth; }
 	unsigned char* GetTexturePointer() const { return this->m_pTex->GetPointer(); }
 	bool IsAnim() const { return this->m_bIsAnim; }
+	int GetSide() const { return this->m_ESide; }
 
 	void SetPosition(short x, short y) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = x; this->m_v2Pos.y = y; }
 	void SetPosition(Vec2 v) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = v.x; this->m_v2Pos.y = v.y; }
 	void SetHeight(int h) { this->m_nHeight = h; }
 	void SetWidth(int w) { this->m_nWidth = w; }
+	void SetSide(int side) { this->m_ESide = side; }
 	void SetTexture(Texture& tex) {
 
 		m_pTex = &tex;

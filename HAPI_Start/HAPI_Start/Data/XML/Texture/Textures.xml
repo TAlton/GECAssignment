@@ -8,4 +8,5 @@
 	<Texture filepath="Data\XML\Texture\door.png" alias="doorRight" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\door.png" alias="doorPrev" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" isAnim="1" />
+	<Texture filepath="Data\XML\Texture\Bullet.png" alias="bullet" isAnim="0" />
 </Textures>
