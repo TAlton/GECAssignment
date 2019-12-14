@@ -27,6 +27,7 @@ void Player::UpdateX(float dt) {
 			m_nFrameIterator = 0;
 			this->GetTexture()->SetCurrentFrame();
 		}
+		m_bDirection = LEFT;
 		break;
 	case MOVERIGHT:
 		this->Move(dt, 0);
@@ -35,6 +36,7 @@ void Player::UpdateX(float dt) {
 			m_nFrameIterator = 0;
 			this->GetTexture()->SetCurrentFrame();
 		}
+		m_bDirection = RIGHT;
 		break;
 	case IDLE:
 		this->GetTexture()->SetCurrentFrame(IDLE);

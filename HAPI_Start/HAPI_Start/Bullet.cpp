@@ -8,7 +8,8 @@ Bullet::Bullet()
 
 void Bullet::Update(float dt) {
 
-	this->SetPosition(this->m_v2Pos.x + dt, this->m_v2Pos.y);
+	if(this->m_bDirection == LEFT) this->SetPosition(this->m_v2Pos.x - dt, this->m_v2Pos.y);
+	if (this->m_bDirection == RIGHT) this->SetPosition(this->m_v2Pos.x + dt, this->m_v2Pos.y);
 
 }
 

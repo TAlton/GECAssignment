@@ -46,6 +46,7 @@ public:
 
 	int GetState() const { return this->m_nState; }
 	int GetJump() const { return this->m_bJumping; }
+	bool GetDirection() const { return this->m_bDirection; }
 
 	void SetState(int state) { this->m_nState = state; }
 	void SetJump(bool b) { this->m_bJumping = b;  }
@@ -66,7 +67,8 @@ private:
 	bool m_bCollided{ true },
 		m_bJumping{ false },
 		m_bFalling{ true },
-		m_bDead{ false };
+		m_bDead{ false },
+		m_bDirection{ LEFT };
 
 };
 

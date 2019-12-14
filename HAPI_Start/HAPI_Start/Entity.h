@@ -10,6 +10,7 @@
 using namespace HAPISPACE;
 
 enum eSide : int { NEUTRAL = 0, PLAYER, ENEMY, NOCOLLIDE };
+enum eDirection : int { LEFT = 0, RIGHT };
 
 class Entity {
 

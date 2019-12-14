@@ -226,7 +226,7 @@ void World::GetInput() {
 	switch (m_pInput->GetMouseInput()) {
 
 	case LMB:
-		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet();
+		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet(m_pPlayer->GetDirection());
 		break;
 	case RMB:
 		break;
@@ -377,7 +377,7 @@ void World::UpdateLevel() {
 
 }
 
-void World::SpawnBullet() { //should take in a reference to the spawner
+void World::SpawnBullet(bool dir) { //should take in a reference to the spawner
 
 	bool bFoundBullet{ false };
 
@@ -388,6 +388,7 @@ void World::SpawnBullet() { //should take in a reference to the spawner
 			if (false == vecpBullets[i]->IsActive()) {
 
 				bFoundBullet = true;
+				vecpBullets[i]->SetDirection(dir);
 				vecpBullets[i]->SetActive(true);
 				vecpBullets[i]->SetSide(PLAYER);
 				bFoundBullet = !bFoundBullet;
