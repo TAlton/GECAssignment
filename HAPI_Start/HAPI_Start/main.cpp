@@ -12,7 +12,6 @@ void HAPI_Main() {
 
 colliding with door and pressing e for interact changes level
 ------add in check for nullptr (lambda check null might have to be reused)
-adding animation --- there is slides for this
 shooting ---- if input == left click shoort based on direction (check moveleft and right)
 -----------update entities will cause bullet to move
 enemy

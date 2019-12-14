@@ -85,7 +85,7 @@ void World::LoadTextures() {
 		if (!node->GetAttributeWithName("filepath", attr)) return;
 		if (!node->GetAttributeWithName("alias", attr)) return;
 
-		Texture* t = new Texture(node->GetAttributes()[0].AsString());
+		Texture* t = new Texture(node->GetAttributes()[0].AsString(), node->GetAttributes()[2].AsInt());
 
 		t->LoadTexture();
 
@@ -209,7 +209,7 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
-	if (m_ulCurrentTime % 16 == 0) return;
+	if (m_ulCurrentTime % 16 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
 	m_pPlayer->UpdateY(m_ulFrameTime);
 	CheckCollision();

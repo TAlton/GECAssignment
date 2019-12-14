@@ -54,8 +54,6 @@ void Graphics::Draw(Entity& e) {
 	std::shared_ptr<Rectangle> rect;
 	rect = std::make_shared<Rectangle>(*e.GetRectangle());
 
-	//e.GetTexture()->GetWidth();
-
 	int i{ 0 };
 	const int eol = (m_cnWidth - e.GetTexture()->GetWidth()) * BYTESPERPIXEL;
 	int nPosX = e.GetPosition().x;
@@ -69,7 +67,7 @@ void Graphics::Draw(Entity& e) {
 
 	const int nWidthToDraw = std::abs(rect->GetLeft() - rect->GetRight());
 	const int nHeightToDraw = std::abs(rect->GetBottom() - rect->GetTop());
-	const int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) << 2;
+	int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) << 2;
 	const int nTexOffsetY = std::abs(((e.GetTexture()->GetHeight() - nHeightToDraw) * e.GetTexture()->GetWidth()) << 2);
 
 	rect->Translate(-nPosX, -nPosY);
@@ -78,7 +76,13 @@ void Graphics::Draw(Entity& e) {
 	if (nPosY < 0) nPosY = 0;
 
 	BYTE* tempBufferPtr = m_pScreen + ((nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) << 2);//* BYTESPERPIXEL;
-	BYTE* tPtr = e.GetTexturePointer();
+	BYTE* tPtr = e.GetTexturePointer() + (e.GetTexture()->GetCurrentFrame() * e.GetWidth()) * 4;
+
+	if (e.GetTexture()->IsAnim()) {
+
+		nTexOffsetX = (std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) + ((e.GetTexture()->GetMaxFrames() - 1) * e.GetWidth())) << 2; //changes per frame of anim 
+
+	}
 
 	if (rect->GetTop() != 0) tPtr += nTexOffsetY;
 	if (rect->GetLeft() != 0) tPtr += nTexOffsetX;

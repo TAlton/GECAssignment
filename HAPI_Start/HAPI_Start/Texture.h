@@ -9,7 +9,7 @@ class Texture {
 public:
 
 	Texture() = default;
-	Texture(const std::string filepath) : m_strAlias(filepath) {}
+	Texture(const std::string filepath, bool isAnim) : m_strAlias(filepath), m_bIsAnim(isAnim) {} // should pass in frame width as well but used as Proof of concept
 	Texture(int width, int height) : m_shWidth(static_cast<short>(width)), m_shHeight(static_cast<short>(height)) {}
 	Texture(int width, int height, unsigned char* ptr) : m_shWidth(static_cast<short>(width)), m_shHeight(static_cast<short>(height)), m_pTexture(ptr) {}
 	Texture(short width, short height) : m_shWidth(width), m_shHeight(height) {}
@@ -29,13 +29,44 @@ public:
 	short GetHeight() const { return this->m_shHeight; }
 	unsigned char* GetPointer() const { return this->m_pTexture; }
 	std::string GetAlias() const { return this->m_strAlias; }
+	bool IsAnim() const { return this->m_bIsAnim; }
+	short GetMaxFrames() const { return this->m_shMaxFrames; }
+	short GetCurrentFrame() const { return this->m_shCurrentFrame; }
+
+	void SetCurrentFrame() {
+
+		if (m_shCurrentFrame == m_shMaxFrames) {
+
+			this->m_shCurrentFrame = 0;
+
+		}
+		else {
+
+			m_shCurrentFrame++;
+
+		}
+	}
+
+	void SetCurrentFrame(int i) {
+
+		if (i >= 0 && i <= m_shMaxFrames) {
+
+			m_shCurrentFrame = i;
+
+		}
+
+	}
 
 	void LoadTexture();
 
 private:
 
 	short m_shWidth{ 0 },
-		m_shHeight{ 0 };
+		m_shHeight{ 0 },
+		m_shMaxFrames{ 0 },
+		m_shCurrentFrame{ 0 };
+
+	bool m_bIsAnim{ false };
 
 	std::string m_strAlias{ "default" };
 

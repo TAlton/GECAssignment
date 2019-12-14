@@ -32,6 +32,7 @@ public:
 	int GetHeight() const { return this->m_nHeight; }
 	int GetHealth() const { return this->m_nHealth; }
 	unsigned char* GetTexturePointer() const { return this->m_pTex->GetPointer(); }
+	bool IsAnim() const { return this->m_bIsAnim; }
 
 	void SetPosition(short x, short y) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = x; this->m_v2Pos.y = y; }
 	void SetPosition(Vec2 v) { this->m_v2LastPos = this->m_v2Pos; this->m_v2Pos.x = v.x; this->m_v2Pos.y = v.y; }
@@ -43,6 +44,7 @@ public:
 		SetWidth(m_pTex->GetWidth());
 		SetHeight(m_pTex->GetHeight());
 		m_pRectangle = new Rectangle(m_nWidth, m_nHeight);
+		m_bIsAnim = tex.IsAnim();
 
 	};
 
@@ -55,6 +57,8 @@ protected:
 		m_nWidth{ 0 },
 		m_nHeight{ 0 },
 		m_nHealth{ 0 };
+
+	bool m_bIsAnim{ false };
 
 	std::string m_strAlias{ "default" };
 

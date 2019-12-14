@@ -1,9 +1,9 @@
 <Textures>
-	<Texture filepath="Data\XML\Texture\alphaThing.tga" alias="player" />
-	<Texture filepath="Data\XML\Texture\playerSprite.tga" alias="test" />
-	<Texture filepath="Data\XML\Texture\Floor.png" alias="floor" />
-	<Texture filepath="Data\XML\Texture\Platform100_50.png" alias="Platform100_50" />
-	<Texture filepath="Data\XML\Texture\Wall.png" alias="Wall" />
-	<Texture filepath="Data\XML\Texture\door.png" alias="door" />
-	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" />
+	<Texture filepath="Data\XML\Texture\alphaThing.tga" alias="player" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\playerSprite.tga" alias="test" isAnim="0"  />
+	<Texture filepath="Data\XML\Texture\Floor.png" alias="floor" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\Platform100_50.png" alias="Platform100_50" isAnim="0"  />
+	<Texture filepath="Data\XML\Texture\Wall.png" alias="Wall" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\door.png" alias="door" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" isAnim="1" />
 </Textures>

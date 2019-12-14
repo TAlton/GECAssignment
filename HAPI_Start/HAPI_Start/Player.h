@@ -54,10 +54,11 @@ private:
 		m_shAmmo{ 10 };
 
 	int m_nState{ 0 },
-		m_CurrentState{ IDLE };
+		m_nCurrentState{ IDLE },
+		m_nFrameIterator{ 0 };
 
-	float m_fMaxVelocity{ 2.5f };
-	float m_fVelocity{ -m_fMaxVelocity };
+	float m_fMaxVelocity{ 2.5f },
+		m_fVelocity{ -m_fMaxVelocity };
 
 	bool m_bCollided{ true },
 		m_bJumping{ false },

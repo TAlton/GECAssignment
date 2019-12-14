@@ -17,11 +17,22 @@ void Player::UpdateX(float dt) {
 
 	case MOVELEFT:
 		this->Move(-dt, 0);
+		m_nFrameIterator += dt;
+		if (m_nFrameIterator >= 100) { //changes frame every 100 milliseconds
+			m_nFrameIterator = 0;
+			this->GetTexture()->SetCurrentFrame();
+		}
 		break;
 	case MOVERIGHT:
 		this->Move(dt, 0);
+		m_nFrameIterator += dt;
+		if (m_nFrameIterator >= 100) {
+			m_nFrameIterator = 0;
+			this->GetTexture()->SetCurrentFrame();
+		}
 		break;
 	case IDLE:
+		this->GetTexture()->SetCurrentFrame(IDLE);
 		break;
 	default:
 		break;

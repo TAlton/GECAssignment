@@ -13,12 +13,23 @@ void Texture::LoadTexture() {
 
 	try {
 
-		int width = static_cast<int>(m_shHeight),
-			height = static_cast<int>(m_shWidth);
+		int width = static_cast<int>(m_shHeight);
+		int height = static_cast<int>(m_shWidth);
 		HAPI.LoadTexture(m_strAlias, &m_pTexture, width, height);
 
 		this->m_shHeight = height;
-		this->m_shWidth = width;
+
+		if (!m_bIsAnim) {
+
+			this->m_shWidth = width;
+
+		}
+		else {
+
+			this->m_shMaxFrames = width / 64;
+			this->m_shWidth = (width / m_shMaxFrames);
+
+		}
 
 	}
 	catch (std::overflow_error& e) {
