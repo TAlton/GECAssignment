@@ -70,5 +70,7 @@ private:
 		m_bDead{ false },
 		m_bDirection{ LEFT };
 
+	const int m_cnFrameChange{ 300 };
+
 };
 

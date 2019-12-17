@@ -32,11 +32,7 @@ Vec2 Input::GetControllerAnalogInput(int i) {
 
 	if (true == vecbControllers[i]) {
 
-		Vec2 v{ 0,0 };
-		v.x = GetLeftAnalogX(i);
-		v.y = GetLeftAnalogY(i);
-
-		return v;
+		return Vec2( GetLeftAnalogX(i), GetLeftAnalogY(i) );
 
 	}
 
@@ -64,21 +60,18 @@ void Input::CheckControllersConnected() {
 
 }
 
-int Input::GetLeftAnalogX(int i) {
+int Input::GetLeftAnalogX(int i) { //returns a 1 or -1 as direction right/left 
 
 	const HAPI_TControllerData& ctrlrData = HAPI.GetControllerData(i);
-	int x{ 0 };
 
 	if (ctrlrData.analogueButtons[HK_ANALOGUE_LEFT_THUMB_X] > HK_GAMEPAD_LEFT_THUMB_DEADZONE) {
 
-		x = 1;
-		return x;
+		return 1;
 
 	}
 	if (ctrlrData.analogueButtons[HK_ANALOGUE_LEFT_THUMB_X] < -HK_GAMEPAD_LEFT_THUMB_DEADZONE) {
 
-		x = -1;
-		return x;
+		return -1;
 
 	}
 
@@ -86,26 +79,21 @@ int Input::GetLeftAnalogX(int i) {
 
 }
 
-int Input::GetLeftAnalogY(int i) {
+int Input::GetLeftAnalogY(int i) {//returns 1 or -1, Up or Down 
 
 	const HAPI_TControllerData& ctrlrData = HAPI.GetControllerData(i);
 
-	int y{ 0 };
-
 	if (ctrlrData.analogueButtons[HK_ANALOGUE_LEFT_THUMB_X] > HK_GAMEPAD_LEFT_THUMB_DEADZONE) {
 
-		y = 1;
-		return y;
+		return 1;
 
 	}
 	if (ctrlrData.analogueButtons[HK_ANALOGUE_LEFT_THUMB_X] < -HK_GAMEPAD_LEFT_THUMB_DEADZONE) {
 
-		y = -1;
-		return y;
+		return -1;
 
 	}
 
 	return 0;
-
 
 }

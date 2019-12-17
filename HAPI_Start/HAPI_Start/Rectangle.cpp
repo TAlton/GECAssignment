@@ -28,9 +28,7 @@ void Rectangle::Translate(Vec2 v) {
 	this->m_shBottom += v.y;
 
 }
-/*
-@param x 
-*/
+
 void Rectangle::Translate(short x, short y) {
 
 	this->m_shLeft += x;
@@ -40,7 +38,7 @@ void Rectangle::Translate(short x, short y) {
 
 }
 
-bool Rectangle::Contains(const Rectangle& other) {
+bool Rectangle::Contains(const Rectangle& other) const {
 
 	if (this->m_shTop > other.m_shBottom) return false;
 	if (this->m_shBottom < other.m_shTop) return false;
@@ -51,7 +49,7 @@ bool Rectangle::Contains(const Rectangle& other) {
 
 }
 
-bool Rectangle::Outside(const Rectangle& other) {
+bool Rectangle::Outside(const Rectangle& other) const {
 
 	if (this->m_shTop > other.m_shBottom) return true;
 	if (this->m_shBottom < other.m_shTop) return true;
@@ -62,7 +60,7 @@ bool Rectangle::Outside(const Rectangle& other) {
 }
 
 
-bool Rectangle::Overlap(const Rectangle& other) {
+bool Rectangle::Overlap(const Rectangle& other) const {
 
 	if (this->m_shLeft < other.m_shRight && this->m_shRight > other.m_shLeft &&
 		this->m_shTop > other.m_shBottom && this->m_shBottom < other.m_shTop) return true;

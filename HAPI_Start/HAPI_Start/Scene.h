@@ -21,7 +21,7 @@ public:
 	const int GetNextSceneLeft() const { return this->m_shNextSceneLeft; }
 	const int GetNextSceneRight() const { return this->m_shNextSceneRight; }
 	const int GetID() const { return this->m_shSceneID; }
-	void SetPathways(int id, int parent, int lChild, int rChild) {
+	void SetPathways(int id, int parent, int lChild, int rChild) { //applies the binary tree paths to the scene
 
 		m_shID = id;
 		m_shPrevScene = parent;

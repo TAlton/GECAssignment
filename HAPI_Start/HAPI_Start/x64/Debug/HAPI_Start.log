@@ -1,6 +1,5 @@
-﻿  Bullet.cpp
-C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Bullet.cpp(11): warning C4244: 'argument': conversion from 'long' to 'short', possible loss of data
-C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Bullet.cpp(12): warning C4244: 'argument': conversion from 'long' to 'short', possible loss of data
+﻿  FileManager.cpp
+  Scene.cpp
   World.cpp
 C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\World.cpp(261): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
   main.cpp

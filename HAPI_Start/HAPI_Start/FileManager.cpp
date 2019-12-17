@@ -9,7 +9,7 @@ FileManager::~FileManager()
 {
 }
 
-std::string FileManager::GetSceneFilepath(const int index) {
+std::string FileManager::GetSceneFilepath(const int index) const {
 
 	try {
 

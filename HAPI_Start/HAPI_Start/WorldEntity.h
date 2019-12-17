@@ -17,7 +17,7 @@ public:
 private:
 
 	int m_nSide{ 0 };
-	short m_shHealth{ 0 };
+	short m_shHealth{ 0 }; //health is added due to potential for breakable objects
 
 };
 

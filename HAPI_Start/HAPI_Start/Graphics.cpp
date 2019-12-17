@@ -65,7 +65,7 @@ void Graphics::Draw(Entity& e) {
 
 	rect->ClipTo(*m_rectScreen);
 
-	const int nWidthToDraw = std::abs(rect->GetLeft() - rect->GetRight());
+	const int nWidthToDraw = std::abs(rect->GetLeft() - rect->GetRight()); //calculates what length and width of the rectangle to draw and any offset necessary if not starting from 0
 	const int nHeightToDraw = std::abs(rect->GetBottom() - rect->GetTop());
 	int nTexOffsetX = std::abs(e.GetTexture()->GetWidth() - nWidthToDraw) << 2;
 	const int nTexOffsetY = std::abs(((e.GetTexture()->GetHeight() - nHeightToDraw) * e.GetTexture()->GetWidth()) << 2);
@@ -76,7 +76,7 @@ void Graphics::Draw(Entity& e) {
 	if (nPosY < 0) nPosY = 0;
 
 	BYTE* tempBufferPtr = m_pScreen + ((nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) << 2);//* BYTESPERPIXEL;
-	BYTE* tPtr = e.GetTexturePointer() + (e.GetTexture()->GetCurrentFrame() * e.GetWidth()) * 4;
+	BYTE* tPtr = e.GetTexturePointer() + (static_cast<size_t>(e.GetTexture()->GetCurrentFrame()) * e.GetWidth()) * 4;
 
 	if (e.GetTexture()->IsAnim()) {
 

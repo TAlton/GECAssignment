@@ -10,7 +10,7 @@ Player::~Player()
 void Player::Update(long dt)
 {
 
-	m_nAttackSpeedIterator += dt;
+	m_nAttackSpeedIterator += dt; //updates timer on when the player can shoot next
 
 }
 
@@ -23,37 +23,37 @@ void Player::UpdateX(long dt) {
 	case MOVELEFT:
 		this->Move(-dt, 0);
 		m_nFrameIterator += dt;
-		if (m_nFrameIterator >= 300) { //changes frame every 100 milliseconds
+		if (m_nFrameIterator >= m_cnFrameChange) { //changes frame every 300 milliseconds of movement
 			m_nFrameIterator = 0;
 			this->GetTexture()->SetCurrentFrame();
 		}
 		m_bDirection = LEFT;
 		break;
+
 	case MOVERIGHT:
 		this->Move(dt, 0);
 		m_nFrameIterator += dt;
-		if (m_nFrameIterator >= 300) {
+		if (m_nFrameIterator >= m_cnFrameChange) {
 			m_nFrameIterator = 0;
 			this->GetTexture()->SetCurrentFrame();
 		}
 		m_bDirection = RIGHT;
 		break;
+
 	case IDLE:
 		this->GetTexture()->SetCurrentFrame(IDLE);
 		break;
+
 	default:
 		break;
 
 	}
 
-	HAPI.RenderText(0, 10, HAPI_TColour::GREEN, std::to_string(this->GetPosition().x));
-	HAPI.RenderText(0, 20, HAPI_TColour::GREEN, std::to_string(this->GetPosition().y));
-
 }
 
 void Player::UpdateY(long dt) {
 
-	if (true == this->m_bJumping) {
+	if (true == this->m_bJumping) { //player can either jump or fall in Y nothing else
 
 		Jump(dt);
 

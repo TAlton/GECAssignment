@@ -8,11 +8,6 @@ public:
 
 	Rectangle(short width, short height) : m_shRight(width), m_shBottom(height) {}
 
-	short m_shLeft{ 0 },
-		m_shRight{ 0 },
-		m_shTop{ 0 },
-		m_shBottom{ 0 };
-
 	Rectangle() = default;
 	~Rectangle();
 
@@ -20,9 +15,9 @@ public:
 	void Translate(Vec2 v);
 	void Translate(short x, short y);
 
-	bool Contains(const Rectangle& other);
-	bool Outside(const Rectangle& other);
-	bool Overlap(const Rectangle& other);
+	bool Contains(const Rectangle& other) const;
+	bool Outside(const Rectangle& other) const;
+	bool Overlap(const Rectangle& other) const; //deprecated check for collision
 
 	short GetWidth() { return this->m_shRight; }
 	short GetHeight() { return this->m_shBottom; }
@@ -31,6 +26,12 @@ public:
 	short GetTop() { return this->m_shTop; }
 	short GetBottom() { return this->m_shBottom; }
 
+private:
+
+	short m_shLeft{ 0 },
+		m_shRight{ 0 },
+		m_shTop{ 0 },
+		m_shBottom{ 0 };
 
 };
 

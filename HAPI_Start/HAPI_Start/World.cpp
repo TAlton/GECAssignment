@@ -56,7 +56,7 @@ World::World() {
 
 }
 
-World::~World() { //this could all be avoided with smart pointers
+World::~World() { //this could all be avoided with smart pointers, not a priority fix
 
 	for (auto& x : umapTextures) delete x.second;
 	for (auto& x : vecpScenes) delete x;
@@ -70,7 +70,7 @@ World::~World() { //this could all be avoided with smart pointers
 
 }
 
-void World::LoadTextures() {
+void World::LoadTextures() { //checks if a file exists extracts xml nodes and loads them as textures, placed bullet load in here to prevent memory alloc in loop
 
 	if (!FILEMANAGER->FileExists(FILEMANAGER->GetTextureFilepath())) return;
 	std::string str = FILEMANAGER->GetTextureFilepath();
@@ -177,7 +177,7 @@ void World::LoadScenes() {
 				wo->GetAlias()
 			)));
 
-			if (NOCOLLIDE == vecAttr[4].AsInt()) {
+			if (NOCOLLIDE == vecAttr[4].AsInt()) { //if the object is not able to collide with anything load into seperate vector
 
 				s->AddBackground(wo);
 
@@ -252,10 +252,9 @@ void World::GetInput() {
 
 		case true:
 			break;
+
 		case false:
 			m_pPlayer->SetJump(true);
-			break;
-		default:
 			break;
 
 		}
@@ -280,10 +279,13 @@ void World::GetInput() {
 	case LMB:
 		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet(m_pPlayer->GetDirection());
 		break;
+
 	case RMB:
 		break;
+
 	case MMB:
 		break;
+
 	default:
 		break;
 
@@ -343,7 +345,7 @@ void World::UpdateEntities() {
 
 }
 
-bool World::CheckCollision() { //this is really ugly and needs cleaning up
+bool World::CheckCollision() { //this is really ugly and needs cleaning up, or is it bucket collision will speed up as we wont check unnecessary objects
 
 	const short x1 = m_pPlayer->GetPosition().x;
 	const short y1 = m_pPlayer->GetPosition().y;
@@ -376,7 +378,7 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up
 		if (x1 < e_x2 && x2 > e_x1 &&
 			y1 < e_y2 && y2 > e_y1) {
 
-			if ('E' == m_pInput->GetKBInput() && "doorLeft" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneLeft() != -1) 
+			if ('E' == m_pInput->GetKBInput() && "doorLeft" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneLeft() != -1) //use interact button whilst colliding with door
 				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetNextSceneLeft();
 			if ('E' == m_pInput->GetKBInput() && "doorRight" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneRight() != -1)
 				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetNextSceneRight();
@@ -438,6 +440,8 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up
 	}
 	//collision checking for bullet against player
 
+	//will need to add enemy colliding with player bullets
+
 	m_pPlayer->Collided(false);
 	return false;
 
@@ -455,22 +459,22 @@ void World::UpdateLevel() {
 
 }
 
-void World::SpawnBullet(bool dir) { //should take in a reference to the spawner
+void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 
 	bool bFoundBullet{ false };
 
 	do  {
 
-		for (int i{ 0 }; i < vecpBullets.size(); i++) {
+		for (int i{ 0 }; i < vecpBullets.size(); i++) { //sets bullet to active, 
 			
 			if (false == vecpBullets[i]->IsActive()) {
 
 				bFoundBullet = true;
 				vecpBullets[i]->SetDirection(dir);
 				vecpBullets[i]->SetActive(true);
-				vecpBullets[i]->SetSide(PLAYER);
+				vecpBullets[i]->SetSide(PLAYER); //pass in side of shooter here
 				bFoundBullet = !bFoundBullet;
-				vecpBullets[i]->SetPosition(m_pPlayer->GetPosition());
+				vecpBullets[i]->SetPosition(m_pPlayer->GetPosition()); //if all bullets are active use the last bullet in the vector due to rotation it has the longest lifetime
 				return;
 
 			}
