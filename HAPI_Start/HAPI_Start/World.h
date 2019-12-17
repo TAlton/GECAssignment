@@ -49,8 +49,11 @@ private:
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
 
-	unsigned long m_ulCurrentTime{ 0 };
-	unsigned long m_ulFrameTime;
+	unsigned long m_ulCurrentTime{ 0 },
+		m_ulFrameTime{ 0 },
+		m_ulScore{ 999999 };
+
+	bool m_bGameOver{ false };
 
 	void LoadTextures();
 	void LoadScenes();
@@ -61,6 +64,7 @@ private:
 	void CalcFrameTime();
 	void UpdateLevel();
 	void SpawnBullet(bool dir);
+	void RestartGame();
 
 };
 

@@ -41,9 +41,8 @@ void World::Loop() {
 
 		CalcFrameTime();
 		GRAPHICS->ClearScreen();
-
+		GetInput();
 		UpdateEntities();
-
 		DrawRenderables();
 
 	}
@@ -246,8 +245,6 @@ void World::UpdateEntities() {
 	m_pPlayer->UpdateY(m_ulFrameTime);
 	CheckCollision();
 
-	GetInput();
-
 	for (auto& x : vecpBullets) {
 
 		if (x->IsActive()) {
@@ -262,6 +259,11 @@ void World::UpdateEntities() {
 	m_pPlayer->UpdateX(m_ulFrameTime);
 	CheckCollision();
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
+
+	m_ulScore -= m_ulCurrentTime / 1000;
+	HAPI.RenderText(600, 0, HAPI_TColour::CYAN, std::to_string(m_ulScore), 24);
+
+	if (m_pPlayer->GetHealth() <= 0 || m_ulScore <= 0) RestartGame();
 
 }
 
@@ -408,6 +410,17 @@ void World::SpawnBullet(bool dir) { //should take in a reference to the spawner
 		return;
 
 	} while (!bFoundBullet);
+
+}
+
+void World::RestartGame() {
+
+	/*
+	
+	reset all positions and scores
+	reload binary tree 
+
+	*/
 
 }
 
