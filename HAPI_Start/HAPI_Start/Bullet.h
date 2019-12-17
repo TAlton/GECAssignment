@@ -23,7 +23,8 @@ public:
 
 private:
 
-	short m_shDamage{ 10 };
+	const short m_shDamage{ 10 },
+		m_shSpeed{ 2 };
 
 	bool m_bActive{ false },
 		m_bDirection{ LEFT };

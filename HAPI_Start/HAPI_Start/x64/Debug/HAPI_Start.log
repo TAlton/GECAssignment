@@ -1,4 +1,8 @@
-﻿  Player.cpp
-C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Player.cpp(119): warning C4244: 'argument': conversion from 'float' to 'short', possible loss of data
-C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Player.cpp(136): warning C4244: 'argument': conversion from 'float' to 'short', possible loss of data
+﻿  Bullet.cpp
+C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Bullet.cpp(11): warning C4244: 'argument': conversion from 'long' to 'short', possible loss of data
+C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Bullet.cpp(12): warning C4244: 'argument': conversion from 'long' to 'short', possible loss of data
+  World.cpp
+C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\World.cpp(261): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+  main.cpp
+  Generating Code...
   HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GECAssignment3\HAPI_Start\x64\Debug\HAPI_Start.exe

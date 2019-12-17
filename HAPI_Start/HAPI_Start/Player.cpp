@@ -23,7 +23,7 @@ void Player::UpdateX(long dt) {
 	case MOVELEFT:
 		this->Move(-dt, 0);
 		m_nFrameIterator += dt;
-		if (m_nFrameIterator >= 100) { //changes frame every 100 milliseconds
+		if (m_nFrameIterator >= 300) { //changes frame every 100 milliseconds
 			m_nFrameIterator = 0;
 			this->GetTexture()->SetCurrentFrame();
 		}
@@ -32,7 +32,7 @@ void Player::UpdateX(long dt) {
 	case MOVERIGHT:
 		this->Move(dt, 0);
 		m_nFrameIterator += dt;
-		if (m_nFrameIterator >= 100) {
+		if (m_nFrameIterator >= 300) {
 			m_nFrameIterator = 0;
 			this->GetTexture()->SetCurrentFrame();
 		}
@@ -116,7 +116,7 @@ void Player::Jump(long dt) {
 		return;
 	}
 
-	this->SetPosition(m_v2Pos.x, m_v2Pos.y + m_fVelocity);
+	this->SetPosition(m_v2Pos.x, m_v2Pos.y + static_cast<short>(m_fVelocity));
 
 
 }
@@ -133,7 +133,7 @@ void Player::Fall(long dt) {
 	}
 
 
-	this->SetPosition(m_v2Pos.x, this->m_v2Pos.y - m_fVelocity);
+	this->SetPosition(m_v2Pos.x, this->m_v2Pos.y - static_cast<short>(m_fVelocity));
 
 }
 

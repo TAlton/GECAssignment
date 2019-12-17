@@ -26,7 +26,7 @@ void Texture::LoadTexture() {
 		}
 		else {
 
-			this->m_shMaxFrames = width / 64;
+			this->m_shMaxFrames = width / 64; //frame width could be added into XML file, setting default to 1 or overloading constructor fixes issues
 			this->m_shWidth = (width / m_shMaxFrames);
 
 		}
