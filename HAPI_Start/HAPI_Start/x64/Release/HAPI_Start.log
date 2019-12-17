@@ -1,9 +1,11 @@
-﻿  World.cpp
+﻿  Input.cpp
+  World.cpp
 C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(228,23): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(245,21): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(252,14): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(259,21): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(264,21): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(271,14): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
+C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(278,21): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
   main.cpp
   Generating Code...
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(405,33): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(424,33): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(424,33): warning C4267: C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\Input.cpp(55) : warning C4715: 'Input::GetControllerDigitalInput': not all control paths return a value
   HAPI_Start.vcxproj -> C:\Users\s6079142\Source\Repos\GECAssignment2\HAPI_Start\x64\Release\HAPI_Start.exe

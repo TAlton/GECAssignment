@@ -222,7 +222,7 @@ void World::GetInput() {
 
 	}
 
-	switch (m_pInput->GetMouseInput()) {
+	switch (m_pInput->GetMouseInput()) { //mouse input
 
 	case LMB:
 		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet(m_pPlayer->GetDirection());
@@ -235,6 +235,27 @@ void World::GetInput() {
 		break;
 
 	}
+
+	do {
+
+		if (HK_DIGITAL_A == m_pInput->GetControllerDigitalInput(0) || true == m_pPlayer->GetJump()) {
+			m_pPlayer->SetJump(true);
+		}
+		if (-1 == m_pInput->GetControllerAnalogInput(0).x) {
+
+			m_pPlayer->SetState(MOVELEFT);
+			break;
+
+		}
+		if (1 == m_pInput->GetControllerAnalogInput(0).x) { 
+
+			m_pPlayer->SetState(MOVERIGHT);
+			break;
+		}
+
+		break;
+
+	} while(true);
 
 }
 
