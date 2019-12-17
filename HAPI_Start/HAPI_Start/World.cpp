@@ -56,12 +56,14 @@ World::World() {
 
 }
 
-World::~World() {
+World::~World() { //this could all be avoided with smart pointers
 
 	for (auto& x : umapTextures) delete x.second;
 	for (auto& x : vecpScenes) delete x;
 	for (auto& x : vecpBullets) delete x;
+	for (auto& x : vecpUI) delete x;
 
+	vecpUI.clear();
 	vecpBullets.clear();
 	vecpScenes.clear();
 	umapTextures.clear();
@@ -97,9 +99,31 @@ void World::LoadTextures() {
 		vecpBullets.push_back(b);
 
 	}
-	for(auto& x : vecpBullets) x->SetTexture(*(umapTextures.at(
-								x->GetAlias()
-								)));
+
+	try {
+
+		umapTextures.find(vecpBullets[0]->GetAlias()) != umapTextures.end(); //checks if the texture exists
+
+	}
+	catch (std::out_of_range & e) {
+
+		throw e;
+		return;
+
+	}
+	catch (...) {
+
+		return;
+
+	}
+
+	for (auto& x : vecpBullets) {
+
+		x->SetTexture(*(umapTextures.at(
+			x->GetAlias()
+		)));
+
+	}
 	
 }
 
@@ -170,7 +194,7 @@ void World::LoadScenes() {
 
 }
 
-void World::LoadUI() {
+void World::LoadUI() { //potential to move this whole function into filemanager and pass in filepath, node name ?
 
 	if (!FILEMANAGER->FileExists(FILEMANAGER->GetUIFilepath())) return;
 	std::string str = FILEMANAGER->GetUIFilepath();
@@ -213,7 +237,7 @@ void World::DrawRenderables() const {
 
 	GRAPHICS->Draw(*m_pPlayer);
 
-	for (auto& x : vecpUI) GRAPHICS->Draw(*x);
+	for (auto& x : vecpUI) GRAPHICS->Draw(*x); //draw ui last has z priority
 
 }
 
@@ -265,9 +289,9 @@ void World::GetInput() {
 
 	}
 
-	do {
+	do { //nested in a do while to prevent overrwriting or using goto
 
-		if (HK_DIGITAL_A == m_pInput->GetControllerDigitalInput(0) || true == m_pPlayer->GetJump()) {
+		if (HK_DIGITAL_A == m_pInput->GetControllerDigitalInput(0) || true == m_pPlayer->GetJump()) { //controller input for buttons and analog buttons
 			m_pPlayer->SetJump(true);
 		}
 		if (-1 == m_pInput->GetControllerAnalogInput(0).x) {
@@ -292,8 +316,7 @@ void World::UpdateEntities() {
 
 	if (m_ulCurrentTime % 16 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
-	m_pPlayer->UpdateY(m_ulFrameTime);
-	CheckCollision();
+	
 
 	for (auto& x : vecpBullets) {
 
@@ -308,13 +331,15 @@ void World::UpdateEntities() {
 
 	m_pPlayer->UpdateX(m_ulFrameTime);
 	CheckCollision();
-
+	m_pPlayer->UpdateY(m_ulFrameTime);
+	CheckCollision();
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
+	//X then Y prevent clinging to walls, as Y applies falling velocity
+
+	if (m_pPlayer->GetHealth() <= 0 || m_ulScore <= 0) RestartGame();
 
 	m_ulScore -= m_ulCurrentTime / 1000;
 	HAPI.RenderText(600, 0, HAPI_TColour::CYAN, std::to_string(m_ulScore), 24);
-
-	if (m_pPlayer->GetHealth() <= 0 || m_ulScore <= 0) RestartGame();
 
 }
 
@@ -453,7 +478,7 @@ void World::SpawnBullet(bool dir) { //should take in a reference to the spawner
 		}
 
 		bFoundBullet = true;
-		int i = vecpBullets.size() - 1;
+		size_t i = vecpBullets.size() - 1;
 		vecpBullets[i]->SetActive(true);
 		vecpBullets[i]->SetSide(PLAYER);
 		bFoundBullet = !bFoundBullet;

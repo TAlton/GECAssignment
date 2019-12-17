@@ -6,6 +6,6 @@ WorldEntity::~WorldEntity()
 {
 }
 
-void WorldEntity::Update(float dt)
+void WorldEntity::Update(long dt)
 {
 }

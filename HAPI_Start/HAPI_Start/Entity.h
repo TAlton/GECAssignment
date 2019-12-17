@@ -22,7 +22,7 @@ public:
 	Entity(const Entity& e) : m_nHealth(e.GetHealth()), m_v2Pos(e.GetPosition()), m_strAlias(e.GetAlias()) {}
 	~Entity();
 
-	virtual void Update(float dt) = 0;
+	virtual void Update(long dt) = 0;
 
 	Vec2 GetPosition() const { return this->m_v2Pos; }
 	Vec2 GetLastPosition() const { return this->m_v2LastPos; }

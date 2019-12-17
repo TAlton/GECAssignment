@@ -7,14 +7,14 @@ Player::~Player()
 
 }
 
-void Player::Update(float dt)
+void Player::Update(long dt)
 {
 
 	m_nAttackSpeedIterator += dt;
 
 }
 
-void Player::UpdateX(float dt) {
+void Player::UpdateX(long dt) {
 
 	Update(dt);
 
@@ -51,7 +51,7 @@ void Player::UpdateX(float dt) {
 
 }
 
-void Player::UpdateY(float dt) {
+void Player::UpdateY(long dt) {
 
 	if (true == this->m_bJumping) {
 
@@ -100,13 +100,13 @@ void Player::Collided(bool b) {
 
 }
 
-void Player::Jump(float dt) {
+void Player::Jump(long dt) {
 
 	m_bFalling = false;
 
 	if (m_fVelocity < m_fMaxVelocity * 2) { //slowly decelerate velocity -- has to be velocity *2 to make up for speed up on the way down
 
-		m_fVelocity += dt / 100;
+		m_fVelocity += static_cast<float>(dt) / 100;
 
 	}
 	else {
@@ -116,32 +116,28 @@ void Player::Jump(float dt) {
 		return;
 	}
 
-	this->SetPosition(m_v2Pos.x,
-		static_cast<int>(PHYSICS->Lerp(this->m_v2Pos.y,
-			this->m_v2Pos.y + m_fVelocity, 1.0f)));  //issue passing in t
+	this->SetPosition(m_v2Pos.x, m_v2Pos.y + m_fVelocity);
 
 
 }
 
-void Player::Fall(float dt) {
+void Player::Fall(long dt) {
 
 	m_bJumping = false;
 
 	if (m_fVelocity < m_fMaxVelocity) {
-		m_fVelocity -= dt / 100;
+		m_fVelocity -= static_cast<float>(dt) / 100;
 	}
 	else {
 		m_bFalling = false;
 	}
 
 
-	this->SetPosition(m_v2Pos.x,
-		static_cast<int>(PHYSICS->Lerp(this->m_v2Pos.y,
-			this->m_v2Pos.y - m_fVelocity, 1.0f)));
+	this->SetPosition(m_v2Pos.x, this->m_v2Pos.y - m_fVelocity);
 
 }
 
-bool Player::Shoot(float dt) {
+bool Player::Shoot(long dt) {
 
 	if (m_nAttackSpeedIterator >= m_nAttackSpeed) {
 

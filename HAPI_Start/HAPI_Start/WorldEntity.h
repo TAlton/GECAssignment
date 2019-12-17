@@ -12,7 +12,7 @@ public:
 	WorldEntity(const Entity& e) : Entity(e) {}
 	~WorldEntity();
 
-	void Update(float dt) override;
+	void Update(long dt) override;
 
 private:
 

@@ -10,7 +10,7 @@ public:
 	UserInterface(const Entity& e) : Entity(e) {}
 	~UserInterface();
 
-	void Update(float dt) override;
+	void Update(long dt) override;
 
 private:
 

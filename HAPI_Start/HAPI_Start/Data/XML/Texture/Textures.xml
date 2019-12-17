@@ -10,4 +10,5 @@
 	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" isAnim="1" />
 	<Texture filepath="Data\XML\Texture\Bullet.png" alias="bullet" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\HealthBar.png" alias="HealthBar" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\Platform50_100.png" alias="Platform50_100" isAnim="0" />
 </Textures>

@@ -33,19 +33,19 @@ public:
 
 	~Player();
 
-	void Update(float dt) override;
-	void UpdateX(float dt);
-	void UpdateY(float dt);
+	void Update(long dt) override;
+	void UpdateX(long dt);
+	void UpdateY(long dt);
 	void Move(int x, int y);
 	void Move(Vec2 v);
 	void Collided(bool b);
-	void Fall(float dt);
-	void Jump(float dt);
+	void Fall(long dt);
+	void Jump(long dt);
 	void Damage(int dmg) { this->m_shHealth -= dmg; }
-	bool Shoot(float dt);
+	bool Shoot(long dt);
 
 	int GetState() const { return this->m_nState; }
-	int GetJump() const { return this->m_bJumping; }
+	bool GetJump() const { return this->m_bJumping; }
 	bool GetDirection() const { return this->m_bDirection; }
 
 	void SetState(int state) { this->m_nState = state; }

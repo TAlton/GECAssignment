@@ -12,8 +12,6 @@ void HAPI_Main() {
 enemy
 
 win lose conditions ---- kill boss or die
-fix compiler errors
-------pretty much all cast issues 
 implement more error handling
 ----try catch blocks, file and texture loading
 check const correctness

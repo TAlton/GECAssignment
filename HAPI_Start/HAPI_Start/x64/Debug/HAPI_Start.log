@@ -1,2 +1,4 @@
-﻿  main.cpp
+﻿  Player.cpp
+C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Player.cpp(119): warning C4244: 'argument': conversion from 'float' to 'short', possible loss of data
+C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Player.cpp(136): warning C4244: 'argument': conversion from 'float' to 'short', possible loss of data
   HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GECAssignment3\HAPI_Start\x64\Debug\HAPI_Start.exe

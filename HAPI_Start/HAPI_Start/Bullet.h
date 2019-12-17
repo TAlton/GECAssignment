@@ -11,7 +11,7 @@ public:
 	Bullet();
 	Bullet(int h, int x, int y, std::string id, int side) : Entity(h, x, y, id, side) { }
 
-	void Update(float dt) override;
+	void Update(long dt) override;
 
 	void SetActive(bool b) { this->m_bActive = b; }
 	void SetDirection(bool b) { this->m_bDirection = b; }
