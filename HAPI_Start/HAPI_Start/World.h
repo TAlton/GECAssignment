@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Input.h"
 #include "Bullet.h"
+#include "UserInterface.h"
 
 class World
 {
@@ -45,6 +46,7 @@ private:
 
 	std::vector<Scene*> vecpScenes;
 	std::vector<Bullet*> vecpBullets;
+	std::vector<UserInterface*> vecpUI;
 
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
@@ -57,6 +59,7 @@ private:
 
 	void LoadTextures();
 	void LoadScenes();
+	void LoadUI();
 	void DrawRenderables() const;
 	void GetInput();
 	void UpdateEntities();

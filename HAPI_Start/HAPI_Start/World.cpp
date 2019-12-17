@@ -8,6 +8,7 @@ void World::Init() {
 	BINARYTREE->CreateTree(m_cshNumLevels);
 	LoadTextures();
 	LoadScenes();
+	LoadUI();
 
 	m_pPlayer = std::make_shared<Player>(Vec2(0,0));
 	m_pInput = std::make_shared<Input>();
@@ -169,6 +170,32 @@ void World::LoadScenes() {
 
 }
 
+void World::LoadUI() {
+
+	if (!FILEMANAGER->FileExists(FILEMANAGER->GetUIFilepath())) return;
+	std::string str = FILEMANAGER->GetUIFilepath();
+	CHapiXML xml = FILEMANAGER->GetUIFilepath();
+
+	std::vector<CHapiXMLNode*> nodes = xml.GetAllNodesWithName("Object");
+
+	for (auto& node : nodes) {
+
+		CHapiXMLAttribute attr;
+
+		UserInterface* ui = new UserInterface(0, node->GetAttributes()[0].AsInt(), node->GetAttributes()[1].AsInt(), node->GetAttributes()[2].AsString());
+
+		ui->SetTexture(*(umapTextures.at(
+			ui->GetAlias()
+		)));
+
+		vecpUI.push_back(ui);
+
+	}
+
+	
+
+}
+
 void World::DrawRenderables() const {
 
 	for (auto& x : vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x);
@@ -185,6 +212,8 @@ void World::DrawRenderables() const {
 	}
 
 	GRAPHICS->Draw(*m_pPlayer);
+
+	for (auto& x : vecpUI) GRAPHICS->Draw(*x);
 
 }
 
@@ -279,6 +308,7 @@ void World::UpdateEntities() {
 
 	m_pPlayer->UpdateX(m_ulFrameTime);
 	CheckCollision();
+
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
 
 	m_ulScore -= m_ulCurrentTime / 1000;

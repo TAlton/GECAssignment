@@ -13,7 +13,7 @@ std::string FileManager::GetSceneFilepath(const int index) {
 
 	try {
 
-		m_cveccstrFilepaths[index];
+		m_vecstrFilepaths[index];
 
 	}
 	catch (std::out_of_range& e) {
@@ -44,7 +44,7 @@ std::string FileManager::GetSceneFilepath(const int index) {
 
 	}
 
-	return m_cveccstrFilepaths[index];
+	return m_vecstrFilepaths[index];
 
 }
 

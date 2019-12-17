@@ -1,8 +1,2 @@
-﻿  World.cpp
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(228,23): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(241,93): warning C4805:  '==': unsafe mix of type 'bool' and type 'int' in operation
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(266,21): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(273,14): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(280,21): warning C4244:  'argument': conversion from 'unsigned long' to 'float', possible loss of data
-C:\Users\s6079142\Source\repos\GECAssignment2\HAPI_Start\HAPI_Start\World.cpp(426,33): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
-  HAPI_Start.vcxproj -> C:\Users\s6079142\Source\Repos\GECAssignment2\HAPI_Start\x64\Debug\HAPI_Start.exe
+﻿  main.cpp
+  HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GECAssignment3\HAPI_Start\x64\Debug\HAPI_Start.exe
