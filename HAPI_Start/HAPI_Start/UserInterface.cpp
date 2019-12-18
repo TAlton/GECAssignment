@@ -4,6 +4,6 @@ UserInterface::~UserInterface()
 {
 }
 
-void UserInterface::Update(long dt)
-{
+void UserInterface::Update(long dt) {
+
 }

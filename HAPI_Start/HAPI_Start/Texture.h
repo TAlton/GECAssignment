@@ -9,7 +9,7 @@ class Texture {
 public:
 
 	Texture() = default;
-	Texture(const std::string filepath, bool isAnim) : m_strAlias(filepath), m_bIsAnim(isAnim) {} // should pass in frame width as well but used as Proof of concept
+	Texture(const std::string filepath, bool isAnim, bool isBackground = false) : m_strAlias(filepath), m_bIsAnim(isAnim), m_bIsBackground(isBackground) {} // should pass in frame width as well but used as Proof of concept
 	Texture(int width, int height) : m_shWidth(static_cast<short>(width)), m_shHeight(static_cast<short>(height)) {}
 	Texture(int width, int height, unsigned char* ptr) : m_shWidth(static_cast<short>(width)), m_shHeight(static_cast<short>(height)), m_pTexture(ptr) {}
 	Texture(short width, short height) : m_shWidth(width), m_shHeight(height) {}
@@ -30,6 +30,7 @@ public:
 	unsigned char* GetPointer() const { return this->m_pTexture; }
 	std::string GetAlias() const { return this->m_strAlias; }
 	bool IsAnim() const { return this->m_bIsAnim; }
+	bool IsBackground() const { return this->m_bIsBackground; }
 	short GetMaxFrames() const { return this->m_shMaxFrames; }
 	short GetCurrentFrame() const { return this->m_shCurrentFrame; }
 
@@ -66,7 +67,8 @@ private:
 		m_shMaxFrames{ 0 },
 		m_shCurrentFrame{ 0 };
 
-	bool m_bIsAnim{ false };
+	bool m_bIsAnim{ false },
+		m_bIsBackground{ false };
 
 	std::string m_strAlias{ "default" };
 

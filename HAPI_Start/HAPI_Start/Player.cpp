@@ -107,6 +107,7 @@ void Player::Jump(long dt) {
 	if (m_fVelocity < m_fMaxVelocity * 2) { //slowly decelerate velocity -- has to be velocity *2 to make up for speed up on the way down
 
 		m_fVelocity += static_cast<float>(dt) / 100;
+		this->Move(0, static_cast<int>(m_fVelocity));
 
 	}
 	else {
@@ -116,9 +117,6 @@ void Player::Jump(long dt) {
 		return;
 	}
 
-	this->SetPosition(m_v2Pos.x, m_v2Pos.y + static_cast<short>(m_fVelocity));
-
-
 }
 
 void Player::Fall(long dt) {
@@ -127,13 +125,11 @@ void Player::Fall(long dt) {
 
 	if (m_fVelocity < m_fMaxVelocity) {
 		m_fVelocity -= static_cast<float>(dt) / 100;
+		this->Move(0, static_cast<int>(-m_fVelocity));
 	}
 	else {
 		m_bFalling = false;
 	}
-
-
-	this->SetPosition(m_v2Pos.x, this->m_v2Pos.y - static_cast<short>(m_fVelocity));
 
 }
 

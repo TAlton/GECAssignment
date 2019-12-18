@@ -9,6 +9,41 @@ Graphics::Graphics() {
 
 }
 
+void Graphics::DrawBackground(Texture& t) {
+
+	BYTE* tempScreenPtr = m_pScreen;
+	BYTE* tPtr = t.GetPointer();
+
+	if ("backgroundZ_4" == t.GetAlias()) {
+
+		memmove(tempScreenPtr, tPtr, (m_cnWidth * m_cnHeight) << 2);
+		return;
+
+	}
+
+	int i{ 0 };
+
+	for (int y{ 0 }; y < m_cnHeight; y++) {
+
+		for (int x{ 0 }; x < m_cnWidth; x++) {
+
+			if (255 == tPtr[i + GREEN]) {
+
+				i += BYTESPERPIXEL;
+				continue; //may have to add checks for no red or blue
+
+			}
+			
+			//memmove(&tempScreenPtr[i], &tPtr[i], BYTESPERPIXEL);
+			memcpy(&tempScreenPtr[i], &tPtr[i], BYTESPERPIXEL);
+			i += BYTESPERPIXEL;
+
+		}
+
+	}
+
+}
+
 void Graphics::CreateWindow() {
 
 	if (m_bCreateWindow) return;
@@ -79,7 +114,7 @@ void Graphics::Draw(Entity& e) {
 	if (nPosX < 0) nPosX = 0;
 	if (nPosY < 0) nPosY = 0;
 
-	BYTE* tempBufferPtr = m_pScreen + ((nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) << 2);//* BYTESPERPIXEL;
+	BYTE* tempScreenPtr = m_pScreen + ((nPosX + (static_cast<size_t>(nPosY) * m_cnWidth)) << 2);//* BYTESPERPIXEL;
 	BYTE* tPtr = e.GetTexturePointer() + (static_cast<size_t>(e.GetTexture()->GetCurrentFrame()) * e.GetWidth()) * 4;
 
 	if (e.GetTexture()->IsAnim()) {
@@ -98,16 +133,16 @@ void Graphics::Draw(Entity& e) {
 
 			if (245 <= tPtr[i + ALPHA]) { //memcpy if alpha isnt required
 
-				memcpy(&tempBufferPtr[i], &tPtr[i], BYTESPERPIXEL);
+				memmove(&tempScreenPtr[i], &tPtr[i], BYTESPERPIXEL);
 				i += BYTESPERPIXEL;
 
 			}
 
 			else { //access the bytes directly for the rgb channels
 
-				tempBufferPtr[i] = tempBufferPtr[i] + ((tPtr[i + ALPHA] * (tPtr[i] - tempBufferPtr[i])) >> 8); //red
-				tempBufferPtr[i + GREEN] = tempBufferPtr[i + GREEN] + ((tPtr[i + ALPHA] * (tPtr[i + GREEN] - tempBufferPtr[i + GREEN])) >> 8); //green
-				tempBufferPtr[i + BLUE] = tempBufferPtr[i + BLUE] + ((tPtr[i + ALPHA] * (tPtr[i + BLUE] - tempBufferPtr[i + BLUE])) >> 8); //blue
+				tempScreenPtr[i] = tempScreenPtr[i] + ((tPtr[i + ALPHA] * (tPtr[i] - tempScreenPtr[i])) >> 8); //red
+				tempScreenPtr[i + GREEN] = tempScreenPtr[i + GREEN] + ((tPtr[i + ALPHA] * (tPtr[i + GREEN] - tempScreenPtr[i + GREEN])) >> 8); //green
+				tempScreenPtr[i + BLUE] = tempScreenPtr[i + BLUE] + ((tPtr[i + ALPHA] * (tPtr[i + BLUE] - tempScreenPtr[i + BLUE])) >> 8); //blue
 
 				i += BYTESPERPIXEL;
 
@@ -116,7 +151,7 @@ void Graphics::Draw(Entity& e) {
 		}
 
 		tPtr += nTexOffsetX; //for everyline offset if needed
-		tempBufferPtr += ((static_cast<size_t>(m_cnWidth) - nWidthToDraw) << 2); //offset pointer
+		tempScreenPtr += ((static_cast<size_t>(m_cnWidth) - nWidthToDraw) << 2); //offset pointer
 
 	}
 
@@ -127,7 +162,6 @@ void Graphics::ClearScreen() const {
 	memset(m_pScreen, 0, m_cnScreenSize);
 
 }
-
 
 Graphics::~Graphics()
 {

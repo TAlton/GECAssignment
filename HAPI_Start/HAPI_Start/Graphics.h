@@ -20,7 +20,8 @@ public:
 	}
 
 	void CreateWindow();
-	void Draw(Entity& e);
+	void Draw(Entity& e); //potential make multiple private draws to handle animations, backgrounds etc
+	void DrawBackground(Texture& e);
 	void ClearScreen() const;
 
 private:

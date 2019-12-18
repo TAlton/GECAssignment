@@ -11,8 +11,6 @@ void HAPI_Main() {
 
 enemy
 
-for each getter error handle
-
 win lose conditions ---- kill boss or die
 
 health bar
@@ -21,6 +19,7 @@ health bar
 
 ADDITIONS
 
+move file handling into filemanager completely ---- move all xml files into one?
 falling background
 adding boss enemy 
 pickups

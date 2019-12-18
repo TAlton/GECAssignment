@@ -21,7 +21,7 @@ void World::Init() {
 
 	try {
 
-		umapTextures.find(m_pPlayer->GetAlias()) != umapTextures.end(); //checks if the texture exists
+		m_umapTextures.find(m_pPlayer->GetAlias()) != m_umapTextures.end(); //checks if the texture exists
 
 	}
 	catch (std::out_of_range& e) {
@@ -36,7 +36,7 @@ void World::Init() {
 
 	}
 
-	m_pPlayer->SetTexture(*(umapTextures.at(m_pPlayer->GetAlias())));
+	m_pPlayer->SetTexture(*(m_umapTextures.at(m_pPlayer->GetAlias())));
 
 }
 
@@ -48,6 +48,7 @@ void World::Loop() {
 		GRAPHICS->ClearScreen();
 		GetInput();
 		UpdateEntities();
+		UpdateScore();
 		DrawRenderables();
 
 	}
@@ -62,15 +63,17 @@ World::World() {
 
 World::~World() { //this could all be avoided with smart pointers, not a priority fix
 
-	for (auto& x : umapTextures) delete x.second;
-	for (auto& x : vecpScenes) delete x;
-	for (auto& x : vecpBullets) delete x;
-	for (auto& x : vecpUI) delete x;
+	for (auto& x : m_umapTextures) delete x.second;
+	for (auto& x : m_vecpScenes) delete x;
+	for (auto& x : m_vecpBullets) delete x;
+	for (auto& x : m_vecpUI) delete x;
+	for (auto& x : m_vecpBackgrounds) delete x;
 
-	vecpUI.clear();
-	vecpBullets.clear();
-	vecpScenes.clear();
-	umapTextures.clear();
+	m_vecpBackgrounds.clear();
+	m_vecpUI.clear();
+	m_vecpBullets.clear();
+	m_vecpScenes.clear();
+	m_umapTextures.clear();
 
 }
 
@@ -92,24 +95,34 @@ void World::LoadTextures() { //checks if a file exists extracts xml nodes and lo
 		if (!node->GetAttributeWithName("filepath", attr)) return;
 		if (!node->GetAttributeWithName("alias", attr)) return;
 
+		if (node->GetAttributeWithName("isBackground", attr, false)) { //loads into a seperate umap if it has the isbackground attribute
+
+			Texture* t = new Texture(node->GetAttributes()[0].AsString(), node->GetAttributes()[2].AsInt(), node->GetAttributes()[3].AsBool());
+			t->LoadTexture();
+
+			m_vecpBackgrounds.push_back(t);
+			continue;
+
+		}
+
 		Texture* t = new Texture(node->GetAttributes()[0].AsString(), node->GetAttributes()[2].AsInt());
 
 		t->LoadTexture();
 
-		umapTextures.insert({ node->GetAttributes()[1].AsString(), t });
+		m_umapTextures.insert({ node->GetAttributes()[1].AsString(), t });
 
 	}
 
 	for (int i{ 0 }; i < 100; i++) {
 
 		Bullet* b = new Bullet(0, 0, 0, "bullet", ENEMY);
-		vecpBullets.push_back(b);
+		m_vecpBullets.push_back(b);
 
 	}
 
 	try {
 
-		umapTextures.find(vecpBullets[0]->GetAlias()) != umapTextures.end(); //checks if the texture exists
+		m_umapTextures.find(m_vecpBullets[0]->GetAlias()) != m_umapTextures.end(); //checks if the texture exists
 
 	}
 	catch (std::out_of_range & e) {
@@ -124,9 +137,9 @@ void World::LoadTextures() { //checks if a file exists extracts xml nodes and lo
 
 	}
 
-	for (auto& x : vecpBullets) {
+	for (auto& x : m_vecpBullets) {
 
-		x->SetTexture(*(umapTextures.at(
+		x->SetTexture(*(m_umapTextures.at(
 			x->GetAlias()
 		)));
 
@@ -161,7 +174,7 @@ void World::LoadScenes() {
 
 		}
 
-		vecpScenes.push_back(s);
+		m_vecpScenes.push_back(s);
 
 		if (!FILEMANAGER->FileExists(FILEMANAGER->GetSceneFilepath(s->GetID()))) return;
 
@@ -183,7 +196,7 @@ void World::LoadScenes() {
 
 			WorldEntity* wo = new WorldEntity(vecAttr[0].AsInt(), vecAttr[1].AsInt(), vecAttr[2].AsInt(), vecAttr[3].AsString(), vecAttr[4].AsInt());
 
-			wo->SetTexture(*(umapTextures.at(
+			wo->SetTexture(*(m_umapTextures.at(
 				wo->GetAlias()
 			)));
 
@@ -221,11 +234,11 @@ void World::LoadUI() { //potential to move this whole function into filemanager 
 
 		UserInterface* ui = new UserInterface(0, node->GetAttributes()[0].AsInt(), node->GetAttributes()[1].AsInt(), node->GetAttributes()[2].AsString());
 
-		ui->SetTexture(*(umapTextures.at(
+		ui->SetTexture(*(m_umapTextures.at(
 			ui->GetAlias()
 		)));
 
-		vecpUI.push_back(ui);
+		m_vecpUI.push_back(ui);
 
 	}
 
@@ -235,9 +248,10 @@ void World::LoadUI() { //potential to move this whole function into filemanager 
 
 void World::DrawRenderables() const {
 
-	for (auto& x : vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x);
-	for (auto& x : vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x); //draw background then entities
-	for (auto& x : vecpBullets) {
+	//for (auto& x : m_vecpBackgrounds) GRAPHICS->DrawBackground(*x);
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x);
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x); //draw background then entities
+	for (auto& x : m_vecpBullets) {
 		
 		if (x->IsActive()) {
 
@@ -250,7 +264,7 @@ void World::DrawRenderables() const {
 
 	GRAPHICS->Draw(*m_pPlayer);
 
-	for (auto& x : vecpUI) GRAPHICS->Draw(*x); //draw ui last has z priority
+	for (auto& x : m_vecpUI) GRAPHICS->Draw(*x); //draw ui last has z priority
 
 }
 
@@ -329,11 +343,10 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
-	if (m_ulCurrentTime % 16 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
+	if (m_pPlayer->GetHealth() <= 0 || m_lScore <= 0) RestartGame(); //end game if player dies or score <= 0
+	if (m_ulCurrentTime % 8 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
-	
-
-	for (auto& x : vecpBullets) {
+	for (auto& x : m_vecpBullets) {
 
 		if (x->IsActive()) {
 
@@ -351,11 +364,6 @@ void World::UpdateEntities() {
 	//necessary to check collision twice as the player will either stick to the floor or be able to go through walls
 	//X then Y prevent clinging to walls, as Y applies falling velocity
 
-	if (m_pPlayer->GetHealth() <= 0 || m_ulScore <= 0) RestartGame();
-
-	m_ulScore -= m_ulCurrentTime / 1000;
-	HAPI.RenderText(600, 0, HAPI_TColour::CYAN, std::to_string(m_ulScore), 24);
-
 }
 
 bool World::CheckCollision() { //this is really ugly and needs cleaning up, or is it bucket collision will speed up as we wont check unnecessary objects
@@ -365,7 +373,7 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 	const short x2 = m_pPlayer->GetPosition().x + m_pPlayer->GetWidth();
 	const short y2 = m_pPlayer->GetPosition().y + m_pPlayer->GetHeight();
 
-	for (auto& x : vecpScenes[m_shCurrentScene]->GetEntities()) {
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEntities()) {
 
 		const short e_x1 = x->GetPosition().x;
 		const short e_y1 = x->GetPosition().y;
@@ -381,7 +389,7 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 
 	}  
 	//general collision checking for world objects
-	for (auto& x : vecpScenes[m_shCurrentScene]->GetBackground()) {
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackground()) {
 
 		const short e_x1 = x->GetPosition().x;
 		const short e_y1 = x->GetPosition().y;
@@ -391,27 +399,27 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 		if (x1 < e_x2 && x2 > e_x1 &&
 			y1 < e_y2 && y2 > e_y1) {
 
-			if ('E' == m_pInput->GetKBInput() && "doorLeft" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneLeft() != -1) //use interact button whilst colliding with door
-				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetNextSceneLeft();
-			if ('E' == m_pInput->GetKBInput() && "doorRight" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetNextSceneRight() != -1)
-				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetNextSceneRight();
-			if ('E' == m_pInput->GetKBInput() && "doorPrev" == x->GetAlias() && vecpScenes[m_shCurrentScene]->GetPrevScene() != -1)
-				m_shCurrentScene = vecpScenes[m_shCurrentScene]->GetPrevScene();
+			if ('E' == m_pInput->GetKBInput() && "doorLeft" == x->GetAlias() && m_vecpScenes[m_shCurrentScene]->GetNextSceneLeft() != -1) //use interact button whilst colliding with door
+				m_shCurrentScene = m_vecpScenes[m_shCurrentScene]->GetNextSceneLeft();
+			if ('E' == m_pInput->GetKBInput() && "doorRight" == x->GetAlias() && m_vecpScenes[m_shCurrentScene]->GetNextSceneRight() != -1)
+				m_shCurrentScene = m_vecpScenes[m_shCurrentScene]->GetNextSceneRight();
+			if ('E' == m_pInput->GetKBInput() && "doorPrev" == x->GetAlias() && m_vecpScenes[m_shCurrentScene]->GetPrevScene() != -1)
+				m_shCurrentScene = m_vecpScenes[m_shCurrentScene]->GetPrevScene();
 
 		}
 
 	}  
 	//collision checking for doors
-	for (int i{ 0 }; i < vecpBullets.size(); i++) {
+	for (int i{ 0 }; i < m_vecpBullets.size(); i++) {
 
-		if (false == vecpBullets[i]->IsActive()) break; //if bullet isnt active do nothing
+		if (false == m_vecpBullets[i]->IsActive()) break; //if bullet isnt active do nothing
 
-		const short x_1 = vecpBullets[i]->GetPosition().x;
-		const short y_1 = vecpBullets[i]->GetPosition().y;
-		const short x_2 = vecpBullets[i]->GetPosition().x + vecpBullets[i]->GetWidth();
-		const short y_2 = vecpBullets[i]->GetPosition().y + vecpBullets[i]->GetHeight();
+		const short x_1 = m_vecpBullets[i]->GetPosition().x;
+		const short y_1 = m_vecpBullets[i]->GetPosition().y;
+		const short x_2 = m_vecpBullets[i]->GetPosition().x + m_vecpBullets[i]->GetWidth();
+		const short y_2 = m_vecpBullets[i]->GetPosition().y + m_vecpBullets[i]->GetHeight();
 
-		for (auto& y : vecpScenes[m_shCurrentScene]->GetEntities()) {
+		for (auto& y : m_vecpScenes[m_shCurrentScene]->GetEntities()) {
 
 			const short e_x1 = y->GetPosition().x;
 			const short e_y1 = y->GetPosition().y;
@@ -421,9 +429,9 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 			if (x_1 < e_x2 && x_2 > e_x1 &&
 				y_1 < e_y2 && y_2 > e_y1) {
 
-				vecpBullets[i]->SetActive(false);
-				auto index = vecpBullets.begin() + i;
-				std::rotate(index, index + 1, vecpBullets.end()); //rotate to the end of the vector for caching and breaking
+				m_vecpBullets[i]->SetActive(false);
+				auto index = m_vecpBullets.begin() + i;
+				std::rotate(index, index + 1, m_vecpBullets.end()); //rotate to the end of the vector for caching and breaking
 
 			}
 
@@ -431,22 +439,22 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 
 	}
 	//collision checking for bullet against world objects
-	for (int i{ 0 }; i < vecpBullets.size(); i++) {
+	for (int i{ 0 }; i < m_vecpBullets.size(); i++) {
 
-		if (false == vecpBullets[i]->IsActive() || PLAYER == vecpBullets[i]->GetSide()) break; //if bullet isnt active do nothing
+		if (false == m_vecpBullets[i]->IsActive() || PLAYER == m_vecpBullets[i]->GetSide()) break; //if bullet isnt active do nothing
 
-		const short x_1 = vecpBullets[i]->GetPosition().x;
-		const short y_1 = vecpBullets[i]->GetPosition().y;
-		const short x_2 = vecpBullets[i]->GetPosition().x + vecpBullets[i]->GetWidth();
-		const short y_2 = vecpBullets[i]->GetPosition().y + vecpBullets[i]->GetHeight();
+		const short x_1 = m_vecpBullets[i]->GetPosition().x;
+		const short y_1 = m_vecpBullets[i]->GetPosition().y;
+		const short x_2 = m_vecpBullets[i]->GetPosition().x + m_vecpBullets[i]->GetWidth();
+		const short y_2 = m_vecpBullets[i]->GetPosition().y + m_vecpBullets[i]->GetHeight();
 
 		if (x_1 < x2 && x_2 > x1 &&
 			y_1 < y2 && y_2 > y1) {
 
-			vecpBullets[i]->SetActive(false);
-			auto index = vecpBullets.begin() + i;
-			std::rotate(index, index + 1, vecpBullets.end()); //rotate to the end of the vector for caching and breaking
-			m_pPlayer->Damage(vecpBullets[i]->GetDamage());
+			m_vecpBullets[i]->SetActive(false);
+			auto index = m_vecpBullets.begin() + i;
+			std::rotate(index, index + 1, m_vecpBullets.end()); //rotate to the end of the vector for caching and breaking
+			m_pPlayer->Damage(m_vecpBullets[i]->GetDamage());
 
 		}
 
@@ -484,16 +492,16 @@ void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 
 	do  {
 
-		for (int i{ 0 }; i < vecpBullets.size(); i++) { //sets bullet to active, 
+		for (int i{ 0 }; i < m_vecpBullets.size(); i++) { //sets bullet to active, 
 			
-			if (false == vecpBullets[i]->IsActive()) {
+			if (false == m_vecpBullets[i]->IsActive()) {
 
 				bFoundBullet = true;
-				vecpBullets[i]->SetDirection(dir);
-				vecpBullets[i]->SetActive(true);
-				vecpBullets[i]->SetSide(PLAYER); //pass in side of shooter here
+				m_vecpBullets[i]->SetDirection(dir);
+				m_vecpBullets[i]->SetActive(true);
+				m_vecpBullets[i]->SetSide(PLAYER); //pass in side of shooter here
 				bFoundBullet = !bFoundBullet;
-				vecpBullets[i]->SetPosition(m_pPlayer->GetPosition().x + (m_pPlayer->GetWidth() >> 1), m_pPlayer->GetPosition().y); 
+				m_vecpBullets[i]->SetPosition(m_pPlayer->GetPosition().x + (m_pPlayer->GetWidth() >> 1), m_pPlayer->GetPosition().y); 
 				//if all bullets are active use the last bullet in the vector due to rotation it has the longest lifetime
 				//spawns bullet inside of player not at top left
 				return;
@@ -503,11 +511,11 @@ void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 		}
 
 		bFoundBullet = true;
-		size_t i = vecpBullets.size() - 1;
-		vecpBullets[i]->SetActive(true);
-		vecpBullets[i]->SetSide(PLAYER);
+		size_t i = m_vecpBullets.size() - 1;
+		m_vecpBullets[i]->SetActive(true);
+		m_vecpBullets[i]->SetSide(PLAYER);
 		bFoundBullet = !bFoundBullet;
-		vecpBullets[i]->SetPosition(m_pPlayer->GetPosition());
+		m_vecpBullets[i]->SetPosition(m_pPlayer->GetPosition());
 		return;
 
 	} while (!bFoundBullet);
@@ -522,6 +530,13 @@ void World::RestartGame() {
 	reload binary tree 
 
 	*/
+
+}
+
+void World::UpdateScore() { //outside of update entities to prevent flickering
+
+	m_lScore -= m_ulFrameTime;
+	HAPI.RenderText(600, 0, HAPI_TColour::CYAN, std::to_string(m_lScore), 24);
 
 }
 

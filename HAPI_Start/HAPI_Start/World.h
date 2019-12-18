@@ -46,18 +46,20 @@ private:
 	std::shared_ptr<Player> m_pPlayer = nullptr;
 	std::shared_ptr<Input> m_pInput = nullptr;
 
-	std::unordered_map<std::string, Texture*> umapTextures;
+	std::unordered_map<std::string, Texture*> m_umapTextures;
 
-	std::vector<Scene*> vecpScenes;
-	std::vector<Bullet*> vecpBullets;
-	std::vector<UserInterface*> vecpUI;
+	std::vector<Texture*> m_vecpBackgrounds;
+	std::vector<Scene*> m_vecpScenes;
+	std::vector<Bullet*> m_vecpBullets;
+	std::vector<UserInterface*> m_vecpUI;
 
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
 
 	unsigned long m_ulCurrentTime{ 0 },
-		m_ulFrameTime{ 0 },
-		m_ulScore{ 999999 };
+		m_ulFrameTime{ 0 };
+
+	long m_lScore{ 999999 };
 
 	bool m_bGameOver{ false };
 
@@ -72,6 +74,7 @@ private:
 	void UpdateLevel();
 	void SpawnBullet(bool dir);
 	void RestartGame();
+	void UpdateScore();
 
 };
 
