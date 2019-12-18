@@ -1,6 +1,7 @@
 #include "Graphics.h"
 
 std::shared_ptr<Graphics> Graphics::s_pGraphics = nullptr;
+bool Graphics::m_bCreateWindow = false;
 
 Graphics::Graphics() {
 
@@ -9,6 +10,9 @@ Graphics::Graphics() {
 }
 
 void Graphics::CreateWindow() {
+
+	if (m_bCreateWindow) return;
+	m_bCreateWindow = true;
 
 	try {
 

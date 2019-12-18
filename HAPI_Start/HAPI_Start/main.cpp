@@ -11,9 +11,10 @@ void HAPI_Main() {
 
 enemy
 
+for each getter error handle
+
 win lose conditions ---- kill boss or die
-sound
------sound class, vector of sounds, enum for iteration i.e. bullet collision, playercollision
+
 health bar
 ----- change health bar width based on hp
 

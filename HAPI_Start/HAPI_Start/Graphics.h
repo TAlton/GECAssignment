@@ -28,6 +28,7 @@ private:
 	Graphics();
 
 	static std::shared_ptr<Graphics> s_pGraphics;
+	static bool m_bCreateWindow;
 
 	std::shared_ptr<Rectangle> m_rectScreen = nullptr;
 

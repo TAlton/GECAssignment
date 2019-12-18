@@ -1,12 +1,16 @@
 #include "World.h"
 
 std::shared_ptr<World> World::s_pWorld = nullptr;
+bool World::m_bLoadScene = false; //prevent loading of data twice
+bool World::m_bLoadTexture = false;
+bool World::m_bLoadUI = false;
 
 void World::Init() {
 
 	GRAPHICS->CreateWindow();
 	BINARYTREE->CreateTree(m_cshNumLevels);
 	LoadTextures();
+	SOUND->LoadSound();
 	LoadScenes();
 	LoadUI();
 
@@ -72,6 +76,9 @@ World::~World() { //this could all be avoided with smart pointers, not a priorit
 
 void World::LoadTextures() { //checks if a file exists extracts xml nodes and loads them as textures, placed bullet load in here to prevent memory alloc in loop
 
+	if (m_bLoadTexture) return;
+	m_bLoadTexture = true;
+
 	if (!FILEMANAGER->FileExists(FILEMANAGER->GetTextureFilepath())) return;
 	std::string str = FILEMANAGER->GetTextureFilepath();
 	CHapiXML xml = FILEMANAGER->GetTextureFilepath();
@@ -128,6 +135,9 @@ void World::LoadTextures() { //checks if a file exists extracts xml nodes and lo
 }
 
 void World::LoadScenes() {
+
+	if (m_bLoadScene) return;
+	m_bLoadScene = true;
 
 	for (int i{ 0 }; i < BINARYTREE->GetTreeSize(); i++) {
 
@@ -195,6 +205,9 @@ void World::LoadScenes() {
 }
 
 void World::LoadUI() { //potential to move this whole function into filemanager and pass in filepath, node name ?
+
+	if (m_bLoadUI) return;
+	m_bLoadUI = true;
 
 	if (!FILEMANAGER->FileExists(FILEMANAGER->GetUIFilepath())) return;
 	std::string str = FILEMANAGER->GetUIFilepath();
@@ -461,6 +474,12 @@ void World::UpdateLevel() {
 
 void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 
+	if (!HAPI.PlaySound(SOUND->GetSound(SHOOT))) {
+
+		throw std::runtime_error{ "unable to find file enum SHOOT" };
+
+	}
+
 	bool bFoundBullet{ false };
 
 	do  {
@@ -474,7 +493,9 @@ void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 				vecpBullets[i]->SetActive(true);
 				vecpBullets[i]->SetSide(PLAYER); //pass in side of shooter here
 				bFoundBullet = !bFoundBullet;
-				vecpBullets[i]->SetPosition(m_pPlayer->GetPosition()); //if all bullets are active use the last bullet in the vector due to rotation it has the longest lifetime
+				vecpBullets[i]->SetPosition(m_pPlayer->GetPosition().x + (m_pPlayer->GetWidth() >> 1), m_pPlayer->GetPosition().y); 
+				//if all bullets are active use the last bullet in the vector due to rotation it has the longest lifetime
+				//spawns bullet inside of player not at top left
 				return;
 
 			}

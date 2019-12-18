@@ -43,6 +43,7 @@ private:
 	BinaryTree();
 
 	static std::shared_ptr<BinaryTree> s_pBinaryTree;
+	static bool m_bCreateTree;
 
 	Node* m_nodeRoot;
 	std::chrono::milliseconds::rep unSeed = std::chrono::system_clock::now().time_since_epoch().count();

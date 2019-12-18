@@ -1,16 +1,18 @@
 #pragma once
 
-#include <memory>
-#include <vector>
-#include <string>
+#include "FileManager.h"
+
+#include <HAPI_lib.h>
+
+using namespace HAPISPACE;
+
+enum eSound : int { SHOOT = 0 };
 
 class Sound {
 
 public:
 
 	~Sound();
-
-	static std::shared_ptr<Sound> s_pSound;
 
 	static std::shared_ptr<Sound>& GetInstance() {
 
@@ -26,9 +28,16 @@ public:
 
 	}
 
+	void LoadSound();
+	std::string GetSound(int i) const { return this->m_vecstrSound[i]; }
+
 private:
 
 	Sound() = default;
+
+	static std::shared_ptr<Sound> s_pSound;
+
+	static bool m_bInit;
 
 	std::vector<std::string> m_vecstrSound;
 

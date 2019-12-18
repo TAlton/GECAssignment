@@ -11,6 +11,7 @@
 #include "Input.h"
 #include "Bullet.h"
 #include "UserInterface.h"
+#include "Sound.h"
 
 class World
 {
@@ -38,6 +39,9 @@ private:
 	World();
 
 	static std::shared_ptr<World> s_pWorld;
+	static bool m_bLoadTexture,
+		m_bLoadScene,
+		m_bLoadUI;
 
 	std::shared_ptr<Player> m_pPlayer = nullptr;
 	std::shared_ptr<Input> m_pInput = nullptr;

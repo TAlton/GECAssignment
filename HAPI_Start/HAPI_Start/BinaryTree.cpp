@@ -1,6 +1,7 @@
 #include "BinaryTree.h"
 
 std::shared_ptr<BinaryTree> BinaryTree::s_pBinaryTree = nullptr;
+bool BinaryTree::m_bCreateTree = false;
 
 BinaryTree::BinaryTree() {
 
@@ -168,6 +169,9 @@ Node* BinaryTree::GetRightChild(int key) {
 }
 
 void BinaryTree::CreateTree(unsigned int numNodes) {
+
+	if (m_bCreateTree) return;
+	m_bCreateTree = true;
 
 	std::default_random_engine rand(static_cast<unsigned int>(unSeed)); //setting up random number gen
 	std::uniform_int_distribution<int> distrib(0, numNodes - 1);
