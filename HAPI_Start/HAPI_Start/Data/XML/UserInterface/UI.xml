@@ -1,3 +1,4 @@
 <UI>
-	<Object Position_X="10" Position_Y="700" alias="HealthBar" />
+	<Object Position_X="530" Position_Y="30" alias="HealthBarBackground" />
+	<Object Position_X="530" Position_Y="30" alias="HealthBar" />
 </UI>

@@ -67,9 +67,7 @@ World::~World() { //this could all be avoided with smart pointers, not a priorit
 	for (auto& x : m_vecpBullets) delete x;
 	for (auto& x : m_vecpUI) delete x;
 	for (auto& x : m_vecpBackgrounds) delete x;
-	for (auto& x : m_vecpEnemy) delete x;
 
-	m_vecpEnemy.clear();
 	m_vecpBackgrounds.clear();
 	m_vecpUI.clear();
 	m_vecpBullets.clear();
@@ -212,29 +210,29 @@ void World::LoadScenes() {
 
 			}
 
-		}
+			std::vector<CHapiXMLNode*> nodesEnemy = xml.GetAllNodesWithName("Enemy");
 
-		nodes = xml.GetAllNodesWithName("Enemy");
+			for (auto& node : nodesEnemy) { // loads objects
 
-		for (auto& node : nodes) { //loads enemies
+				CHapiXMLAttribute attr;
 
-			CHapiXMLAttribute attr;
+				auto vecAttr = node->GetAttributes();
 
-			auto vecAttr = node->GetAttributes();
+				if (!node->GetAttributeWithName("Health", attr)) return;
+				if (!node->GetAttributeWithName("Position_X", attr)) return;
+				if (!node->GetAttributeWithName("Position_Y", attr)) return;
+				if (!node->GetAttributeWithName("TextureAlias", attr)) return;
+				if (!node->GetAttributeWithName("Side", attr)) return;
 
-			if (!node->GetAttributeWithName("Health", attr)) return;
-			if (!node->GetAttributeWithName("Position_X", attr)) return;
-			if (!node->GetAttributeWithName("Position_Y", attr)) return;
-			if (!node->GetAttributeWithName("TextureAlias", attr)) return;
-			if (!node->GetAttributeWithName("Side", attr)) return;
+				Enemy* e = new Enemy(vecAttr[0].AsInt(), vecAttr[1].AsInt(), vecAttr[2].AsInt(), vecAttr[3].AsString(), vecAttr[4].AsInt());
 
-			Enemy* e = new Enemy(vecAttr[0].AsInt(), vecAttr[1].AsInt(), vecAttr[2].AsInt(), vecAttr[3].AsString(), vecAttr[4].AsInt());
+				e->SetTexture(*(m_umapTextures.at(
+					e->GetAlias()
+				)));
 
-			e->SetTexture(*(m_umapTextures.at(
-				e->GetAlias()
-			)));
+				s->AddEnemy(e);
 
-			m_vecpEnemy.push_back(e);
+			}
 
 		}
 
@@ -274,7 +272,7 @@ void World::LoadUI() { //potential to move this whole function into filemanager 
 void World::DrawRenderables() const {
 
 	//for (auto& x : m_vecpBackgrounds) GRAPHICS->DrawBackground(*x);
-	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x); //scene background is uninteractable objects
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackgrounds()) GRAPHICS->Draw(*x); //scene background is uninteractable objects
 	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x); //draw background then entities
 	for (auto& x : m_vecpBullets) {
 		
@@ -287,7 +285,7 @@ void World::DrawRenderables() const {
 
 	}
 
-	for (auto& x : m_vecpEnemy) GRAPHICS->Draw(*x);
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEnemies()) GRAPHICS->Draw(*x);
 
 	GRAPHICS->Draw(*m_pPlayer);
 
@@ -370,6 +368,8 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
+	m_vecpUI[1]->GetRectangle()->SetRight(m_pPlayer->GetHealth() << 1);
+
 	if (m_pPlayer->GetHealth() <= 0 || m_lScore <= 0) RestartGame(); //end game if player dies or score <= 0
 	if (m_ulCurrentTime % 8 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
@@ -416,7 +416,7 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 
 	}  
 	//general collision checking for world objects
-	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackground()) {
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackgrounds()) {
 
 		const short e_x1 = x->GetPosition().x;
 		const short e_y1 = x->GetPosition().y;

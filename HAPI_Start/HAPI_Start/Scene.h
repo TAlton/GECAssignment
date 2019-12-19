@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "FileManager.h"
 #include "WorldEntity.h"
+#include "Enemy.h"
 
 using namespace HAPISPACE;
 
@@ -30,11 +31,13 @@ public:
 
 	}
 
-	std::vector<Entity*> GetEntities() const { return this->m_vecpenEntities; }
-	std::vector<Entity*> GetBackground() const { return this->m_vecpenBackground; }
+	std::vector<Entity*> GetEntities() const { return this->m_vecpEntities; }
+	std::vector<Entity*> GetBackgrounds() const { return this->m_vecpBackground; }
+	std::vector<Enemy*> GetEnemies() const { return this->m_vecpEnemy; }
 
 	void AddEntity(Entity* e);
 	void AddBackground(Entity* e);
+	void AddEnemy(Enemy* e);
 
 private:
 
@@ -44,8 +47,9 @@ private:
 		m_shNextSceneRight{ -1 },
 		m_shSceneID{ -1 };
 
-	std::vector<Entity*> m_vecpenEntities;
-	std::vector<Entity*> m_vecpenBackground;
+	std::vector<Entity*> m_vecpEntities;
+	std::vector<Entity*> m_vecpBackground;
+	std::vector<Enemy*> m_vecpEnemy;
 
 };
 

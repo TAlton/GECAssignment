@@ -1,6 +1,4 @@
 <Textures>
-	<Texture filepath="Data\XML\Texture\alphaThing.tga" alias="player" isAnim="0" />
-	<Texture filepath="Data\XML\Texture\playerSprite.tga" alias="test" isAnim="0"  />
 	<Texture filepath="Data\XML\Texture\Floor.png" alias="floor" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\Platform100_50.png" alias="Platform100_50" isAnim="0"  />
 	<Texture filepath="Data\XML\Texture\Wall.png" alias="Wall" isAnim="0" />
@@ -10,6 +8,7 @@
 	<Texture filepath="Data\XML\Texture\testPlayer.png" alias="testPlayer" isAnim="1" />
 	<Texture filepath="Data\XML\Texture\Bullet.png" alias="bullet" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\HealthBar.png" alias="HealthBar" isAnim="0" />
+	<Texture filepath="Data\XML\Texture\HealthBarBackground.png" alias="HealthBarBackground" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\Platform50_100.png" alias="Platform50_100" isAnim="0" />
 	<Texture filepath="Data\XML\Texture\backgroundZ_4.png" alias="backgroundZ_4" isAnim="0" isBackground="1" />
 	<Texture filepath="Data\XML\Texture\Enemy.png" alias="Enemy" isAnim="0" /> 

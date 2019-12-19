@@ -10,13 +10,15 @@ public:
 
 	Player() {
 
-		m_v2Pos = m_v2LastPos = Vec2(0,0);
+		this->m_nHealth = 100;
+		this->m_v2Pos = this->m_v2LastPos = Vec2(0,0);
 		this->m_strAlias = "testPlayer";
 
 	}
 	Player(Vec2 v) {
 
-			m_v2Pos = m_v2LastPos = v;
+		this->m_nHealth = 100;
+		this->m_v2Pos = this->m_v2LastPos = v;
 			this->m_strAlias = "testPlayer";
 
 	}
@@ -31,8 +33,9 @@ public:
 	void Collided(bool b);
 	void Fall(long dt);
 	void Jump(long dt);
-	void Damage(int dmg) { this->m_shHealth -= dmg; }
+	void Damage(int dmg) { this->m_nHealth -= dmg; }
 	bool Shoot(long dt);
+	bool IsDead() const { return m_bDead; }
 
 	int GetState() const { return this->m_nState; }
 	bool GetJump() const { return this->m_bJumping; }
@@ -40,10 +43,9 @@ public:
 
 	void SetState(int state) { this->m_nState = state; }
 	void SetJump(bool b) { this->m_bJumping = b;  }
+	void SetAliveState(bool b) { this->m_bDead = b; }
 	
 protected:
-
-	short m_shHealth{ 100 };
 
 	int m_nState{ 0 },
 		m_nCurrentState{ IDLE },

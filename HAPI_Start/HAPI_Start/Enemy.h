@@ -25,11 +25,9 @@ public:
 
 	Rectangle* GetRectAI() const { return this->m_pRectAI; }
 
-
 private:
 
 	Rectangle* m_pRectAI = nullptr;
-
 
 };
 
