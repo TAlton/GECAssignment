@@ -8,27 +8,17 @@ class Player :
 
 public:
 
+	Player() {
+
+		m_v2Pos = m_v2LastPos = Vec2(0,0);
+		this->m_strAlias = "testPlayer";
+
+	}
 	Player(Vec2 v) {
 
-		try {
-
-			m_v2Pos = v;
+			m_v2Pos = m_v2LastPos = v;
 			this->m_strAlias = "testPlayer";
-			//m_pRectangle =  std::make_shared<Rectangle>(pTex->GetWidth(), pTex->GetHeight());
 
-		}
-		catch (std::overflow_error& e) {
-			throw e;
-		}
-		catch (std::underflow_error & e) {
-			throw e;
-		}
-		catch (std::invalid_argument & e) {
-			throw e;
-		}
-		catch (...) {
-			
-		}
 	}
 
 	~Player();

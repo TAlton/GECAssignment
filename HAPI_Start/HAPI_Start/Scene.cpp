@@ -5,6 +5,7 @@
 Scene::~Scene(){
 
 	for (auto& x : m_vecpenEntities) delete x;
+	for (auto& x : m_vecpenBackground) delete x;
 
 }
 

@@ -21,7 +21,8 @@ void World::Init() {
 
 	try {
 
-		m_umapTextures.find(m_pPlayer->GetAlias()) != m_umapTextures.end(); //checks if the texture exists
+		if(!(m_umapTextures.find(m_pPlayer->GetAlias()) != m_umapTextures.end())) return; //checks if the texture exists
+		m_pPlayer->SetTexture(*(m_umapTextures.at(m_pPlayer->GetAlias())));
 
 	}
 	catch (std::out_of_range& e) {
@@ -35,8 +36,6 @@ void World::Init() {
 		return;
 
 	}
-
-	m_pPlayer->SetTexture(*(m_umapTextures.at(m_pPlayer->GetAlias())));
 
 }
 
