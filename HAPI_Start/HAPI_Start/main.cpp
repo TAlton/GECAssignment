@@ -9,14 +9,6 @@ void HAPI_Main() {
 
 /*
 
-enemy
-
-win lose conditions ---- kill boss or die
-
-health bar
------ change health bar width based on hp
-
-
 ADDITIONS
 
 move file handling into filemanager completely ---- move all xml files into one?

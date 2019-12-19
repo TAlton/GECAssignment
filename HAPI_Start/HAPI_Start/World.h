@@ -33,15 +33,13 @@ public:
 
 	void Init();
 	void Loop();
+	void RestartGame();
 
 private:
 
 	World();
 
 	static std::shared_ptr<World> s_pWorld;
-	static bool m_bLoadTexture,
-		m_bLoadScene,
-		m_bLoadUI;
 
 	std::shared_ptr<Player> m_pPlayer = nullptr;
 	std::shared_ptr<Input> m_pInput = nullptr;
@@ -61,7 +59,10 @@ private:
 
 	long m_lScore{ 999999 };
 
-	bool m_bGameOver{ false };
+	bool m_bGameOver{ false },
+		m_bLoadTexture{ false },
+		m_bLoadScene{ false },
+		m_bLoadUI{ false };
 
 	void LoadTextures();
 	void LoadScenes();
@@ -72,9 +73,10 @@ private:
 	bool CheckCollision();
 	void CalcFrameTime();
 	void UpdateLevel();
-	void SpawnBullet(bool dir);
-	void RestartGame();
+	void SpawnBullet(bool dir); //add in param for shooter
+	//void SpawnBullet(Vec2 v);
 	void UpdateScore();
+	void ClearContainers();
 
 };
 

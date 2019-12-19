@@ -26,6 +26,14 @@ int Input::GetMouseInput() const {
 
 }
 
+Vec2 Input::GetMousePos() const {
+
+	const HAPI_TMouseData& mData = HAPI.GetMouseData();
+
+	return Vec2(mData.x, mData.y);
+
+}
+
 Vec2 Input::GetControllerAnalogInput(int i) {
 
 	CheckControllersConnected();

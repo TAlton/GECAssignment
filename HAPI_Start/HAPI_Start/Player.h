@@ -15,6 +15,7 @@ public:
 		this->m_strAlias = "testPlayer";
 
 	}
+	
 	Player(Vec2 v) {
 
 		this->m_nHealth = 100;
@@ -43,7 +44,12 @@ public:
 
 	void SetState(int state) { this->m_nState = state; }
 	void SetJump(bool b) { this->m_bJumping = b;  }
-	void SetAliveState(bool b) { this->m_bDead = b; }
+	/*
+	
+	@Param b : false = dead, true = alive
+
+	*/
+	void SetAliveState(bool b) { this->m_bDead = !b; }
 	
 protected:
 

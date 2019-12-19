@@ -16,7 +16,7 @@ public:
 	Vec2 operator*(const int& x) {
 
 		this->x *= static_cast<short>(x);
-		this->y *= static_cast<short>(y);
+		this->y *= static_cast<short>(x);
 
 	}
 
@@ -24,6 +24,14 @@ public:
 
 		this->x -= v.x;
 		this->y -= v.y;
+
+	}
+
+	bool operator==(const Vec2& v) {
+
+		if (this->x == v.x && this->y == v.y) return true;
+
+		return false;
 
 	}
 

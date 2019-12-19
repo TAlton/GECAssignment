@@ -13,7 +13,6 @@ void Bullet::Update(long dt) {
 
 }
 
-
 Bullet::~Bullet()
 {
 }

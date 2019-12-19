@@ -17,6 +17,7 @@ public:
 
 	char GetKBInput() const;
 	int GetMouseInput() const;
+	Vec2 GetMousePos() const;
 	Vec2 GetControllerAnalogInput(int i);
 	int GetControllerDigitalInput(int i);
 
