@@ -67,7 +67,9 @@ World::~World() { //this could all be avoided with smart pointers, not a priorit
 	for (auto& x : m_vecpBullets) delete x;
 	for (auto& x : m_vecpUI) delete x;
 	for (auto& x : m_vecpBackgrounds) delete x;
+	for (auto& x : m_vecpEnemy) delete x;
 
+	m_vecpEnemy.clear();
 	m_vecpBackgrounds.clear();
 	m_vecpUI.clear();
 	m_vecpBullets.clear();
@@ -181,7 +183,7 @@ void World::LoadScenes() {
 
 		std::vector<CHapiXMLNode*> nodes = xml.GetAllNodesWithName("Object");
 
-		for (auto& node : nodes) {
+		for (auto& node : nodes) { // loads objects
 
 			CHapiXMLAttribute attr;
 
@@ -209,6 +211,30 @@ void World::LoadScenes() {
 				s->AddEntity(wo);
 
 			}
+
+		}
+
+		nodes = xml.GetAllNodesWithName("Enemy");
+
+		for (auto& node : nodes) { //loads enemies
+
+			CHapiXMLAttribute attr;
+
+			auto vecAttr = node->GetAttributes();
+
+			if (!node->GetAttributeWithName("Health", attr)) return;
+			if (!node->GetAttributeWithName("Position_X", attr)) return;
+			if (!node->GetAttributeWithName("Position_Y", attr)) return;
+			if (!node->GetAttributeWithName("TextureAlias", attr)) return;
+			if (!node->GetAttributeWithName("Side", attr)) return;
+
+			Enemy* e = new Enemy(vecAttr[0].AsInt(), vecAttr[1].AsInt(), vecAttr[2].AsInt(), vecAttr[3].AsString(), vecAttr[4].AsInt());
+
+			e->SetTexture(*(m_umapTextures.at(
+				e->GetAlias()
+			)));
+
+			m_vecpEnemy.push_back(e);
 
 		}
 
@@ -248,7 +274,7 @@ void World::LoadUI() { //potential to move this whole function into filemanager 
 void World::DrawRenderables() const {
 
 	//for (auto& x : m_vecpBackgrounds) GRAPHICS->DrawBackground(*x);
-	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x);
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackground()) GRAPHICS->Draw(*x); //scene background is uninteractable objects
 	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x); //draw background then entities
 	for (auto& x : m_vecpBullets) {
 		
@@ -260,6 +286,8 @@ void World::DrawRenderables() const {
 		else { break; }
 
 	}
+
+	for (auto& x : m_vecpEnemy) GRAPHICS->Draw(*x);
 
 	GRAPHICS->Draw(*m_pPlayer);
 

@@ -41,7 +41,7 @@ public:
 	void SetState(int state) { this->m_nState = state; }
 	void SetJump(bool b) { this->m_bJumping = b;  }
 	
-private:
+protected:
 
 	short m_shHealth{ 100 };
 

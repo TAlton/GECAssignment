@@ -19,12 +19,17 @@ public:
 	bool Outside(const Rectangle& other) const;
 	bool Overlap(const Rectangle& other) const; //deprecated check for collision
 
-	short GetWidth() { return this->m_shRight; }
-	short GetHeight() { return this->m_shBottom; }
-	short GetLeft() { return this->m_shLeft; }
-	short GetRight() { return this->m_shRight; }
-	short GetTop() { return this->m_shTop; }
-	short GetBottom() { return this->m_shBottom; }
+	short GetWidth() const { return this->m_shRight; }
+	short GetHeight() const { return this->m_shBottom; }
+	short GetLeft() const { return this->m_shLeft; }
+	short GetRight() const { return this->m_shRight; }
+	short GetTop() const { return this->m_shTop; }
+	short GetBottom() const { return this->m_shBottom; }
+
+	void SetLeft(short n) { this->m_shLeft = n; }
+	void SetRight(short n) { this->m_shRight = n; }
+	void SetTop(short n) { this->m_shTop = n; }
+	void SetBottom(short n) { this->m_shBottom = n; }
 
 private:
 

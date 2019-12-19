@@ -12,6 +12,7 @@
 #include "Bullet.h"
 #include "UserInterface.h"
 #include "Sound.h"
+#include "Enemy.h"
 
 class World
 {
@@ -52,6 +53,7 @@ private:
 	std::vector<Scene*> m_vecpScenes;
 	std::vector<Bullet*> m_vecpBullets;
 	std::vector<UserInterface*> m_vecpUI;
+	std::vector<Enemy*> m_vecpEnemy;
 
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
