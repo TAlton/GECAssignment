@@ -8,5 +8,5 @@
 	<Object Health="0" Position_X=" 0" Position_Y="656" TextureAlias="doorRight" Side="3" />
 	<Object Health="0" Position_X="1000" Position_Y="656" TextureAlias="doorPrev" Side="3" />
 	<Object Health="0" Position_X="400" Position_Y="570" TextureAlias="Platform50_100" Side="0" />
-	<Enemy Health="100" Position_X="0" Position_Y="656" TextureAlias="Enemy" Side="2" />
+	<Enemy Health="20" Position_X="30" Position_Y="656" TextureAlias="Enemy" Side="2" />
 </Scene>

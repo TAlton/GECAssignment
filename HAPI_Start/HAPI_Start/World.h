@@ -73,7 +73,7 @@ private:
 	bool CheckCollision();
 	void CalcFrameTime();
 	void UpdateLevel();
-	void SpawnBullet(bool dir); //add in param for shooter
+	void SpawnBullet(bool dir, Entity& e); //add in param for shooter
 	//void SpawnBullet(Vec2 v);
 	void UpdateScore();
 	void ClearContainers();

@@ -331,7 +331,7 @@ void World::GetInput() {
 	switch (m_pInput->GetMouseInput()) { //mouse input
 
 	case LMB:
-		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet(m_pPlayer->GetDirection());
+		if(m_pPlayer->Shoot(m_ulFrameTime))SpawnBullet(m_pPlayer->GetDirection(), *m_pPlayer);
 		break;
 
 	case RMB:
@@ -385,6 +385,15 @@ void World::UpdateEntities() {
 
 		}
 		else { break; }
+
+	}
+
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEnemies()) {
+
+		x->UpdateX(m_ulFrameTime);
+		CheckCollision();
+		x->UpdateY(m_ulFrameTime);
+		CheckCollision();
 
 	}
 
@@ -535,6 +544,54 @@ bool World::CheckCollision() { //this is really ugly and needs cleaning up, or i
 	}
 	//collision checking for bullet against player
 
+	for (int i{ 0 }; i < m_vecpScenes[m_shCurrentScene]->GetEnemies().size(); i++) {
+
+		const short ex1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x;
+		const short ey1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y;
+		const short ex2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetWidth();
+		const short ey2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetHeight();
+
+		if ((y1 >= ey1 && y1 <= ey2) ||
+			(y2 >= ey1 && y2 <= ey2)) {
+
+			bool bDir = LEFT;
+
+			if (x2 >= ex2) bDir = RIGHT;
+
+			if (m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->Shoot(m_ulFrameTime)) SpawnBullet(bDir, *m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]);
+
+		}
+
+
+	}
+
+	for (int i{ 0 }; i < m_vecpScenes[m_shCurrentScene]->GetEnemies().size(); i++) {
+
+		if (true == m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->IsDead()) break; //if bullet isnt active do nothing
+
+		const short x_1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x;
+		const short y_1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y;
+		const short x_2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetWidth();
+		const short y_2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetHeight();
+
+		for (auto& y : m_vecpScenes[m_shCurrentScene]->GetEntities()) {
+
+			const short e_x1 = y->GetPosition().x;
+			const short e_y1 = y->GetPosition().y;
+			const short e_x2 = y->GetPosition().x + y->GetWidth();
+			const short e_y2 = y->GetPosition().y + y->GetHeight();
+
+			if (x_1 < e_x2 && x_2 > e_x1 &&
+				y_1 < e_y2 && y_2 > e_y1) {
+
+				m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->Collided(true);
+
+			}
+
+		}
+
+	}
+
 	m_pPlayer->Collided(false);
 	return false;
 
@@ -552,7 +609,7 @@ void World::UpdateLevel() {
 
 }
 
-void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
+void World::SpawnBullet(bool dir, Entity& e) { //will need to take in side of the shooter
 
 	if (!HAPI.PlaySound(SOUND->GetSound(SHOOT))) {
 
@@ -571,9 +628,9 @@ void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 				bFoundBullet = true;
 				m_vecpBullets[i]->SetDirection(dir);
 				m_vecpBullets[i]->SetActive(true);
-				m_vecpBullets[i]->SetSide(PLAYER); //pass in side of shooter here
+				m_vecpBullets[i]->SetSide(e.GetSide()); //pass in side of shooter here
 				bFoundBullet = !bFoundBullet;
-				m_vecpBullets[i]->SetPosition(m_pPlayer->GetPosition().x + (m_pPlayer->GetWidth() >> 1), m_pPlayer->GetPosition().y);  //shoots from the center of the shooter
+				m_vecpBullets[i]->SetPosition(e.GetPosition().x + (e.GetWidth() >> 1), e.GetPosition().y);  //shoots from the center of the shooter
 				//if all bullets are active use the last bullet in the vector due to rotation it has the longest lifetime
 				//spawns bullet inside of player not at top left
 				return;
@@ -586,9 +643,9 @@ void World::SpawnBullet(bool dir) { //will need to take in side of the shooter
 		size_t i = m_vecpBullets.size() - 1;
 		m_vecpBullets[i]->SetActive(true);
 		m_vecpBullets[i]->SetDirection(dir);
-		m_vecpBullets[i]->SetSide(PLAYER);
+		m_vecpBullets[i]->SetSide(e.GetSide());
 		bFoundBullet = !bFoundBullet;
-		m_vecpBullets[i]->SetPosition(m_pPlayer->GetPosition().x + (m_pPlayer->GetWidth() >> 1), m_pPlayer->GetPosition().y);
+		m_vecpBullets[i]->SetPosition(e.GetPosition().x + (e.GetWidth() >> 1), e.GetPosition().y);  //shoots from the center of the shooter
 		return;
 
 	} while (!bFoundBullet);

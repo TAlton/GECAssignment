@@ -13,6 +13,7 @@ public:
 		this->m_nHealth = 100;
 		this->m_v2Pos = this->m_v2LastPos = Vec2(0,0);
 		this->m_strAlias = "testPlayer";
+		this->m_ESide = PLAYER;
 
 	}
 	
@@ -20,7 +21,8 @@ public:
 
 		this->m_nHealth = 100;
 		this->m_v2Pos = this->m_v2LastPos = v;
-			this->m_strAlias = "testPlayer";
+		this->m_strAlias = "testPlayer";
+		this->m_ESide = PLAYER;
 
 	}
 

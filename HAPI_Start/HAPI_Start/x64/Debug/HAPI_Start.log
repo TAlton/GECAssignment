@@ -1,4 +1,5 @@
-﻿  Bullet.cpp
+﻿  Player.cpp
+  Scene.cpp
   World.cpp
   main.cpp
   Generating Code...
