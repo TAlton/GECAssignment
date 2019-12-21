@@ -107,7 +107,7 @@ void Player::Jump(long dt) {
 	if (m_fVelocity < m_fMaxVelocity * 2) { //slowly decelerate velocity -- has to be velocity *2 to make up for speed up on the way down
 
 		m_fVelocity += static_cast<float>(dt) / 100;
-		this->Move(0, m_fVelocity * dt);
+		this->Move(0, m_fVelocity * dt); //multiplying themovement by delta time allows for it to work in all framerates
 
 	}
 	else {
