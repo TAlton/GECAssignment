@@ -51,6 +51,8 @@ private:
 	std::vector<Bullet*> m_vecpBullets;
 	std::vector<UserInterface*> m_vecpUI;
 
+	Enemy* m_pBossEnemy = nullptr;
+
 	const unsigned short m_cshNumLevels{ 10 };
 	short m_shCurrentScene{ 0 };
 

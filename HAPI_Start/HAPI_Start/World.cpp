@@ -229,9 +229,17 @@ void World::LoadScenes() {
 				e->GetAlias()
 			)));
 
+
 			e->SetRectAI();
 
 			s->AddEnemy(e);
+
+			if ("BossEnemy" == e->GetAlias()) {
+
+				m_pBossEnemy = e;
+				
+			}
+
 
 		}
 
@@ -371,9 +379,11 @@ void World::GetInput() {
 
 void World::UpdateEntities() {
 
-	m_vecpUI[1]->GetRectangle()->SetRight(m_pPlayer->GetHealth() << 1);
+	m_vecpUI[1]->GetRectangle()->SetRight(m_pPlayer->GetHealth() << 1);	
 
 	if (m_pPlayer->GetHealth() <= 0 || m_lScore <= 0) RestartGame(); //end game if player dies or score <= 0
+
+	if (true == m_pBossEnemy->IsDead()) m_bGameOver = true;
 
 	if (m_ulCurrentTime % 8 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
@@ -389,6 +399,8 @@ void World::UpdateEntities() {
 	}
 
 	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEnemies()) {
+
+		if (x->IsDead()) continue;
 
 		x->UpdateX(m_ulFrameTime);
 		CheckCollision();
@@ -406,7 +418,7 @@ void World::UpdateEntities() {
 
 }
 
-bool World::CheckCollision() { //this is really ugly and needs cleaning up, or is it bucket collision will speed up as we wont check unnecessary objects
+bool World::CheckCollision() { // fix for this would be to overload and pass in: entity entity, entity container, container container
 
 	const short x1 = m_pPlayer->GetPosition().x;
 	const short y1 = m_pPlayer->GetPosition().y;
