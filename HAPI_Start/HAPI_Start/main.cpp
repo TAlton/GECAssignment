@@ -9,15 +9,15 @@ void HAPI_Main() {
 
 /*
 
-ADDITIONS
+Check controller works
 
-move file handling into filemanager completely ---- move all xml files into one?
-falling background
-adding boss enemy 
-pickups
+fix lerp
 
-fix Lerp 
-main menu for difficulty
+change collisions to rectangles
+
+add patrol paths
+
+add explosions
 
 
 */

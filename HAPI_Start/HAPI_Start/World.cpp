@@ -385,7 +385,7 @@ void World::UpdateEntities() {
 
 	if (true == m_pBossEnemy->IsDead()) m_bGameOver = true;
 
-	if (m_ulCurrentTime % 8 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
+	//if (m_ulCurrentTime % 8 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
 	for (auto& x : m_vecpBullets) {
 
