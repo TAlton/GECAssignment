@@ -2,7 +2,6 @@
 
 #include <random>
 #include <future>
-#include <set>
 #include <stdexcept>
 
 #include "Node.h"

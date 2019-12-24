@@ -13,11 +13,11 @@ Check controller works
 
 fix lerp
 
-change collisions to rectangles
+change collisions to rectangles simply use entity->GetRect - translate rect to screen space - Rect->Overlap
 
-add patrol paths
+add patrol paths - defined in constructor and in xml, if shooting stop patrol
 
-add explosions
+add explosions if bullet collided set to inactive spawn explosion at bullet location
 
 
 */
