@@ -40,7 +40,8 @@ private:
 	const std::string m_cstrUIFilepath{ "Data\\XML\\UserInterface\\UI.xml" };
 	std::vector<std::string> m_vecstrFilepaths{ "Data\\XML\\Scene\\Scene1.xml",
 															"Data\\XML\\Scene\\Scene2.xml",
-															"Data\\XML\\Scene\\Scene3.xml" };
+															"Data\\XML\\Scene\\Scene3.xml",
+															"Data\\XML\\Scene\\SceneBoss.xml"};
 };
 
 #define FILEMANAGER FileManager::GetInstance()

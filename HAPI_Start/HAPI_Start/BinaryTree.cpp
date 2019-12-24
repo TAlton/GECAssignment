@@ -1,7 +1,6 @@
 #include "BinaryTree.h"
 
 std::shared_ptr<BinaryTree> BinaryTree::s_pBinaryTree = nullptr;
-bool BinaryTree::m_bCreateTree = false;
 
 BinaryTree::BinaryTree() {
 
@@ -118,18 +117,20 @@ Node* BinaryTree::Search(int id) {
 void BinaryTree::DestroyTree() {
 
 	DestroyTree(m_nodeRoot);
+	m_vecnTreeNodes.clear();
+	m_nodeRoot = nullptr;
 
 }
 
 int BinaryTree::GetTreeSize() const {
 
-	return static_cast<int>(vecnTreeNodes.size());
+	return static_cast<int>(m_vecnTreeNodes.size());
 
 }
 
 Node* BinaryTree::GetParent(int key) {
 
-	if (key <= vecnTreeNodes.size() && key >= 0) {
+	if (key <= m_vecnTreeNodes.size() && key >= 0) {
 
 		Node* n = Search(key);
 
@@ -142,7 +143,7 @@ Node* BinaryTree::GetParent(int key) {
 
 Node* BinaryTree::GetLeftChild(int key) {
 
-	if (key <= vecnTreeNodes.size() && key >= 0) {
+	if (key <= m_vecnTreeNodes.size() && key >= 0) {
 
 		Node* n = Search(key);
 
@@ -156,7 +157,7 @@ Node* BinaryTree::GetLeftChild(int key) {
 
 Node* BinaryTree::GetRightChild(int key) {
 
-	if (key <= vecnTreeNodes.size() && key >= 0) {
+	if (key <= m_vecnTreeNodes.size() && key >= 0) {
 
 		Node* n = Search(key);
 
@@ -170,30 +171,27 @@ Node* BinaryTree::GetRightChild(int key) {
 
 void BinaryTree::CreateTree(unsigned int numNodes) {
 
-	if (m_bCreateTree) return;
-	m_bCreateTree = true;
-
 	std::default_random_engine rand(static_cast<unsigned int>(unSeed)); //setting up random number gen
 	std::uniform_int_distribution<int> distrib(0, numNodes - 1);
 	auto genRandNum = std::bind(distrib, rand);
 
-	for (int i{ 0 }; vecnTreeNodes.size() < numNodes; i++) {
+	for (int i{ 0 }; m_vecnTreeNodes.size() < numNodes; i++) {
 
 
 
-		vecnTreeNodes.push_back(genRandNum()); //pushes random nums into vector , sorts these numbers and deletes duplicates
-		std::sort(vecnTreeNodes.begin(), vecnTreeNodes.end());
+		m_vecnTreeNodes.push_back(genRandNum()); //pushes random nums into vector , sorts these numbers and deletes duplicates
+		std::sort(m_vecnTreeNodes.begin(), m_vecnTreeNodes.end());
 
-		vecnTreeNodes.erase(
-			std::unique(vecnTreeNodes.begin(),
-				vecnTreeNodes.end()),
-			vecnTreeNodes.end());
+		m_vecnTreeNodes.erase(
+			std::unique(m_vecnTreeNodes.begin(),
+				m_vecnTreeNodes.end()),
+			m_vecnTreeNodes.end());
 
 	}
 
-	std::shuffle(vecnTreeNodes.begin(), vecnTreeNodes.end(), rand); //shuffles the vector as it will be sorted
+	std::shuffle(m_vecnTreeNodes.begin(), m_vecnTreeNodes.end(), rand); //shuffles the vector as it will be sorted
 
-	for (auto& x : vecnTreeNodes) {
+	for (auto& x : m_vecnTreeNodes) {
 
 		this->Insert(x);
 

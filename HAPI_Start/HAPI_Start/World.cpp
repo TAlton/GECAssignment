@@ -59,17 +59,7 @@ World::World() {
 
 World::~World() { //this could all be avoided with smart pointers, not a priority fix
 
-	for (auto& x : m_umapTextures) delete x.second;
-	for (auto& x : m_vecpScenes) delete x;
-	for (auto& x : m_vecpBullets) delete x;
-	for (auto& x : m_vecpUI) delete x;
-	for (auto& x : m_vecpBackgrounds) delete x;
-
-	m_vecpBackgrounds.clear();
-	m_vecpUI.clear();
-	m_vecpBullets.clear();
-	m_vecpScenes.clear();
-	m_umapTextures.clear();
+	ClearContainers();
 
 }
 
@@ -272,8 +262,6 @@ void World::LoadUI() { //potential to move this whole function into filemanager 
 
 	}
 
-	
-
 }
 
 void World::DrawRenderables() const {
@@ -281,8 +269,14 @@ void World::DrawRenderables() const {
 	//for (auto& x : m_vecpBackgrounds) GRAPHICS->DrawBackground(*x);
 	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackgrounds()) GRAPHICS->Draw(*x); //scene background is uninteractable objects
 	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEntities()) GRAPHICS->Draw(*x); //draw background then entities
+
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEnemies()) {
+		if (x->IsDead()) continue;
+		GRAPHICS->Draw(*x);
+	}
+
 	for (auto& x : m_vecpBullets) {
-		
+
 		if (x->IsActive()) {
 
 			GRAPHICS->Draw(*x);
@@ -290,11 +284,6 @@ void World::DrawRenderables() const {
 		}
 		else { break; }
 
-	}
-
-	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEnemies()) {
-		if (x->IsDead()) continue;
-		GRAPHICS->Draw(*x);
 	}
 
 	GRAPHICS->Draw(*m_pPlayer);
@@ -316,7 +305,10 @@ void World::GetInput() {
 			break;
 
 		case false:
-			m_pPlayer->SetJump(true);
+			if (true == m_pPlayer->m_bCanJump) {
+				m_pPlayer->SetJump(true);
+				m_pPlayer->m_bCanJump = false;
+			}
 			break;
 
 		}
@@ -383,7 +375,9 @@ void World::UpdateEntities() {
 
 	if (m_pPlayer->GetHealth() <= 0 || m_lScore <= 0) RestartGame(); //end game if player dies or score <= 0
 
-	if (true == m_pBossEnemy->IsDead()) m_bGameOver = true;
+	if (!(nullptr == m_pBossEnemy) && true == m_pBossEnemy->IsDead()) {
+		RestartGame();
+	}
 
 	//if (m_ulCurrentTime % 8 == 0) return; //16 is update every 1/60 of a second placeholder to be programmed in
 
@@ -432,6 +426,45 @@ bool World::CheckCollision() { // fix for this would be to overload and pass in:
 		const short e_x2 = x->GetPosition().x + x->GetWidth();
 		const short e_y2 = x->GetPosition().y + x->GetHeight();
 
+		if ((x1 >= e_x1 && x2 <= e_x2) &&
+			y2 >= e_y1 && y2 <= e_y2) {
+
+			m_pPlayer->m_bCanJump = true;
+			break;
+
+		}
+
+	}
+
+	for (int i{ 0 }; i < m_vecpScenes[m_shCurrentScene]->GetEnemies().size(); i++) {
+
+		const short ex1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x;
+		const short ey1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y;
+		const short ex2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetWidth();
+		const short ey2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetHeight();
+
+		if ((y1 >= ey1 && y1 <= ey2) ||
+			(y2 >= ey1 && y2 <= ey2)) {
+
+			bool bDir = LEFT;
+
+			if (x2 >= ex2) bDir = RIGHT;
+
+			if (m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->Shoot(m_ulFrameTime)) SpawnBullet(bDir, *m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]);
+
+		}
+
+
+	}
+	//sets which direction for the enemy to shoot
+
+	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetEntities()) {
+
+		const short e_x1 = x->GetPosition().x;
+		const short e_y1 = x->GetPosition().y;
+		const short e_x2 = x->GetPosition().x + x->GetWidth();
+		const short e_y2 = x->GetPosition().y + x->GetHeight();
+
 		if (x1 < e_x2 && x2 > e_x1 &&
 			y1 < e_y2 && y2 > e_y1) { //checks if rectangle one intersects rectangle 2
 
@@ -441,6 +474,7 @@ bool World::CheckCollision() { // fix for this would be to overload and pass in:
 
 	}  
 	//general collision checking for world objects
+
 	for (auto& x : m_vecpScenes[m_shCurrentScene]->GetBackgrounds()) {
 
 		const short e_x1 = x->GetPosition().x;
@@ -462,6 +496,7 @@ bool World::CheckCollision() { // fix for this would be to overload and pass in:
 
 	}  
 	//collision checking for doors
+
 	for (int i{ 0 }; i < m_vecpBullets.size(); i++) {
 
 		if (false == m_vecpBullets[i]->IsActive()) break; //if bullet isnt active do nothing
@@ -492,6 +527,7 @@ bool World::CheckCollision() { // fix for this would be to overload and pass in:
 
 	}
 	//collision checking for bullet against world objects
+
 	for (int i{ 0 }; i < m_vecpBullets.size(); i++) {
 
 		if (false == m_vecpBullets[i]->IsActive() || PLAYER == m_vecpBullets[i]->GetSide()) break; //if bullet isnt active do nothing
@@ -558,27 +594,6 @@ bool World::CheckCollision() { // fix for this would be to overload and pass in:
 
 	for (int i{ 0 }; i < m_vecpScenes[m_shCurrentScene]->GetEnemies().size(); i++) {
 
-		const short ex1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x;
-		const short ey1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y;
-		const short ex2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetWidth();
-		const short ey2 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().y + m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetHeight();
-
-		if ((y1 >= ey1 && y1 <= ey2) ||
-			(y2 >= ey1 && y2 <= ey2)) {
-
-			bool bDir = LEFT;
-
-			if (x2 >= ex2) bDir = RIGHT;
-
-			if (m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->Shoot(m_ulFrameTime)) SpawnBullet(bDir, *m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]);
-
-		}
-
-
-	}
-
-	for (int i{ 0 }; i < m_vecpScenes[m_shCurrentScene]->GetEnemies().size(); i++) {
-
 		if (true == m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->IsDead()) break; //if bullet isnt active do nothing
 
 		const short x_1 = m_vecpScenes[m_shCurrentScene]->GetEnemies()[i]->GetPosition().x;
@@ -602,7 +617,10 @@ bool World::CheckCollision() { // fix for this would be to overload and pass in:
 
 		}
 
-	}
+	} 
+	//collision with enemies and entities
+
+	
 
 	m_pPlayer->Collided(false);
 	return false;
@@ -726,6 +744,8 @@ void World::RestartGame() {
 
 	ClearContainers();
 
+	BINARYTREE->DestroyTree();
+
 	WORLD->Init();
 	
 }
@@ -752,9 +772,3 @@ void World::ClearContainers() {
 	m_umapTextures.clear();
 
 }
-
-//
-//{
-//	auto it = v.begin() + itemIndex;
-//	std::rotate(it, it + 1, v.end());
-//}

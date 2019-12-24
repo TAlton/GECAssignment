@@ -9,13 +9,27 @@
 
 using namespace HAPISPACE;
 
+#define TOTALSCENES 3
+
 class Scene {
 
-	enum eScene : int { BOSSSCENE = 0, SCENE1, SCENE2, SCENE3 };
+	enum eScene : int { SCENE1 = 0, SCENE2, SCENE3,  BOSSSCENE };
 
 public:
 
-	Scene(const short index) { m_shSceneID = index % 3; }
+	Scene(const int index) { 
+
+		if (BOSSSCENE == index) {
+
+			m_shSceneID = index;
+
+		}
+		else {
+
+			m_shSceneID = index % TOTALSCENES;
+
+		}
+	}
 	~Scene();
 
 	const int GetPrevScene() const { return this->m_shPrevScene; }

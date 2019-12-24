@@ -92,7 +92,10 @@ void Player::Collided(bool b) {
 
 		m_fVelocity = -3.0f;
 		m_bJumping = false;
+		m_bCollided = false;
 		m_bFalling = true;
+
+		return;
 
 	}
 
@@ -135,7 +138,7 @@ void Player::Fall(long dt) {
 
 bool Player::Shoot(long dt) {
 
-	if (m_nAttackSpeedIterator >= m_nAttackSpeed) {
+	if (m_nAttackSpeedIterator >= m_cnAttackSpeed) {
 
 		m_nAttackSpeedIterator = 0;
 		

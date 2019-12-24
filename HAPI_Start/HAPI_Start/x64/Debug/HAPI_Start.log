@@ -1,2 +1,5 @@
-﻿  World.cpp
+﻿  Input.cpp
+  Player.cpp
+C:\Users\alton\source\repos\GECAssignment3\HAPI_Start\HAPI_Start\Player.cpp(113): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
   HAPI_Start.vcxproj -> C:\Users\alton\Source\Repos\GECAssignment3\HAPI_Start\x64\Debug\HAPI_Start.exe

@@ -56,6 +56,8 @@ int Input::GetControllerDigitalInput(int i) {
 
 	if (ctrlrData.digitalButtons[HK_DIGITAL_A]) return HK_DIGITAL_A;
 
+	return NULL;
+
 }
 
 void Input::CheckControllersConnected() {

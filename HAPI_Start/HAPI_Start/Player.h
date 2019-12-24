@@ -43,6 +43,15 @@ public:
 	int GetState() const { return this->m_nState; }
 	bool GetJump() const { return this->m_bJumping; }
 	bool GetDirection() const { return this->m_bDirection; }
+	bool GetCollided() const { return this->m_bCollided; }
+	bool GetFalling() const { return this->m_bFalling; }
+	bool CanJump() const {
+
+		if (m_bCollided && m_bFalling) return true;
+
+		return false;
+
+	}
 
 	void SetState(int state) { this->m_nState = state; }
 	void SetJump(bool b) { this->m_bJumping = b;  }
@@ -52,14 +61,16 @@ public:
 
 	*/
 	void SetAliveState(bool b) { this->m_bDead = !b; }
+
+	bool m_bCanJump = false;
 	
 protected:
 
 	int m_nState{ 0 },
 		m_nCurrentState{ IDLE },
 		m_nFrameIterator{ 0 },
-		m_nAttackSpeedIterator{ 0 },
-		m_nAttackSpeed{ 333 };
+		m_nAttackSpeedIterator{ 0 };
+	const int m_cnAttackSpeed{ 333 };
 
 	float m_fMaxVelocity{ 2.5f },
 		m_fVelocity{ -m_fMaxVelocity };
