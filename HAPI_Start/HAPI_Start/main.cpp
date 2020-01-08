@@ -9,7 +9,9 @@ void HAPI_Main() {
 
 /*
 
-Check controller works
+implement shooting and interacting for controller
+
+jumping error reoccured where holding jump sticks to a surface
 
 fix lerp
 
