@@ -1,5 +1,4 @@
 # GECAssignment
-GEC project
 
 Game Engine Construction project.
 
